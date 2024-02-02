@@ -4,8 +4,10 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 
-class NbaCotractScreen extends StatelessWidget {
-  const NbaCotractScreen({super.key});
+import '../../approval/approval.dart';
+
+class NbaContractScreen extends StatelessWidget {
+  const NbaContractScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,7 @@ class NbaCotractScreen extends StatelessWidget {
             title: 'NBA Contracts',
             prefixIcon: Icons.arrow_back_ios,
             prefixIconOnTap: () {
+              Get.back();
               // Handle back button tap
             },
             sufixWidget: CircleAvatar()),
@@ -66,13 +69,13 @@ class PlayerTable extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: DataTable(
         headingTextStyle:
-            const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         dataRowHeight: 70,
         dataRowColor: MaterialStateColor.resolveWith(
-            (states) => ColorAssets.primaryBackground),
+                (states) => ColorAssets.primaryBackground),
         columnSpacing: 20.0,
         headingRowColor:
-            MaterialStateColor.resolveWith((states) => ColorAssets.primary),
+        MaterialStateColor.resolveWith((states) => ColorAssets.primary),
         columns: [
           DataColumn(label: SizedBox(child: Text('Player'))),
           DataColumn(label: SizedBox(child: Text('Position'))),
@@ -105,7 +108,7 @@ class PlayerTable extends StatelessWidget {
         ],
         rows: List.generate(
           100,
-          (index) => DataRow(
+              (index) => DataRow(
             cells: [
               const DataCell(
                 SizedBox(
@@ -136,69 +139,69 @@ class PlayerTable extends StatelessWidget {
 
 //   app bar
 
-class CustomAppBar2 extends StatelessWidget {
-  final void Function()? prefixIconOnTap;
-  final void Function()? sufixWidgetOnTap;
-  final IconData? prefixIcon;
-  final Widget? sufixWidget;
-  final String title;
-
-  const CustomAppBar2({
-    Key? key,
-    this.prefixIcon,
-    required this.title,
-    this.prefixIconOnTap,
-    this.sufixWidget,
-    this.sufixWidgetOnTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: Get.height * 0.2,
-      decoration: const BoxDecoration(
-        color: ColorAssets.primary,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(30.0),
-          bottomRight: Radius.circular(30.0),
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: prefixIconOnTap,
-                  child: Icon(
-                    prefixIcon,
-                    color: ColorAssets.white,
-                  ),
-                ),
-                const Spacer(),
-                if (sufixWidget != null)
-                  InkWell(onTap: sufixWidgetOnTap, child: sufixWidget!),
-                if (sufixWidget == null) const SizedBox()
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 40.0, right: 40),
-            child: CustomTextWidget(
-                text: title,
-                textColor: ColorAssets.white,
-                fontWeight: FontWeight.w500,
-                fontSize: 20),
-          ),
-        ],
-      ),
-    );
-  }
-}
+// class CustomAppBar2 extends StatelessWidget {
+//   final void Function()? prefixIconOnTap;
+//   final void Function()? sufixWidgetOnTap;
+//   final IconData? prefixIcon;
+//   final Widget? sufixWidget;
+//   final String title;
+//
+//   const CustomAppBar2({
+//     Key? key,
+//     this.prefixIcon,
+//     required this.title,
+//     this.prefixIconOnTap,
+//     this.sufixWidget,
+//     this.sufixWidgetOnTap,
+//   }) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: Get.height * 0.2,
+//       decoration: const BoxDecoration(
+//         color: ColorAssets.primary,
+//         borderRadius: BorderRadius.only(
+//           bottomLeft: Radius.circular(30.0),
+//           bottomRight: Radius.circular(30.0),
+//         ),
+//       ),
+//       child: Column(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           Padding(
+//             padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+//             child: Row(
+//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//               children: [
+//                 InkWell(
+//                   onTap: prefixIconOnTap,
+//                   child: Icon(
+//                     prefixIcon,
+//                     color: ColorAssets.white,
+//                   ),
+//                 ),
+//                 const Spacer(),
+//                 if (sufixWidget != null)
+//                   InkWell(onTap: sufixWidgetOnTap, child: sufixWidget!),
+//                 if (sufixWidget == null) const SizedBox()
+//               ],
+//             ),
+//           ),
+//           const SizedBox(
+//             height: 20,
+//           ),
+//           Padding(
+//             padding: const EdgeInsets.only(left: 40.0, right: 40),
+//             child: CustomTextWidget(
+//                 text: title,
+//                 textColor: ColorAssets.white,
+//                 fontWeight: FontWeight.w500,
+//                 fontSize: 20),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
