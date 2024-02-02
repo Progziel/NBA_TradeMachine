@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/utils.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:nbatrade/approval/approval.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
-import 'package:nbatrade/view/Home%20Dashboard/my_feeds/home_tabs.dart';
-import 'package:nbatrade/view/Home%20Dashboard/my_feeds/my_feeds_data.dart';
 import '../../../helper/constants/colors.dart';
 import '../../../helper/constants/custom_appbar.dart';
+import '../nba_contract/nba_contract.dart';
+import 'my_feeds/home_tabs.dart';
+import 'my_feeds/my_feeds_data.dart';
 
 class HomeDashboard extends StatefulWidget {
   const HomeDashboard({Key? key}) : super(key: key);
@@ -16,6 +19,11 @@ class HomeDashboard extends StatefulWidget {
 
 class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProviderStateMixin {
   late TabController _tabController ;
+
+  bool expanded = false;
+
+
+
 
   @override
   void initState() {
@@ -43,24 +51,25 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
           children: [
             gridViewWidget(),
             Container(
-              color: ColorAssets.greyContainer,
+              color: ColorAssets.primaryBackground,
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Column(
                   children: [
                     customTabbar(),
-                    Divider(),
-                    Container(
+                    const Divider(),
+                    SizedBox(
                       height: Get.height,
+                      // width: Get.width,
                       child: TabBarView(
 
                         controller: _tabController,
                         children: [
                           // Content for each tab
-                          MyFeeds(),
-                          Container(child: Text("Content for Tab 2")),
-                          Container(child: Text("Content for Tab 3")),
-                          Container(child: Text("Content for Tab 4")),
+                           MyFeeds(),
+                          Container(child: const Text("Content for Tab 2")),
+                          Container(child: const Text("Content for Tab 3")),
+                          Container(child: const Text("Content for Tab 4")),
                         ],
                       ),
                     ),
@@ -84,10 +93,17 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
         // Customize the indicator if needed
         borderSide: BorderSide(width: 0.0, color: Colors.transparent),
       ),
+      isScrollable: true,
+      labelPadding: const EdgeInsets.all(6),
+      padding: const EdgeInsets.all(0),
+      indicatorPadding: const EdgeInsets.all(0),
+      tabAlignment: TabAlignment.center,
+// Remove default padding
       tabs:  [
         CustomTab(
-          text: "abc",
+          text: "My Feeds",
           index: 0,
+          icon: Symbols.news,
           selected: _tabController.index == 0,
           onTap: ()  {_tabController.animateTo(0);
           setState(() {
@@ -95,7 +111,8 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
           });},
         ),
         CustomTab(
-          text: "abc",
+          text: "Trending",
+          icon: Symbols.news,
           index: 1,
           selected: _tabController.index == 1,
           onTap: ()  {_tabController.animateTo(1);
@@ -104,7 +121,9 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
           });},
         ),
         CustomTab(
-          text: "abc",
+          text: "New",
+          icon: Symbols.news,
+
           index: 2,
           selected: _tabController.index == 2,
           onTap: ()  {_tabController.animateTo(2);
@@ -114,7 +133,9 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
           },
         ),
         CustomTab(
-            text: "abc",
+            text: "Top",
+            icon: Symbols.news,
+
             index: 3,
             selected: _tabController.index == 3,
             onTap: () {
@@ -134,14 +155,19 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: GridView.count(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           crossAxisCount: 4,
+
           children:  [
             gridViewList(text: "Team Selection",icon: Icons.diversity_2),
             gridViewList(text: "Trade",icon: Icons.send_time_extension),
-            gridViewList(text: "NBA Contacts",icon: Icons.diversity_3),
-            gridViewList(text: "Approval",icon: Icons.approval_outlined),
+            gridViewList(text: "NBA Contacts",icon: Icons.diversity_3,ontap: (){
+              Get.to(()=> const NbaContractScreen());
+            }),
+            gridViewList(text: "Approval",icon: Icons.approval_outlined,ontap: (){
+              Get.to(()=> ApprovalScreen());
+            }),
             gridViewList(text: "Compare Players",icon: Icons.compare_arrows),
             gridViewList(text: "News",icon: Icons.auto_awesome_mosaic_sharp),
             gridViewList(text: "Spaces",icon: Icons.public),
@@ -163,7 +189,7 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
               child: Icon( icon,color: ColorAssets.greyContainer,)
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         CustomTextWidget(text: text),
@@ -198,7 +224,7 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
               BoxShadow(
                 color: Colors.grey.withOpacity(0.4), // Adjust color and opacity as needed
                 blurRadius: 5.0, // Adjust blur radius as needed
-                offset: Offset(0, 6), // Offset shadow only on the bottom
+                offset: const Offset(0, 6), // Offset shadow only on the bottom
               ),
             ],
           ),
