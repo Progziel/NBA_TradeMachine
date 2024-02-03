@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/utils.dart';
 import 'package:material_symbols_icons/symbols.dart';
-import 'package:nbatrade/approval/approval.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 import '../../../helper/constants/colors.dart';
 import '../../../helper/constants/custom_appbar.dart';
+import '../approval/approval.dart';
 import '../nba_contract/nba_contract.dart';
 import 'my_feeds/home_tabs.dart';
 import 'my_feeds/my_feeds_data.dart';
@@ -40,49 +40,100 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorAssets.white,
-      appBar: PreferredSize(
-          preferredSize: Size.fromHeight(Get.height * 0.28), // Adjust the preferred height
-          child:  appBar()
-      ),
-
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            gridViewWidget(),
-            Container(
-              color: ColorAssets.primaryBackground,
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  children: [
-                    customTabbar(),
-                    const Divider(),
-                    SizedBox(
-                      height: Get.height,
-                      // width: Get.width,
-                      child: TabBarView(
-
-                        controller: _tabController,
-                        children: [
-                          // Content for each tab
-                           MyFeeds(),
-                          Container(child: const Text("Content for Tab 2")),
-                          Container(child: const Text("Content for Tab 3")),
-                          Container(child: const Text("Content for Tab 4")),
-                        ],
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: Get.height * 0.28,
+            flexibleSpace: FlexibleSpaceBar(
+              background: appBar(),
+            ),
+          ),
+          SliverGrid(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+            ),
+            delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                return gridViewList(
+                  text: "Team Selection",
+                  icon: Icons.diversity_2,
+                );
+              },
+              childCount: 8,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SingleChildScrollView(
+              child: Container(
+                color: ColorAssets.primaryBackground,
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    children: [
+                      customTabbar(),
+                      const Divider(),
+                      SizedBox(
+                        height: Get.height * 1.4,
+                        child: TabBarView(
+                          controller: _tabController,
+                          children: const [
+                            MyFeeds(),
+                            Text("Content for Tab 2"),
+                            Text("Content for Tab 3"),
+                            Text("Content for Tab 4"),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-
             ),
+          ),
 
-
-          ],
-        ),
+        ],
       ),
+
+      // appBar: PreferredSize(
+      //     preferredSize: Size.fromHeight(Get.height * 0.28), // Adjust the preferred height
+      //     child:  appBar()
+      // ),
+      //
+      // body: ListView(
+      //   children: [
+      //     gridViewWidget(),
+      //     Container(
+      //       color: ColorAssets.black,
+      //       child: Padding(
+      //         padding: const EdgeInsets.all(12.0),
+      //         child: Column(
+      //           children: [
+      //             customTabbar(),
+      //             const Divider(),
+      //             SizedBox(
+      //               height: Get.height * 1.4,
+      //               // width: Get.width,
+      //               child: TabBarView(
+      //
+      //                 controller: _tabController,
+      //                 children: const [
+      //                   // Content for each tab
+      //                    MyFeeds(),
+      //                    Text("Content for Tab 2"),
+      //                    Text("Content for Tab 3"),
+      //                    Text("Content for Tab 4"),
+      //                 ],
+      //               ),
+      //             ),
+      //           ],
+      //         ),
+      //       ),
+      //
+      //     ),
+      //
+      //
+      //   ],
+      // ),
     );
   }
   Widget customTabbar(){
@@ -149,35 +200,51 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
 
     );
   }
-  Widget gridViewWidget(){
-    return  Container(
-      // color: ColorAssets.white,
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: GridView.count(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          crossAxisCount: 4,
-
-          children:  [
-            gridViewList(text: "Team Selection",icon: Icons.diversity_2),
-            gridViewList(text: "Trade",icon: Icons.send_time_extension),
-            gridViewList(text: "NBA Contacts",icon: Icons.diversity_3,ontap: (){
-              Get.to(()=> const NbaContractScreen());
-            }),
-            gridViewList(text: "Approval",icon: Icons.approval_outlined,ontap: (){
-              Get.to(()=> ApprovalScreen());
-            }),
-            gridViewList(text: "Compare Players",icon: Icons.compare_arrows),
-            gridViewList(text: "News",icon: Icons.auto_awesome_mosaic_sharp),
-            gridViewList(text: "Spaces",icon: Icons.public),
-            gridViewList(text: "Chatrooms",icon: Icons.inbox),
-          ],
-
-        ),
+  Widget gridViewWidget() {
+    return SliverGrid(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 4,
+      ),
+      delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+          return gridViewList(
+            text: "Team Selection",
+            icon: Icons.diversity_2,
+          );
+        },
+        childCount: 8, // Number of grid items
       ),
     );
   }
+  // Widget gridViewWidget(){
+  //   return  Container(
+  //     // color: ColorAssets.white,
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(12.0),
+  //       child: GridView.count(
+  //         physics: const NeverScrollableScrollPhysics(),
+  //         shrinkWrap: true,
+  //         crossAxisCount: 4,
+  //
+  //         children:  [
+  //           gridViewList(text: "Team Selection",icon: Icons.diversity_2),
+  //           gridViewList(text: "Trade",icon: Icons.send_time_extension),
+  //           gridViewList(text: "NBA Contacts",icon: Icons.diversity_3,ontap: (){
+  //             Get.to(()=> const NbaContractScreen());
+  //           }),
+  //           gridViewList(text: "Approval",icon: Icons.approval_outlined,ontap: (){
+  //             Get.to(()=> ApprovalScreen());
+  //           }),
+  //           gridViewList(text: "Compare Players",icon: Icons.compare_arrows),
+  //           gridViewList(text: "News",icon: Icons.auto_awesome_mosaic_sharp),
+  //           gridViewList(text: "Spaces",icon: Icons.public),
+  //           gridViewList(text: "Chatrooms",icon: Icons.inbox),
+  //         ],
+  //
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget gridViewList({text,ontap,icon}){
     return  Column(

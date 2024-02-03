@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nbatrade/approval/tabs/panding.dart';
-import 'package:nbatrade/approval/tabs/rejected.dart';
+
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
+import 'package:nbatrade/view/approval/tabs/panding.dart';
+import 'package:nbatrade/view/approval/tabs/rejected.dart';
 
-import '../view/Home Dashboard/my_feeds/home_tabs.dart';
+import '../Home Dashboard/my_feeds/home_tabs.dart';
 import 'tabs/approved.dart';
 
 class ApprovalScreen extends StatefulWidget {
