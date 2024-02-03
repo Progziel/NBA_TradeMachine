@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/utils.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
+import 'package:nbatrade/view/Home%20Dashboard/trending/trending_screen.dart';
 import '../../../helper/constants/colors.dart';
 import '../../../helper/constants/custom_appbar.dart';
 import '../approval/approval.dart';
@@ -17,13 +18,29 @@ class HomeDashboard extends StatefulWidget {
   State<HomeDashboard> createState() => _HomeDashboardState();
 }
 
-class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProviderStateMixin {
-  late TabController _tabController ;
+class _HomeDashboardState extends State<HomeDashboard>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
 
   bool expanded = false;
-
-
-
+  List<Map<String, dynamic>> gridItemsData = [
+    {"text": "Team Selection", "icon": Icons.diversity_2},
+    {"text": "Trade", "icon": Icons.send_time_extension},
+    {
+      "text": "NBA Contacts",
+      "icon": Icons.diversity_3,
+      "ontap": () => Get.to(const NbaContractScreen())
+    },
+    {
+      "text": "Approval",
+      "icon": Icons.approval_outlined,
+      "ontap": () => Get.to(ApprovalScreen())
+    },
+    {"text": "Compare Players", "icon": Icons.compare_arrows},
+    {"text": "News", "icon": Icons.auto_awesome_mosaic_sharp},
+    {"text": "Spaces", "icon": Icons.public},
+    {"text": "Chatrooms", "icon": Icons.inbox},
+  ];
 
   @override
   void initState() {
@@ -31,11 +48,13 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
     // TODO: implement initState
     super.initState();
   }
+
   @override
   void dispose() {
     _tabController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,20 +67,7 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
               background: appBar(),
             ),
           ),
-          SliverGrid(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-            ),
-            delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                return gridViewList(
-                  text: "Team Selection",
-                  icon: Icons.diversity_2,
-                );
-              },
-              childCount: 8,
-            ),
-          ),
+          gridViewWidget(gridItemsData),
           SliverToBoxAdapter(
             child: SingleChildScrollView(
               child: Container(
@@ -73,14 +79,14 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
                       customTabbar(),
                       const Divider(),
                       SizedBox(
-                        height: Get.height * 1.4,
+                        height: Get.height,
                         child: TabBarView(
                           controller: _tabController,
                           children: const [
                             MyFeeds(),
-                            Text("Content for Tab 2"),
-                            Text("Content for Tab 3"),
-                            Text("Content for Tab 4"),
+                            Trending(),
+                            Trending(),
+                            Trending(),
                           ],
                         ),
                       ),
@@ -90,54 +96,13 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
               ),
             ),
           ),
-
         ],
       ),
-
-      // appBar: PreferredSize(
-      //     preferredSize: Size.fromHeight(Get.height * 0.28), // Adjust the preferred height
-      //     child:  appBar()
-      // ),
-      //
-      // body: ListView(
-      //   children: [
-      //     gridViewWidget(),
-      //     Container(
-      //       color: ColorAssets.black,
-      //       child: Padding(
-      //         padding: const EdgeInsets.all(12.0),
-      //         child: Column(
-      //           children: [
-      //             customTabbar(),
-      //             const Divider(),
-      //             SizedBox(
-      //               height: Get.height * 1.4,
-      //               // width: Get.width,
-      //               child: TabBarView(
-      //
-      //                 controller: _tabController,
-      //                 children: const [
-      //                   // Content for each tab
-      //                    MyFeeds(),
-      //                    Text("Content for Tab 2"),
-      //                    Text("Content for Tab 3"),
-      //                    Text("Content for Tab 4"),
-      //                 ],
-      //               ),
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //
-      //     ),
-      //
-      //
-      //   ],
-      // ),
     );
   }
-  Widget customTabbar(){
-    return  TabBar(
+
+  Widget customTabbar() {
+    return TabBar(
       controller: _tabController,
       dividerColor: Colors.transparent,
       indicator: const UnderlineTabIndicator(
@@ -150,125 +115,101 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
       indicatorPadding: const EdgeInsets.all(0),
       tabAlignment: TabAlignment.center,
 // Remove default padding
-      tabs:  [
+      tabs: [
         CustomTab(
           text: "My Feeds",
           index: 0,
           icon: Symbols.news,
           selected: _tabController.index == 0,
-          onTap: ()  {_tabController.animateTo(0);
-          setState(() {
-
-          });},
+          onTap: () {
+            _tabController.animateTo(0);
+            setState(() {});
+          },
         ),
         CustomTab(
           text: "Trending",
           icon: Symbols.news,
           index: 1,
           selected: _tabController.index == 1,
-          onTap: ()  {_tabController.animateTo(1);
-          setState(() {
-
-          });},
+          onTap: () {
+            _tabController.animateTo(1);
+            setState(() {});
+          },
         ),
         CustomTab(
           text: "New",
           icon: Symbols.news,
-
           index: 2,
           selected: _tabController.index == 2,
-          onTap: ()  {_tabController.animateTo(2);
-          setState(() {
-
-          });
+          onTap: () {
+            _tabController.animateTo(2);
+            setState(() {});
           },
         ),
         CustomTab(
             text: "Top",
             icon: Symbols.news,
-
             index: 3,
             selected: _tabController.index == 3,
             onTap: () {
               _tabController.animateTo(3);
-              setState(() {
-
-              });
-            }
-        ),
+              setState(() {});
+            }),
       ],
-
     );
   }
-  Widget gridViewWidget() {
-    return SliverGrid(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 4,
-      ),
-      delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-          return gridViewList(
-            text: "Team Selection",
-            icon: Icons.diversity_2,
-          );
-        },
-        childCount: 8, // Number of grid items
+
+  Widget gridViewWidget(List<Map<String, dynamic>> gridItems) {
+    return SliverToBoxAdapter(
+      child: Container(
+        height: Get.height / 3, // Set the desired height
+        child: GridView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4,
+            crossAxisSpacing: 4.0,
+            mainAxisSpacing: 4.0,
+            childAspectRatio: 1.0, // Adjust this ratio as needed
+          ),
+          itemBuilder: (BuildContext context, int index) {
+            return gridViewList(
+              text: gridItems[index]['text'],
+              icon: gridItems[index]['icon'],
+              onTap: gridItems[index]['ontap'],
+            );
+          },
+          itemCount: gridItems.length,
+        ),
       ),
     );
   }
-  // Widget gridViewWidget(){
-  //   return  Container(
-  //     // color: ColorAssets.white,
-  //     child: Padding(
-  //       padding: const EdgeInsets.all(12.0),
-  //       child: GridView.count(
-  //         physics: const NeverScrollableScrollPhysics(),
-  //         shrinkWrap: true,
-  //         crossAxisCount: 4,
-  //
-  //         children:  [
-  //           gridViewList(text: "Team Selection",icon: Icons.diversity_2),
-  //           gridViewList(text: "Trade",icon: Icons.send_time_extension),
-  //           gridViewList(text: "NBA Contacts",icon: Icons.diversity_3,ontap: (){
-  //             Get.to(()=> const NbaContractScreen());
-  //           }),
-  //           gridViewList(text: "Approval",icon: Icons.approval_outlined,ontap: (){
-  //             Get.to(()=> ApprovalScreen());
-  //           }),
-  //           gridViewList(text: "Compare Players",icon: Icons.compare_arrows),
-  //           gridViewList(text: "News",icon: Icons.auto_awesome_mosaic_sharp),
-  //           gridViewList(text: "Spaces",icon: Icons.public),
-  //           gridViewList(text: "Chatrooms",icon: Icons.inbox),
-  //         ],
-  //
-  //       ),
-  //     ),
-  //   );
-  // }
 
-  Widget gridViewList({text,ontap,icon}){
-    return  Column(
+  Widget gridViewList({text, onTap, icon}) {
+    return Column(
       children: [
         InkWell(
-          onTap: ontap,
+          onTap: onTap,
           child: CircleAvatar(
               backgroundColor: ColorAssets.buttonPrimary,
-              child: Icon( icon,color: ColorAssets.greyContainer,)
-          ),
+              child: Icon(
+                icon,
+                color: ColorAssets.greyContainer,
+              )),
         ),
         const SizedBox(
           height: 5,
         ),
         CustomTextWidget(text: text),
-
       ],
     );
   }
 
-  Widget appBar(){
+  Widget appBar() {
     return Stack(
       children: [
-        const CustomAppBar(title: 'NBA Trade Machine',
+        const CustomAppBar(
+          title: 'NBA Trade Machine',
           prefixIcon: Icons.menu,
           sufixWidget: CircleAvatar(),
         ),
@@ -277,11 +218,11 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
     );
   }
 
-  Widget dropDownRow(){
+  Widget dropDownRow() {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Padding(
-        padding: const EdgeInsets.only(left:20.0,right: 20),
+        padding: const EdgeInsets.only(left: 20.0, right: 20),
         child: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
@@ -289,21 +230,20 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
             color: ColorAssets.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.4), // Adjust color and opacity as needed
+                color: Colors.grey
+                    .withOpacity(0.4), // Adjust color and opacity as needed
                 blurRadius: 5.0, // Adjust blur radius as needed
                 offset: const Offset(0, 6), // Offset shadow only on the bottom
               ),
             ],
           ),
-
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              appBarRow(text: "SPACES",onTap: (){}),
-              appBarRow(text: "TOOLS",onTap: (){}),
-              appBarRow(text: "POST",onTap: (){}),
-              appBarRow(text: "RESOURCES",onTap: (){}),
-
+              appBarRow(text: "SPACES", onTap: () {}),
+              appBarRow(text: "TOOLS", onTap: () {}),
+              appBarRow(text: "POST", onTap: () {}),
+              appBarRow(text: "RESOURCES", onTap: () {}),
             ],
           ),
         ),
@@ -311,12 +251,12 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
     );
   }
 
-  Widget appBarRow({text, onTap}){
+  Widget appBarRow({text, onTap}) {
     return InkWell(
       onTap: onTap,
       child: Container(
         color: ColorAssets.greyContainer,
-        padding: const EdgeInsets.only(left: 6,right: 6,top: 4,bottom: 4),
+        padding: const EdgeInsets.only(left: 6, right: 6, top: 4, bottom: 4),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -324,8 +264,10 @@ class _HomeDashboardState extends State<HomeDashboard>   with SingleTickerProvid
             const SizedBox(
               width: 5,
             ),
-            const Icon(Icons.arrow_drop_down,color: Colors.black,),
-
+            const Icon(
+              Icons.arrow_drop_down,
+              color: Colors.black,
+            ),
           ],
         ),
       ),
