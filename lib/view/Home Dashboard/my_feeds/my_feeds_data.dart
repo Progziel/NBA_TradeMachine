@@ -94,21 +94,20 @@ class _MyFeedsState extends State<MyFeeds> {
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                if (post.playerModel![index].profileImage !=
-                                    null)
-                                  Expanded(
-                                    child: PostImagesRow(
-                                     profilePictures: [
-                                       post.playerModel![index].profileImage!,
-                                     ],
+                                // if (post.playerModel![index].profileImage !=
+                                //     null)
+                                  PostImagesRow(
+                                    profilePictures: post.playerModel,
+                                   // profilePictures: [
+                                   //   post.playerModel![index].profileImage!,
+                                   // ],
 
-                                        // [
-                                        //   "assets/images/player2.png",
-                                        //   "assets/images/player2.png"
-                                        // ]
-                                        // post.playerModelList[index].profileImage
-                                        ),
-                                  ),
+                                      // [
+                                      //   "assets/images/player2.png",
+                                      //   "assets/images/player2.png"
+                                      // ]
+                                      // post.playerModelList[index].profileImage
+                                      ),
                                 Expanded(
                                   child: Padding(
                                     padding:  EdgeInsets.all(8.0),
@@ -124,13 +123,10 @@ class _MyFeedsState extends State<MyFeeds> {
                             color: const Color(0xff08591b),
                             child: Column(
                               children: [
-                                if (post.playerModel![index].profileImage !=
-                                    null)
+
                                   Expanded(
                                     child: PostImagesRow(
-                                      profilePictures: [
-                                        post.playerModel![index].profileImage!,
-                                      ],
+                                      profilePictures: post.playerModel
                                         //   post.playerModelList[index].profileImage
 // [
 //   "assets/images/player2.png",
