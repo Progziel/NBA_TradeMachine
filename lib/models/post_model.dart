@@ -1,7 +1,7 @@
 import 'package:nbatrade/models/player_model.dart';
 
 class PostModel {
-  final List<String>? profilePictures;
+  List<PlayerModel>? playerModel;
  // final PlayerModel playerModel;
   final String channelName;
   final String postedBy;
@@ -25,7 +25,7 @@ class PostModel {
       this.flamCount,
       this.likeCount,
         this.expended = false,
-      this.shareCount,this.profilePictures});
+      this.shareCount,this.playerModel,});
 }
 
 class Comments {
