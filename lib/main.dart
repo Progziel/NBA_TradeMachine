@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
-import 'package:nbatrade/view/Home%20Dashboard/my_feeds/home_feed.dart';
-import 'package:nbatrade/view/Home%20Dashboard/my_feeds/player_profile_screen.dart';
-import 'package:nbatrade/view/compare_players/compare_player.dart';
-
-import 'helper/constants/profile_detail_widget.dart';
+import 'package:nbatrade/view/Home%20Dashboard/home_dashboard.dart';
 
 void main() {
   runApp(const MyApp());

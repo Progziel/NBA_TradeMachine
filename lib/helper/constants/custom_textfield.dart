@@ -4,42 +4,72 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final String hint;
-  final String? label;
   final bool? obscureText;
+  final int? maxLines;
+  final Color? fillColor;
+  final Color? hintTextColor;
+  final Widget? sufixIcon;
   final void Function(String)? onChanged;
   const CustomTextFormField(
       {Key? key,
         this.controller,
-        this.label,
+        this.sufixIcon,
+        this.fillColor,
+        this.hintTextColor,
         this.validator,
-         required this.hint,
-         this.obscureText,
-        this.onChanged
-   })
+        required this.hint,
+        this.obscureText,
+        this.onChanged,
+        this.maxLines})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      validator: validator,
-      controller: controller,
-      onChanged: onChanged,
-      keyboardType: TextInputType.text,
-      style: const TextStyle(color: Colors.black),
-      obscureText: obscureText ?? false,
+    return SizedBox(
+     height: 40,
+      child: TextFormField(
 
-      decoration: InputDecoration(
-        label: Text(label ?? "",),
-        hintText: hint,
-        hintStyle: const TextStyle(color: Color(0XFF535353)),
-        filled: true,
-        fillColor: Colors.grey[200],
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey, width: 0.5),
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black, width: 1.5),
-        ),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
+        validator: validator,
+        controller: controller,
+        onChanged: onChanged,
+        keyboardType: TextInputType.text,
+        style: const TextStyle(color: Colors.black),
+        obscureText: obscureText ?? false,
+        maxLines: maxLines ?? 1,
+        decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
+
+            // label: Text(label ?? "",),
+          //   border: OutlineInputBorder(
+          //     borderRadius: BorderRadius.circular(15.0), // Adjust the radius as needed
+          //   ),
+            hintText: hint,
+            hintStyle: TextStyle(color: hintTextColor),
+            filled: true,
+            fillColor: fillColor,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              borderSide: BorderSide(
+                color: Colors.grey,
+                width: 2.0,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              borderSide: BorderSide(
+                color: Colors.blue,
+                width: 2.0,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              borderSide: BorderSide(
+                color: Colors.green,
+                width: 2.0,
+              ),
+            ),
+            //focusedBorder: InputBorder.none,
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            suffixIcon: sufixIcon),
       ),
     );
     // return TextFormField(
