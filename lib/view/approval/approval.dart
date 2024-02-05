@@ -7,7 +7,7 @@ import 'package:nbatrade/view/approval/tabs/panding.dart';
 import 'package:nbatrade/view/approval/tabs/rejected.dart';
 
 class TradeApprovalScreen extends StatefulWidget {
-  TradeApprovalScreen({super.key});
+  const TradeApprovalScreen({super.key});
 
   @override
   State<TradeApprovalScreen> createState() => _TradeApprovalScreenState();
@@ -27,45 +27,24 @@ class _TradeApprovalScreenState extends State<TradeApprovalScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(Get.height * 0.28),
-        child: CustomAppBar2(
-            title: 'Trade Approval',
-            prefixIcon: Icons.arrow_back_ios,
-            prefixIconOnTap: () {
-              // Handle back button tap
-            },
-            sufixWidget: const CircleAvatar()),
-      ),
-      body: Container(
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(0.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                customTabbar(),
-                SizedBox(
-                  height: Get.height,
-                  // width: Get.width,
-                  child: TabBarView(
-                    physics: NeverScrollableScrollPhysics(),
-                    controller: _tabController,
-                    children: [
-                      // Content for each tab
-                      TabPanding(),
-                      TabApproved(),
-                      TabRejected(),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+        backgroundColor: Colors.white,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(Get.height * 0.28),
+          child: CustomAppBar2(
+              title: 'Trade Approval',
+              prefixIcon: Icons.arrow_back_ios,
+              prefixIconOnTap: () {
+                Get.back();
+              },
+              sufixWidget: const CircleAvatar()),
         ),
-      ),
-    );
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              
+            ),
+          ],
+        ));
   }
 
   Widget customTabbar() {
@@ -83,7 +62,7 @@ class _TradeApprovalScreenState extends State<TradeApprovalScreen>
       tabAlignment: TabAlignment.center,
 // Remove default padding
       tabs: [
-        CustomTab(
+        CustomAplTab(
           text: "Pandings",
           color: const Color(0xFFD9D9D9),
           index: 0,
@@ -94,8 +73,8 @@ class _TradeApprovalScreenState extends State<TradeApprovalScreen>
           },
           fontColr: const Color(0xFF1C1B1F),
         ),
-        CustomTab(
-          text: "Approved",
+        CustomAplTab(
+          text: "Acceped",
           color: const Color(0xFF9AD16E),
           index: 1,
           selected: _tabController.index == 1,
@@ -105,7 +84,7 @@ class _TradeApprovalScreenState extends State<TradeApprovalScreen>
           },
           fontColr: const Color(0xFFFFFFFF),
         ),
-        CustomTab(
+        CustomAplTab(
           text: "Rejected",
           index: 2,
           color: const Color(0xFFDA7777),
@@ -189,8 +168,8 @@ class CustomAppBar2 extends StatelessWidget {
   }
 }
 
-//   CustomTab
-class CustomTab extends StatelessWidget {
+//   CustomAplTab
+class CustomAplTab extends StatelessWidget {
   final String text;
   final int index;
   final Color color;
@@ -199,7 +178,7 @@ class CustomTab extends StatelessWidget {
   final VoidCallback onTap;
   final IconData? icon;
 
-  const CustomTab(
+  const CustomAplTab(
       {super.key,
       required this.text,
       required this.color,
@@ -233,7 +212,10 @@ class CustomTab extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(width: 10),
-            Text(text, style: TextStyle(color: fontColr)),
+            Text(
+                textAlign: TextAlign.center,
+                text,
+                style: TextStyle(color: fontColr)),
             const SizedBox(width: 10),
           ],
         ),

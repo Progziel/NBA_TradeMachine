@@ -3,8 +3,7 @@ import 'package:get/get.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
-
-import '../../approval/approval.dart';
+import 'package:nbatrade/view/approval/approval.dart';
 
 class NbaContractScreen extends StatelessWidget {
   const NbaContractScreen({super.key});
@@ -69,13 +68,13 @@ class PlayerTable extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: DataTable(
         headingTextStyle:
-        const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+            const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         dataRowHeight: 70,
         dataRowColor: MaterialStateColor.resolveWith(
-                (states) => ColorAssets.primaryBackground),
+            (states) => ColorAssets.primaryBackground),
         columnSpacing: 20.0,
         headingRowColor:
-        MaterialStateColor.resolveWith((states) => ColorAssets.primary),
+            MaterialStateColor.resolveWith((states) => ColorAssets.primary),
         columns: [
           DataColumn(label: SizedBox(child: Text('Player'))),
           DataColumn(label: SizedBox(child: Text('Position'))),
@@ -107,8 +106,8 @@ class PlayerTable extends StatelessWidget {
           ),
         ],
         rows: List.generate(
-          100,
-              (index) => DataRow(
+          30,
+          (index) => DataRow(
             cells: [
               const DataCell(
                 SizedBox(

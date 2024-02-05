@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/utils.dart';
 import 'package:material_symbols_icons/symbols.dart';
-import 'package:nbatrade/approval/approval.dart';
+import 'package:nbatrade/helper/constants/colors.dart';
+import 'package:nbatrade/helper/constants/custom_appbar.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
-import '../../../helper/constants/colors.dart';
-import '../../../helper/constants/custom_appbar.dart';
-import '../nba_contract/nba_contract.dart';
-import 'my_feeds/home_tabs.dart';
+import 'package:nbatrade/view/Home%20Dashboard/my_feeds/home_tabs.dart';
+import 'package:nbatrade/view/approval/approval.dart';
+import 'package:nbatrade/view/nba_contract/nba_contract.dart';
+import 'package:nbatrade/view/news/news.dart';
+
 import 'my_feeds/my_feeds_data.dart';
 
 class HomeDashboard extends StatefulWidget {
@@ -161,10 +162,15 @@ class _HomeDashboardState extends State<HomeDashboard>
                 text: "Approval",
                 icon: Icons.approval_outlined,
                 ontap: () {
-                  Get.to(() => ApprovalScreen());
+                  Get.to(() => TradeApprovalScreen());
                 }),
             gridViewList(text: "Compare Players", icon: Icons.compare_arrows),
-            gridViewList(text: "News", icon: Icons.auto_awesome_mosaic_sharp),
+            gridViewList(
+                text: "News",
+                icon: Icons.auto_awesome_mosaic_sharp,
+                ontap: () {
+                  Get.to(() => const NewsScreen());
+                }),
             gridViewList(text: "Spaces", icon: Icons.public),
             gridViewList(text: "Chatrooms", icon: Icons.inbox),
           ],

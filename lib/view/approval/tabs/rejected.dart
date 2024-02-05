@@ -15,6 +15,7 @@ class TabRejected extends StatelessWidget {
         child: Column(
           children: [
             const Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomTextWidget(
                     fontSize: 15,
@@ -37,7 +38,7 @@ class TabRejected extends StatelessWidget {
               height: 500,
               width: Get.width,
               decoration: BoxDecoration(
-                  color: Color.fromARGB(169, 255, 237, 237),
+                  color: const Color.fromARGB(169, 255, 237, 237),
                   borderRadius: BorderRadius.circular(20)),
               child: const Column(
                 children: [],

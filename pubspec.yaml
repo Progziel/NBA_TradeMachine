@@ -37,6 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.6
   material_symbols_icons: ^4.2718.0
+  carousel_slider: ^4.2.1
+  social_embed_webview: ^0.3.0-dev.4
+  reorderables: ^0.6.0
 
 dev_dependencies:
   flutter_test:

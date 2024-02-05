@@ -19,7 +19,7 @@ class TabApproved extends StatelessWidget {
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
                   textColor: ColorAssets.primary,
-                  text: "Trade Status is Pending until Admin Approve"),
+                  text: "These Trades are Successfully Approved"),
             ),
             SizedBox(height: 10),
             Container(
