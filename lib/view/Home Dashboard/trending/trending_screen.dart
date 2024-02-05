@@ -94,24 +94,18 @@ class _TrendingState extends State<Trending> {
                         children: [
                           if (post.playerModel![index].profileImage !=
                               null)
-                            Expanded(
-                              child: PostImagesRow(
-                                profilePictures: [
-                                  post.playerModel![index].profileImage!,
-                                ],
+                            PostImagesRow(
+                              profilePictures:post.playerModel
 
-                                // [
-                                //   "assets/images/player2.png",
-                                //   "assets/images/player2.png"
-                                // ]
-                                // post.playerModelList[index].profileImage
-                              ),
+                              // [
+                              //   "assets/images/player2.png",
+                              //   "assets/images/player2.png"
+                              // ]
+                              // post.playerModelList[index].profileImage
                             ),
-                          Expanded(
-                            child: Padding(
-                              padding:  EdgeInsets.all(8.0),
-                              child: CustomTextWidget(text:  post.description,),
-                            ),
+                          Padding(
+                            padding:  EdgeInsets.all(8.0),
+                            child: CustomTextWidget(text:  post.description,),
                           ),
                         ],
                       ),
@@ -126,9 +120,7 @@ class _TrendingState extends State<Trending> {
                               null)
                             Expanded(
                               child: PostImagesRow(
-                                profilePictures: [
-                                  post.playerModel![index].profileImage!,
-                                ],
+                                profilePictures: post.playerModel
                                 //   post.playerModelList[index].profileImage
 // [
 //   "assets/images/player2.png",
