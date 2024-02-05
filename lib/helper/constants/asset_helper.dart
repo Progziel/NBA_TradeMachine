@@ -17,6 +17,9 @@ class MyAssetHelper{
   static String player6="assets/images/player6.png";
   static String placeholder="assets/images/placeholder.png";
   static String twitter="assets/images/twitter.png";
+  static String userProfileAppBarBackground="assets/images/userProfileAppBarBackground.svg";
+  static String userProfileAppBarBackground1="assets/images/userProfilebackground.png";
+
 
 
 
