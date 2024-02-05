@@ -5,8 +5,6 @@ import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/helper/constants/custom_textfield.dart';
 import 'colors.dart';
 
-
-
 class CustomAppBar extends StatelessWidget {
   final void Function()? prefixIconOnTap;
   final void Function()? sufixWidgetOnTap;
@@ -14,7 +12,7 @@ class CustomAppBar extends StatelessWidget {
   final Widget? sufixWidget;
   final String title;
 
-   const CustomAppBar({
+  const CustomAppBar({
     Key? key,
     this.prefixIcon,
     required this.title,
@@ -39,16 +37,24 @@ class CustomAppBar extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 12.0,right: 12.0),
+            padding: const EdgeInsets.only(left: 12.0, right: 12.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                InkWell(onTap: prefixIconOnTap, child: Icon(prefixIcon,color: ColorAssets.white,)),
-                CustomTextWidget(text: title, textColor: ColorAssets.white,fontWeight: FontWeight.w500,fontSize: 20),
+                InkWell(
+                    onTap: prefixIconOnTap,
+                    child: Icon(
+                      prefixIcon,
+                      color: ColorAssets.white,
+                    )),
+                CustomTextWidget(
+                    text: title,
+                    textColor: ColorAssets.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20),
                 if (sufixWidget != null)
                   InkWell(onTap: sufixWidgetOnTap, child: sufixWidget!),
-                if(sufixWidget == null)
-                  const SizedBox()
+                if (sufixWidget == null) const SizedBox()
               ],
             ),
           ),
@@ -56,7 +62,7 @@ class CustomAppBar extends StatelessWidget {
             height: 20,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 40.0,right: 40),
+            padding: const EdgeInsets.only(left: 40.0, right: 40),
             child: CustomTextFormField(
               hint: "Search",
               sufixIcon: const Icon(Icons.search),
@@ -68,5 +74,3 @@ class CustomAppBar extends StatelessWidget {
     );
   }
 }
-
-

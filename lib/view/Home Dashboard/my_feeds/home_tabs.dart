@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:material_symbols_icons/symbols.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 
 class CustomTab extends StatelessWidget {
@@ -9,13 +8,12 @@ class CustomTab extends StatelessWidget {
   final VoidCallback onTap;
   final IconData? icon;
 
-  const CustomTab({
-    required this.text,
-    required this.index,
-    required this.selected,
-    required this.onTap,
-    this.icon
-  });
+  const CustomTab(
+      {required this.text,
+      required this.index,
+      required this.selected,
+      required this.onTap,
+      this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +35,8 @@ class CustomTab extends StatelessWidget {
             Text(
               text,
               style: TextStyle(
-                color: selected ? ColorAssets.white : ColorAssets.borderSecondary,
+                color:
+                    selected ? ColorAssets.white : ColorAssets.borderSecondary,
               ),
             ),
           ],

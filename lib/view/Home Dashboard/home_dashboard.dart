@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/view/Home%20Dashboard/trending/trending_screen.dart';
+import 'package:nbatrade/view/news/news.dart';
 import '../../../helper/constants/colors.dart';
 import '../../../helper/constants/custom_appbar.dart';
 import '../approval/approval.dart';
@@ -33,10 +34,14 @@ class _HomeDashboardState extends State<HomeDashboard>
     {
       "text": "Approval",
       "icon": Icons.approval_outlined,
-      "ontap": () => Get.to(ApprovalScreen())
+      "ontap": () => Get.to(TradeApprovalScreen())
     },
     {"text": "Compare Players", "icon": Icons.compare_arrows},
-    {"text": "News", "icon": Icons.auto_awesome_mosaic_sharp},
+    {
+      "text": "News",
+      "icon": Icons.auto_awesome_mosaic_sharp,
+      "ontap": () => Get.to(const NewsScreen())
+    },
     {"text": "Spaces", "icon": Icons.public},
     {"text": "Chatrooms", "icon": Icons.inbox},
   ];
@@ -160,7 +165,7 @@ class _HomeDashboardState extends State<HomeDashboard>
 
   Widget gridViewWidget(List<Map<String, dynamic>> gridItems) {
     return SliverToBoxAdapter(
-      child: Container(
+      child: SizedBox(
         height: Get.height / 3, // Set the desired height
         child: GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
@@ -172,10 +177,13 @@ class _HomeDashboardState extends State<HomeDashboard>
             childAspectRatio: 1.0, // Adjust this ratio as needed
           ),
           itemBuilder: (BuildContext context, int index) {
-            return gridViewList(
-              text: gridItems[index]['text'],
-              icon: gridItems[index]['icon'],
-              onTap: gridItems[index]['ontap'],
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: gridViewList(
+                text: gridItems[index]['text'],
+                icon: gridItems[index]['icon'],
+                onTap: gridItems[index]['ontap'],
+              ),
             );
           },
           itemCount: gridItems.length,
@@ -193,7 +201,7 @@ class _HomeDashboardState extends State<HomeDashboard>
               backgroundColor: ColorAssets.buttonPrimary,
               child: Icon(
                 icon,
-                color: ColorAssets.greyContainer,
+                color: Colors.white,
               )),
         ),
         const SizedBox(
@@ -254,15 +262,14 @@ class _HomeDashboardState extends State<HomeDashboard>
     return InkWell(
       onTap: onTap,
       child: Container(
-        color: ColorAssets.greyContainer,
-        padding: const EdgeInsets.only(left: 6, right: 6, top: 4, bottom: 4),
+        decoration: BoxDecoration(
+            color: ColorAssets.greyContainer,
+            borderRadius: BorderRadius.circular(5)),
+        padding: const EdgeInsets.only(left: 2, right: 0, top: 4, bottom: 4),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             CustomTextWidget(text: text),
-            const SizedBox(
-              width: 5,
-            ),
             const Icon(
               Icons.arrow_drop_down,
               color: Colors.black,

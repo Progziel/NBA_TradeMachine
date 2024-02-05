@@ -12,22 +12,21 @@ class CustomTextFormField extends StatelessWidget {
   final void Function(String)? onChanged;
   const CustomTextFormField(
       {Key? key,
-        this.controller,
-        this.sufixIcon,
-        this.fillColor,
-        this.hintTextColor,
-        this.validator,
-        required this.hint,
-        this.obscureText,
-        this.onChanged,
-        this.maxLines})
+      this.controller,
+      this.sufixIcon,
+      this.fillColor,
+      this.hintTextColor,
+      this.validator,
+      required this.hint,
+      this.obscureText,
+      this.onChanged,
+      this.maxLines})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-     height: 40,
+      height: 40,
       child: TextFormField(
-
         validator: validator,
         controller: controller,
         onChanged: onChanged,
@@ -36,12 +35,13 @@ class CustomTextFormField extends StatelessWidget {
         obscureText: obscureText ?? false,
         maxLines: maxLines ?? 1,
         decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
+            contentPadding:
+                EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
 
             // label: Text(label ?? "",),
-          //   border: OutlineInputBorder(
-          //     borderRadius: BorderRadius.circular(15.0), // Adjust the radius as needed
-          //   ),
+            //   border: OutlineInputBorder(
+            //     borderRadius: BorderRadius.circular(15.0), // Adjust the radius as needed
+            //   ),
             hintText: hint,
             hintStyle: TextStyle(color: hintTextColor),
             filled: true,
@@ -53,23 +53,17 @@ class CustomTextFormField extends StatelessWidget {
                 width: 2.0,
               ),
             ),
-            enabledBorder: OutlineInputBorder(
+            focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
               borderSide: BorderSide(
                 color: Colors.blue,
                 width: 2.0,
               ),
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30.0),
-              borderSide: BorderSide(
-                color: Colors.green,
-                width: 2.0,
-              ),
-            ),
             //focusedBorder: InputBorder.none,
             floatingLabelBehavior: FloatingLabelBehavior.always,
             suffixIcon: sufixIcon),
+            
       ),
     );
     // return TextFormField(

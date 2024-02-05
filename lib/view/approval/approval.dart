@@ -28,20 +28,46 @@ class _TradeApprovalScreenState extends State<TradeApprovalScreen>
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(Get.height * 0.28),
-          child: CustomAppBar2(
-              title: 'Trade Approval',
-              prefixIcon: Icons.arrow_back_ios,
-              prefixIconOnTap: () {
-                Get.back();
-              },
-              sufixWidget: const CircleAvatar()),
-        ),
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
-              
+              automaticallyImplyLeading: false,
+              expandedHeight: Get.height * 0.19,
+              flexibleSpace: const FlexibleSpaceBar(
+                background: AppbarApproval(),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SingleChildScrollView(
+                child: Container(
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          customTabbar(),
+                          const SizedBox(height: 5),
+                          SizedBox(
+                            height: Get.height,
+                            // width: Get.width,
+                            child: TabBarView(
+                              physics: const NeverScrollableScrollPhysics(),
+                              controller: _tabController,
+                              children: const [
+                                // Content for each tab
+                                TabPanding(),
+                                TabApproved(),
+                                TabRejected(),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ));
@@ -100,6 +126,23 @@ class _TradeApprovalScreenState extends State<TradeApprovalScreen>
   }
 }
 
+class AppbarApproval extends StatelessWidget {
+  const AppbarApproval({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomAppBar2(
+        title: 'Trade Approval',
+        prefixIcon: Icons.arrow_back_ios,
+        prefixIconOnTap: () {
+          Get.back();
+        },
+        sufixWidget: const CircleAvatar());
+  }
+}
+
 //   app bar
 class CustomAppBar2 extends StatelessWidget {
   final void Function()? prefixIconOnTap;
@@ -120,7 +163,7 @@ class CustomAppBar2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Get.height * 0.2,
+      height: Get.height * 0.2, 
       decoration: const BoxDecoration(
         color: ColorAssets.primary,
         borderRadius: BorderRadius.only(
