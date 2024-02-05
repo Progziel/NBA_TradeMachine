@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
-import 'package:nbatrade/view/approval/approval.dart';
+
+import '../approval/approval.dart';
+
 
 class NbaContractScreen extends StatelessWidget {
   const NbaContractScreen({super.key});

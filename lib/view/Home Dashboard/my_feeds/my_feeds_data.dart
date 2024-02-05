@@ -5,12 +5,10 @@ import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 
 import '../../../helper/custom_text_dropdown.dart';
-import '../../../models/post_model.dart';
+import '../../../helper/post_image_row.dart';
 
 class MyFeeds extends StatefulWidget {
-
   const MyFeeds({Key? key}) : super(key: key);
-
 
   @override
   State<MyFeeds> createState() => _MyFeedsState();
@@ -35,140 +33,161 @@ class _MyFeedsState extends State<MyFeeds> {
           },
         ),
         if (filterPostByType == true)
-          Container(
-            width: Get.width,
-            padding: const EdgeInsets.only(top: 8,bottom: 0),
-            decoration: BoxDecoration(
-                color: ColorAssets.lightGrey,
-                borderRadius: BorderRadius.circular(4)),
-            child:  Column(
-              children: [
+          Expanded(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: postController.myFeedPosts.length,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (BuildContext context, index) {
+                final post = postController.myFeedPosts[index];
 
-                ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: postController.posts.length,
-                    itemBuilder: (BuildContext context, index){
-                      final post = postController.posts[index];
-                  return Column(
-                    children: [
-                      Padding(
+                return Column(
+                  children: [
+
+                    Container(
+                      color: ColorAssets.grey,
+                      child: Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Row(
-                          //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            ...[
-                              const CircleAvatar(
-                                radius: 10,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              const CustomTextWidget(
-                                text: "Channel 1",
-                                fontWeight: FontWeight.w500,
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const CustomTextWidget(
-                                  text: "Posted by ", textColor: ColorAssets.black),
-                              const SizedBox(
-                                width: 2,
-                              ),
-                              const CustomTextWidget(
-                                  text: "3 Days Ago",
-                                  textColor: ColorAssets.greyContainer),
-                            ],
-                            Spacer(),
-
+                            const CircleAvatar(
+                              radius: 10,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            const CustomTextWidget(
+                              text: "Channel 1",
+                              fontWeight: FontWeight.w500,
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            const CustomTextWidget(
+                              text: "Posted by ",
+                              textColor: ColorAssets.black,
+                            ),
+                            const SizedBox(
+                              width: 2,
+                            ),
+                            const CustomTextWidget(
+                              text: "3 Days Ago",
+                              textColor: ColorAssets.greyContainer,
+                            ),
+                            const Spacer(),
                             InkWell(
-                                onTap:(){
-                                  post.expended = !post.expended!;
-                                  setState(() {
-
-                                  });
-                                },
-                                child: CustomTextWidget(text: "Expanded")),
-                            Icon(Icons.arrow_drop_down),
+                              onTap: () {
+                                postController.togglePostExpansion(post);
+                                setState(() {});
+                              },
+                              child: const CustomTextWidget(text: "Expanded"),
+                            ),
+                            const Icon(Icons.arrow_drop_down),
                           ],
                         ),
                       ),
-                      post.expended == false ?
-                      Container(
-                        height: 100,
-                        color: Colors.red,
-                        child: Row(
-                          children: [
-                            post.profilePictures != null ?
-                            postImagesRow(post.profilePictures): SizedBox(),
-                            Expanded(
-                                child: postDescriptionRow()),
+                    ),
+                    post.expended == false
+                        ? Container(
+                            height: 100,
+                            color: Colors.red,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (post.playerModel![index].profileImage !=
+                                    null)
+                                  Expanded(
+                                    child: PostImagesRow(
+                                     profilePictures: [
+                                       post.playerModel![index].profileImage!,
+                                     ],
 
-                          ],
-                        ),
-                      ) : SizedBox(),
-                      Container(
-                        padding: EdgeInsets.all(6),
-                        color: ColorAssets.grey,
-                        child: Row(
-                          children: [
-                            Icon(Icons.favorite_border),
-                            CustomTextWidget(text: "10"),
-                            SizedBox(
-                              width: 20,
+                                        // [
+                                        //   "assets/images/player2.png",
+                                        //   "assets/images/player2.png"
+                                        // ]
+                                        // post.playerModelList[index].profileImage
+                                        ),
+                                  ),
+                                Expanded(
+                                  child: Padding(
+                                    padding:  EdgeInsets.all(8.0),
+                                    child: CustomTextWidget(text:  post.description,),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Icon(Icons.comment_bank_outlined),
-                            CustomTextWidget(text: "10"),
-                            SizedBox(
-                              width: 20,
+                          )
+                        : Container(
+                            height: Get.height / 3,
+                           // width: Get.width,
+                            color: const Color(0xff08591b),
+                            child: Column(
+                              children: [
+                                if (post.playerModel![index].profileImage !=
+                                    null)
+                                  Expanded(
+                                    child: PostImagesRow(
+                                      profilePictures: [
+                                        post.playerModel![index].profileImage!,
+                                      ],
+                                        //   post.playerModelList[index].profileImage
+// [
+//   "assets/images/player2.png",
+//   "assets/images/player2.png"
+// ]
+                                        ),
+                                  ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: CustomTextWidget(text:  post.description,),
+                                ),
+                              ],
                             ),
-                            Icon(Icons.local_fire_department_outlined),
-                            CustomTextWidget(text: "10"),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Icon(Icons.share),
-                            CustomTextWidget(text: "10"),
-                          ],
-                        ),
-                      )
-                    ],
-                  );
-                })
-
-
-              ],
+                          ),
+                    Container(
+                      padding: const EdgeInsets.all(6),
+                      color: ColorAssets.grey,
+                      child: const Row(
+                        children: [
+                          Icon(Icons.favorite_border),
+                          CustomTextWidget(text: "10"),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Icon(Icons.comment_bank_outlined),
+                          CustomTextWidget(text: "10"),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Icon(Icons.local_fire_department_outlined),
+                          CustomTextWidget(text: "10"),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Icon(Icons.share),
+                          CustomTextWidget(text: "10"),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    )
+                  ],
+                );
+              },
             ),
           ),
       ],
     );
-  }
-  Widget postImagesRow(List<String>? profilePictures){
-    return  ListView.builder(
-      itemCount: profilePictures?.length,
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (BuildContext context, int index) {
-          return  Container(
-               width: Get.width / 6,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                      profilePictures![index]
-                  ),fit: BoxFit.cover
-                )
-              ),
-              );
-        }
 
-    );
+
   }
-  Widget postDescriptionRow(){
-    return CustomTextWidget(text: "ksdkkashdjashdjaskd"
-        "asbdajkshdksahdkjas"
-        "sdjabdjhsabdjhabjhagshdsjdgshjagda"
-        "dsadashjdgjadwye87y8bhcba",);
-  }
+
+
+
+
+
 
   Widget createPostRow() {
     return Container(
@@ -213,3 +232,4 @@ class _MyFeedsState extends State<MyFeeds> {
     );
   }
 }
+

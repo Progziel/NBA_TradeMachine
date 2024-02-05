@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_symbols_icons/symbols.dart';
-import 'package:nbatrade/helper/constants/colors.dart';
-import 'package:nbatrade/helper/constants/custom_appbar.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
-import 'package:nbatrade/view/Home%20Dashboard/my_feeds/home_tabs.dart';
-import 'package:nbatrade/view/approval/approval.dart';
-import 'package:nbatrade/view/nba_contract/nba_contract.dart';
-import 'package:nbatrade/view/news/news.dart';
-
+import 'package:nbatrade/view/Home%20Dashboard/trending/trending_screen.dart';
+import '../../../helper/constants/colors.dart';
+import '../../../helper/constants/custom_appbar.dart';
+import '../approval/approval.dart';
+import '../nba_contract/nba_contract.dart';
+import 'my_feeds/home_tabs.dart';
 import 'my_feeds/my_feeds_data.dart';
 
 class HomeDashboard extends StatefulWidget {
@@ -23,6 +22,24 @@ class _HomeDashboardState extends State<HomeDashboard>
   late TabController _tabController;
 
   bool expanded = false;
+  List<Map<String, dynamic>> gridItemsData = [
+    {"text": "Team Selection", "icon": Icons.diversity_2},
+    {"text": "Trade", "icon": Icons.send_time_extension},
+    {
+      "text": "NBA Contacts",
+      "icon": Icons.diversity_3,
+      "ontap": () => Get.to(const NbaContractScreen())
+    },
+    {
+      "text": "Approval",
+      "icon": Icons.approval_outlined,
+      "ontap": () => Get.to(ApprovalScreen())
+    },
+    {"text": "Compare Players", "icon": Icons.compare_arrows},
+    {"text": "News", "icon": Icons.auto_awesome_mosaic_sharp},
+    {"text": "Spaces", "icon": Icons.public},
+    {"text": "Chatrooms", "icon": Icons.inbox},
+  ];
 
   @override
   void initState() {
@@ -41,43 +58,44 @@ class _HomeDashboardState extends State<HomeDashboard>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorAssets.white,
-      appBar: PreferredSize(
-          preferredSize:
-              Size.fromHeight(Get.height * 0.28), // Adjust the preferred height
-          child: appBar()),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            gridViewWidget(),
-            Container(
-              color: ColorAssets.primaryBackground,
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  children: [
-                    customTabbar(),
-                    const Divider(),
-                    SizedBox(
-                      height: Get.height,
-                      // width: Get.width,
-                      child: TabBarView(
-                        controller: _tabController,
-                        children: [
-                          // Content for each tab
-                          MyFeeds(),
-                          Container(child: const Text("Content for Tab 2")),
-                          Container(child: const Text("Content for Tab 3")),
-                          Container(child: const Text("Content for Tab 4")),
-                        ],
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: Get.height * 0.28,
+            flexibleSpace: FlexibleSpaceBar(
+              background: appBar(),
+            ),
+          ),
+          gridViewWidget(gridItemsData),
+          SliverToBoxAdapter(
+            child: SingleChildScrollView(
+              child: Container(
+                color: ColorAssets.primaryBackground,
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    children: [
+                      customTabbar(),
+                      const Divider(),
+                      SizedBox(
+                        height: Get.height,
+                        child: TabBarView(
+                          controller: _tabController,
+                          children: const [
+                            MyFeeds(),
+                            Trending(),
+                            Trending(),
+                            Trending(),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -140,50 +158,37 @@ class _HomeDashboardState extends State<HomeDashboard>
     );
   }
 
-  Widget gridViewWidget() {
-    return Container(
-      // color: ColorAssets.white,
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: GridView.count(
+  Widget gridViewWidget(List<Map<String, dynamic>> gridItems) {
+    return SliverToBoxAdapter(
+      child: Container(
+        height: Get.height / 3, // Set the desired height
+        child: GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          crossAxisCount: 4,
-          children: [
-            gridViewList(text: "Team Selection", icon: Icons.diversity_2),
-            gridViewList(text: "Trade", icon: Icons.send_time_extension),
-            gridViewList(
-                text: "NBA Contacts",
-                icon: Icons.diversity_3,
-                ontap: () {
-                  Get.to(() => const NbaContractScreen());
-                }),
-            gridViewList(
-                text: "Approval",
-                icon: Icons.approval_outlined,
-                ontap: () {
-                  Get.to(() => TradeApprovalScreen());
-                }),
-            gridViewList(text: "Compare Players", icon: Icons.compare_arrows),
-            gridViewList(
-                text: "News",
-                icon: Icons.auto_awesome_mosaic_sharp,
-                ontap: () {
-                  Get.to(() => const NewsScreen());
-                }),
-            gridViewList(text: "Spaces", icon: Icons.public),
-            gridViewList(text: "Chatrooms", icon: Icons.inbox),
-          ],
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4,
+            crossAxisSpacing: 4.0,
+            mainAxisSpacing: 4.0,
+            childAspectRatio: 1.0, // Adjust this ratio as needed
+          ),
+          itemBuilder: (BuildContext context, int index) {
+            return gridViewList(
+              text: gridItems[index]['text'],
+              icon: gridItems[index]['icon'],
+              onTap: gridItems[index]['ontap'],
+            );
+          },
+          itemCount: gridItems.length,
         ),
       ),
     );
   }
 
-  Widget gridViewList({text, ontap, icon}) {
+  Widget gridViewList({text, onTap, icon}) {
     return Column(
       children: [
         InkWell(
-          onTap: ontap,
+          onTap: onTap,
           child: CircleAvatar(
               backgroundColor: ColorAssets.buttonPrimary,
               child: Icon(
