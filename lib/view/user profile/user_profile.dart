@@ -15,6 +15,7 @@ import 'package:get/utils.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/helper/constants/profile_detail_widget.dart';
+import 'package:nbatrade/helper/constants/userProfileFeed.dart';
 import 'package:nbatrade/view/Home%20Dashboard/my_feeds/my_feeds_data.dart';
 import 'package:nbatrade/view/Home%20Dashboard/trending/trending_screen.dart';
 import 'package:nbatrade/view/compare_players/compare_player.dart';
@@ -49,63 +50,72 @@ class _UserProfileScreenState extends State<UserProfileScreen> with SingleTicker
     return SafeArea(
       child:Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(Get.height * 0.4), // Adjust the preferred height
+          preferredSize: Size.fromHeight(Get.height * 0.35), // Adjust the preferred height
           child:   Container(
-
-
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+
               children: [
-                CircleAvatar(
-                  backgroundColor: Colors.grey.shade200,
-                  backgroundImage:  AssetImage(MyAssetHelper.profileScreenImage),
-                  radius: 40.0,
-                ),
-                CustomTextWidget(text: "u/james_r",fontSize: 14,fontWeight: FontWeight.w500,),
-                CustomTextWidget(text: "wanting jody Allen to Move Away from Sports",fontSize: 14,fontWeight: FontWeight.w500,),
-                SizedBox(height: context.height*0.02,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                Container(
+                  padding: EdgeInsets.only(top: 10),
 
 
-                  children: [
-                    Container(
-                      margin: EdgeInsets.all(5),
-                      height: context.height*0.05,
-                      width: context.width*0.2,
-
-
-
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: Offset(0, 3),
-                            ),
-
-                          ],
-                          color: ColorAssets.white,
-                          borderRadius: BorderRadius.circular(20)
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.grey.shade200,
+                        backgroundImage:  AssetImage(MyAssetHelper.profileScreenImage),
+                        radius: 40.0,
                       ),
-                      child: Center(child: CustomTextWidget(text: "Follow",textColor: ColorAssets.primary,fontSize: 14,fontWeight: FontWeight.bold,)),
-                    ),
-                    CustomTextWidget(text: "167 Followers",fontWeight: FontWeight.bold,fontSize: 15,),
-                    CustomTextWidget(text: "167 Followers",fontWeight: FontWeight.bold,fontSize: 15,),
+                      CustomTextWidget(text: "u/james_r",fontSize: 14,fontWeight: FontWeight.w500,),
+                      CustomTextWidget(text: "wanting jody Allen to Move Away from Sports",fontSize: 14,fontWeight: FontWeight.w500,),
+                      SizedBox(height: context.height*0.02,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(5),
+                            height: context.height*0.04,
+                            width: context.width*0.2,
+
+
+
+                            decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: Offset(0, 3),
+                                  ),
+
+                                ],
+                                color: ColorAssets.white,
+                                borderRadius: BorderRadius.circular(20)
+                            ),
+                            child: Center(child: CustomTextWidget(text: "Follow",textColor: ColorAssets.primary,fontSize: 14,fontWeight: FontWeight.bold,)),
+                          ),
+                          CustomTextWidget(text: "167 Followers",fontWeight: FontWeight.bold,fontSize: 15,),
+                          CustomTextWidget(text: "167 Followers",fontWeight: FontWeight.bold,fontSize: 15,),
 
 
 
 
-                  ],
+                        ],
+                      ),
+                      CustomTabBar(tabController: _tabController,
+                        tabText1: "POSTS",
+                        tabText2: "FLAMS",
+                        tabText3: "COMMENTS",
+                        tabText4: "FEEDBBACK",
+                        tabText5: 'LIKES',),
+
+                    ],
+                  ),
                 ),
-                CustomTabBar(tabController: _tabController,
-                  tabText1: "POSTS",
-                  tabText2: "FLAMS",
-                  tabText3: "COMMENTS",
-                  tabText4: "FEEDBBACK",
-                  tabText5: 'LIKES',),
-
               ],
             ),
           ),
@@ -114,18 +124,17 @@ class _UserProfileScreenState extends State<UserProfileScreen> with SingleTicker
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              // SvgPicture.asset(MyAssetHelper.userProfileAppBarBackground,fit: BoxFit.fill,),
 
               SizedBox(
                 height: Get.height,
                 child: TabBarView(
                   controller: _tabController,
                   children: const [
-                    MyFeeds(),
-                    ProfileDetails(),
-                    ProfileDetails(),
-                    ProfileDetails(),
-                    ProfileDetails(),
+                    UserProfileFeed(),
+                    UserProfileFeed(),
+                    UserProfileFeed(),
+                    UserProfileFeed(),
+                    UserProfileFeed(),
 
                   ],
                 ),

@@ -27,6 +27,7 @@ class CustomReusableTab extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(6),
+
         decoration: BoxDecoration(
           color: selected ? ColorAssets.primary : ColorAssets.white,
           borderRadius: BorderRadius.circular(5.0),

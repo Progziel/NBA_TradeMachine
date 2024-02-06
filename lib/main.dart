@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: ColorAssets.primary),
           useMaterial3: true,
         ),
-        home:  const UserProfileScreen());
+        home:  const PlayerProfileScreen());
   }
 }
 

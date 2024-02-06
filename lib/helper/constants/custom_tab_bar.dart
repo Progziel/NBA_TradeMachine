@@ -34,6 +34,8 @@ class _CustomTabBarState extends State<CustomTabBar> {
     return  TabBar(
 
       controller:widget.tabController,
+      physics: NeverScrollableScrollPhysics(), // Disable scrolling physics
+
       dividerColor: Colors.transparent,
       indicator: const UnderlineTabIndicator(
         // Customize the indicator if needed
@@ -55,7 +57,9 @@ class _CustomTabBarState extends State<CustomTabBar> {
           selected: widget.tabController.index == 0,
           onTap: () {
             widget.tabController.animateTo(0);
-            setState(() {});
+            setState(() {
+
+            });
           }, isIcon: false,
         ),
         CustomReusableTab(
@@ -67,7 +71,9 @@ class _CustomTabBarState extends State<CustomTabBar> {
           selected: widget.tabController.index == 1,
           onTap: () {
             widget.tabController.animateTo(1);
-            setState(() {});
+            setState(() {
+
+            });
           }, isIcon: false,
         ),
         CustomReusableTab(
@@ -79,7 +85,9 @@ class _CustomTabBarState extends State<CustomTabBar> {
           selected: widget.tabController.index == 2,
           onTap: () {
             widget.tabController.animateTo(2);
-            setState(() {});
+            setState(() {
+
+            });
           }, isIcon: false,
         ),
         CustomReusableTab(
@@ -90,7 +98,9 @@ class _CustomTabBarState extends State<CustomTabBar> {
             selected: widget.tabController.index == 3,
             onTap: () {
               widget.tabController.animateTo(3);
-              setState(() {});
+              setState(() {
+
+              });
             }),
         CustomReusableTab(
             isIcon: false,
@@ -101,7 +111,9 @@ class _CustomTabBarState extends State<CustomTabBar> {
             selected: widget.tabController.index == 4,
             onTap: () {
               widget.tabController.animateTo(4);
-              setState(() {});
+              setState(() {
+
+              });
             }),
       ],
     );
