@@ -6,6 +6,7 @@ import 'package:nbatrade/view/Home%20Dashboard/home_dashboard.dart';
 import 'package:nbatrade/view/auth/login_screen.dart';
 
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -21,7 +22,9 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home:  const LoginScreen());
+
   }
 }
+
 
 

@@ -11,6 +11,18 @@ class MyAssetHelper{
   static String teamHistory4="assets/images/teamHistory4.png";
   static String player1="assets/images/player1.png";
   static String player2="assets/images/player2.png";
+  static String player3="assets/images/player3.png";
+  static String player4="assets/images/player4.png";
+  static String player5="assets/images/player5.png";
+  static String player6="assets/images/player6.png";
+  static String placeholder="assets/images/placeholder.png";
+  static String twitter="assets/images/twitter.png";
+  static String userProfileAppBarBackground="assets/images/userProfileAppBarBackground.svg";
+  static String userProfileAppBarBackground1="assets/images/userProfilebackground.png";
+
+
+
+
 
 
 
