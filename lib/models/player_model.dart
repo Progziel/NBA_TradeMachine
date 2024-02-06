@@ -15,4 +15,5 @@ class PlayerModel{
     this.college,
     this.weight,
   });
+
 }
