@@ -29,8 +29,8 @@ class RegisterScreen extends StatelessWidget {
                   child: CustomTextWidget(
                     text: 'Create your Account',
                     maxLines: 2,
-                    fontSize: 14.0,
-                  //  fontStyle: FontStyle.italic,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w600,
                     textColor: ColorAssets.textSecondary,
                   ),
                 ),

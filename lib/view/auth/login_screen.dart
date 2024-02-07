@@ -30,9 +30,8 @@ class LoginScreen extends StatelessWidget {
                       EdgeInsets.symmetric(horizontal: 22.0, vertical: 8.0),
                   child: CustomTextWidget(
                     text: 'Log in to your account.',
-                    maxLines: 2,
-                  //  fontStyle: FontStyle.italic,
-                    fontSize: 14.0,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w600,
                     textColor: ColorAssets.textSecondary,
                   ),
                 ),
@@ -81,7 +80,9 @@ class LoginScreen extends StatelessWidget {
                   showBackgroundColor: true,
                   buttonText: 'Login',
                   onTap: () {
-                    Get.to(()=> HomeDashboard());
+                    Get.offAll(() {
+                      return const HomeDashboard();
+                    });
                   },
                 ),
                 SizedBox(height: context.height * 0.02),

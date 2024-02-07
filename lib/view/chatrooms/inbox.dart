@@ -14,38 +14,36 @@ class InboxView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ChatController controller = Get.find();
-    return Container(
-        color: Colors.transparent,
-        child: Expanded(
-            child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: controller.inboxMessages.length,
-                itemBuilder: (context, index) {
-                  final inboxMessage = controller.inboxMessages[index];
-                  return Column(
-                    children: [
-                      ListTile(
-                        onTap: () {},
-                        leading: CircleAvatar(
-                          backgroundImage:
-                              NetworkImage(inboxMessage.senderImage),
-                          radius: 40,
-                        ),
-                        title: CustomTextWidget(
-                          text: inboxMessage.senderName,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          textAlign: TextAlign.start,
-                        ),
-                        subtitle: CustomTextWidget(
-                          text: inboxMessage.messageType,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w400,
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                    ],
-                  );
-                })));
+    return ListView.builder(
+        shrinkWrap: true,
+        itemCount: chatList.length,
+        itemBuilder: (context, index) {
+          final chat = chatList[index];
+          return Column(
+            children: [
+              ListTile(
+                onTap: () => Get.to(
+                  () => ChatScreen(chatListModel: chat),
+                ),
+                leading: CircleAvatar(
+                  backgroundImage: NetworkImage(chat.senderImage),
+                  radius: 40,
+                ),
+                title: CustomTextWidget(
+                  text: chat.senderName,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  textAlign: TextAlign.start,
+                ),
+                subtitle: CustomTextWidget(
+                  text: chat.chatMessages[0].message,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w400,
+                  textAlign: TextAlign.start,
+                ),
+              ),
+            ],
+          );
+        });
   }
 }

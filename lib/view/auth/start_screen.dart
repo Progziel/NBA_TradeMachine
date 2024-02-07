@@ -5,6 +5,7 @@ import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_button.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/view/auth/login_screen.dart';
+import 'package:nbatrade/view/auth/register_screen.dart';
 
 import 'widgets/auth_header.dart';
 
@@ -24,7 +25,7 @@ class StartScreen extends StatelessWidget {
                     'Welcome to the ultimate destination for NBA trade enthusiasts!',
                 maxLines: 2,
                 fontSize: 14.0,
-               // fontStyle: FontStyle.italic,
+                // fontStyle: FontStyle.italic,
                 textColor: ColorAssets.textSecondary,
               ),
             ),
@@ -60,7 +61,8 @@ class StartScreen extends StatelessWidget {
             CustomButton(
               showBackgroundColor: false,
               buttonText: 'Register',
-              onTap: () {},
+              onTap: () => Get.to(const RegisterScreen(),
+                  transition: Transition.rightToLeft),
             )
           ],
         ),

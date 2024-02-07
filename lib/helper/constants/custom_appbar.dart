@@ -33,9 +33,10 @@ class CustomAppBar extends StatelessWidget {
         ),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
+          SizedBox(height: context.height * 0.02),
           Padding(
             padding: const EdgeInsets.only(left: 12.0, right: 12.0),
             child: Row(
@@ -58,9 +59,7 @@ class CustomAppBar extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: context.height * 0.02),
           Padding(
             padding: const EdgeInsets.only(left: 40.0, right: 40),
             child: CustomTextFormField(

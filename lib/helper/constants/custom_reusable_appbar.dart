@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nbatrade/helper/constants/asset_helper.dart';
+import 'package:nbatrade/helper/constants/circular_profile_avatar.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
+import 'package:nbatrade/view/userprofile/user_profile.dart';
 
 class CustomReusableAppBar extends StatelessWidget {
   final String text;
@@ -47,10 +49,7 @@ class CustomReusableAppBar extends StatelessWidget {
                               color: ColorAssets.grey,
                             ),
                           ),
-                          CircleAvatar(
-                            backgroundImage:
-                                AssetImage(MyAssetHelper.profileScreenImage),
-                          )
+                          const CircularProfilePictureAvatar()
                         ],
                       ),
                     ),

@@ -1,14 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/utils.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:nbatrade/helper/constants/circular_profile_avatar.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/view/Home%20Dashboard/trending/trending_screen.dart';
+import 'package:nbatrade/view/approval/approval.dart';
+import 'package:nbatrade/view/chatrooms/chatroom.dart';
 import 'package:nbatrade/view/compare_players/compare_player.dart';
+import 'package:nbatrade/view/news/news.dart';
+import 'package:nbatrade/view/spaces/space%20view/space_view.dart';
 import 'package:nbatrade/view/team_selection/team_selection.dart';
 import 'package:nbatrade/view/trade/trade.dart';
 import '../../../helper/constants/colors.dart';
 import '../../../helper/constants/custom_appbar.dart';
-import '../approval/approval.dart';
 import '../nba_contract/nba_contract.dart';
 import 'my_feeds/home_tabs.dart';
 import 'my_feeds/my_feeds_data.dart';
@@ -26,8 +32,16 @@ class _HomeDashboardState extends State<HomeDashboard>
 
   bool expanded = false;
   List<Map<String, dynamic>> gridItemsData = [
-    {"text": "Team Selection", "icon": Icons.diversity_2, "ontap": () => Get.to(const NBATeamSelection())},
-    {"text": "Trade", "icon": Icons.send_time_extension, "ontap": () => Get.to(const TradeScreen())},
+    {
+      "text": "Team Selection",
+      "icon": Icons.diversity_2,
+      "ontap": () => Get.to(const NBATeamSelection())
+    },
+    {
+      "text": "Trade",
+      "icon": Icons.send_time_extension,
+      "ontap": () => Get.to(const TradeScreen())
+    },
     {
       "text": "NBA Contacts",
       "icon": Icons.diversity_3,
@@ -38,10 +52,24 @@ class _HomeDashboardState extends State<HomeDashboard>
       "icon": Icons.approval_outlined,
       "ontap": () => Get.to(TradeApprovalScreen())
     },
-    {"text": "Compare Players", "icon": Icons.compare_arrows, "ontap": () => Get.to(ComparePlayerScreen())},
-    {"text": "News", "icon": Icons.auto_awesome_mosaic_sharp},
-    {"text": "Spaces", "icon": Icons.public,},
-    {"text": "Chatrooms", "icon": Icons.inbox},
+    {
+      "text": "Compare Players",
+      "icon": Icons.compare_arrows,
+      "ontap": () => Get.to(ComparePlayerScreen())
+    },
+    {"text": "News", "icon": Icons.auto_awesome_mosaic_sharp,
+      "ontap": () => Get.to(const NewsScreen())
+
+    },
+    {
+      "text": "Spaces",
+      "icon": Icons.public,
+      "ontap": () => Get.to(const SpaceScreen())
+    },
+    {"text": "Chatrooms", "icon": Icons.inbox,
+      "ontap": () => Get.to(const ChatRoomScreen())
+
+    },
   ];
 
   @override
@@ -59,46 +87,48 @@ class _HomeDashboardState extends State<HomeDashboard>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorAssets.white,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: Get.height * 0.28,
-            flexibleSpace: FlexibleSpaceBar(
-              background: appBar(),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: ColorAssets.white,
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              expandedHeight: Get.height * 0.28,
+              flexibleSpace: FlexibleSpaceBar(
+                background: appBar(),
+              ),
             ),
-          ),
-          gridViewWidget(gridItemsData),
-          SliverToBoxAdapter(
-            child: SingleChildScrollView(
-              child: Container(
-                color: ColorAssets.primaryBackground,
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    children: [
-                      customTabbar(),
-                      const Divider(),
-                      SizedBox(
-                        height: Get.height,
-                        child: TabBarView(
-                          controller: _tabController,
-                          children:  [
-                            MyFeeds(),
-                            Trending(),
-                            Trending(),
-                            Trending(),
-                          ],
+            gridViewWidget(gridItemsData),
+            SliverToBoxAdapter(
+              child: SingleChildScrollView(
+                child: Container(
+                  color: ColorAssets.primaryBackground,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      children: [
+                        customTabbar(),
+                        const Divider(),
+                        SizedBox(
+                          height: Get.height,
+                          child: TabBarView(
+                            controller: _tabController,
+                            children: [
+                              MyFeeds(),
+                              Trending(),
+                              Trending(),
+                              Trending(),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -121,7 +151,7 @@ class _HomeDashboardState extends State<HomeDashboard>
         CustomTab(
           text: "My Feeds",
           index: 0,
-          icon: Symbols.news,
+          icon: Symbols.feed,
           selected: _tabController.index == 0,
           onTap: () {
             _tabController.animateTo(0);
@@ -130,7 +160,7 @@ class _HomeDashboardState extends State<HomeDashboard>
         ),
         CustomTab(
           text: "Trending",
-          icon: Symbols.news,
+          icon: Symbols.trending_up,
           index: 1,
           selected: _tabController.index == 1,
           onTap: () {
@@ -140,7 +170,7 @@ class _HomeDashboardState extends State<HomeDashboard>
         ),
         CustomTab(
           text: "New",
-          icon: Symbols.news,
+          icon: Symbols.autorenew,
           index: 2,
           selected: _tabController.index == 2,
           onTap: () {
@@ -150,7 +180,7 @@ class _HomeDashboardState extends State<HomeDashboard>
         ),
         CustomTab(
             text: "Top",
-            icon: Symbols.news,
+            icon: Symbols.subheader,
             index: 3,
             selected: _tabController.index == 3,
             onTap: () {
@@ -163,7 +193,7 @@ class _HomeDashboardState extends State<HomeDashboard>
 
   Widget gridViewWidget(List<Map<String, dynamic>> gridItems) {
     return SliverToBoxAdapter(
-      child: SizedBox(
+      child: Container(
         height: Get.height / 3, // Set the desired height
         child: GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
@@ -175,13 +205,10 @@ class _HomeDashboardState extends State<HomeDashboard>
             childAspectRatio: 1.0, // Adjust this ratio as needed
           ),
           itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: gridViewList(
-                text: gridItems[index]['text'],
-                icon: gridItems[index]['icon'],
-                onTap: gridItems[index]['ontap'],
-              ),
+            return gridViewList(
+              text: gridItems[index]['text'],
+              icon: gridItems[index]['icon'],
+              onTap: gridItems[index]['ontap'],
             );
           },
           itemCount: gridItems.length,
@@ -199,7 +226,7 @@ class _HomeDashboardState extends State<HomeDashboard>
               backgroundColor: ColorAssets.buttonPrimary,
               child: Icon(
                 icon,
-                color: Colors.white,
+                color: ColorAssets.greyContainer,
               )),
         ),
         const SizedBox(
@@ -216,7 +243,7 @@ class _HomeDashboardState extends State<HomeDashboard>
         const CustomAppBar(
           title: 'NBA Trade Machine',
           prefixIcon: Icons.menu,
-          sufixWidget: CircleAvatar(),
+          sufixWidget: CircularProfilePictureAvatar()
         ),
         dropDownRow(),
       ],
@@ -242,14 +269,17 @@ class _HomeDashboardState extends State<HomeDashboard>
               ),
             ],
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              appBarRow(text: "SPACES", onTap: () {}),
-              appBarRow(text: "TOOLS", onTap: () {}),
-              appBarRow(text: "POST", onTap: () {}),
-              appBarRow(text: "RESOURCES", onTap: () {}),
-            ],
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                appBarRow(text: "SPACES", onTap: () {}),
+                appBarRow(text: "TOOLS", onTap: () {}),
+                appBarRow(text: "POST", onTap: () {}),
+                appBarRow(text: "RESOURCES", onTap: () {}),
+              ],
+            ),
           ),
         ),
       ),
@@ -260,14 +290,15 @@ class _HomeDashboardState extends State<HomeDashboard>
     return InkWell(
       onTap: onTap,
       child: Container(
-        decoration: BoxDecoration(
-            color: ColorAssets.greyContainer,
-            borderRadius: BorderRadius.circular(5)),
-        padding: const EdgeInsets.only(left: 2, right: 0, top: 4, bottom: 4),
+        color: ColorAssets.greyContainer,
+        padding: const EdgeInsets.only(left: 6, right: 6, top: 4, bottom: 4),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             CustomTextWidget(text: text),
+            const SizedBox(
+              width: 5,
+            ),
             const Icon(
               Icons.arrow_drop_down,
               color: Colors.black,

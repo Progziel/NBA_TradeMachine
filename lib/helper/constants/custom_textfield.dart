@@ -27,51 +27,47 @@ class CustomTextFormField extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 40,
-      child: TextFormField(
-        validator: validator,
-        controller: controller,
-        onChanged: onChanged,
-        keyboardType: TextInputType.text,
-        style: const TextStyle(color: Colors.black),
-        obscureText: obscureText ?? false,
-        maxLines: maxLines ?? 1,
-        decoration: InputDecoration(
-            contentPadding:
-                EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
+    return TextFormField(
 
-            hintText: hint,
-            hintStyle: TextStyle(color: hintTextColor),
-            filled: true,
-            fillColor: fillColor,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: const BorderSide(
-                color: Colors.grey,
-                width: 2.0,
-              ),
+      validator: validator,
+      controller: controller,
+      onChanged: onChanged,
+      keyboardType: TextInputType.text,
+      style: const TextStyle(color: Colors.black),
+      obscureText: obscureText ?? false,
+      maxLines: maxLines ?? 1,
+      decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
+
+          hintText: hint,
+          hintStyle: TextStyle(color: hintTextColor),
+          filled: true,
+          fillColor: fillColor,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: const BorderSide(
+              color: Colors.grey,
+              width: 2.0,
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: const BorderSide(
-                color: ColorAssets.greyContainer,
-                width: 2.0,
-              ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: const BorderSide(
+              color: ColorAssets.greyContainer,
+              width: 2.0,
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: const BorderSide(
-                color: ColorAssets.primary,
-                width: 2.0,
-              ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: const BorderSide(
+              color: ColorAssets.primary,
+              width: 2.0,
             ),
-            prefixIcon: prefixIcon,
-            //focusedBorder: InputBorder.none,
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            suffixIcon: sufixIcon),
-            
-      ),
+          ),
+          prefixIcon: prefixIcon,
+          //focusedBorder: InputBorder.none,
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          suffixIcon: sufixIcon),
     );
     // return TextFormField(
     //   obscureText: obscureText,

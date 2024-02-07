@@ -42,11 +42,11 @@ class ForgetPasswordScreen extends StatelessWidget {
                         'Please enter your registered email address, and we\'ll send you a link to reset your password.',
                     maxLines: 2,
                     fontSize: 12.0,
-                   // fontStyle: FontStyle.italic,
+                    // fontStyle: FontStyle.italic,
                     textColor: ColorAssets.textSecondary,
                   ),
                 ),
-                SizedBox(height: context.height * 0.03),
+                SizedBox(height: context.height * 0.05),
                 const Padding(
                   padding: EdgeInsets.all(12.0),
                   child: CustomTextFormField(
@@ -57,55 +57,11 @@ class ForgetPasswordScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(height: context.height * 0.02),
                 CustomButton(
                   showBackgroundColor: true,
                   buttonText: 'Reset',
                   onTap: () {},
-                ),
-                SizedBox(height: context.height * 0.02),
-                const CustomTextWidget(
-                  text: 'Or Login with',
-                  fontWeight: FontWeight.w600,
-                  textColor: Colors.black87,
-                ),
-                SizedBox(height: context.height * 0.02),
-                const Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomSocialIcon(
-                          imagePath: 'assets/images/google-icon.png'),
-                      CustomSocialIcon(
-                          imagePath: 'assets/images/facebook-icon.png'),
-                      CustomSocialIcon(
-                          imagePath: 'assets/images/apple-icon.png'),
-                    ],
-                  ),
-                ),
-                SizedBox(height: context.height * 0.01),
-                GestureDetector(
-                  onTap: () {
-                    Get.to(() => const RegisterScreen(),
-                        transition: Transition.rightToLeft);
-                  },
-                  child: Text.rich(
-                    TextSpan(
-                      text: 'Don\'t have an Account? ',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: ColorAssets.textLightGrey,
-                          fontSize: 12.0),
-                      children: const [
-                        TextSpan(
-                          text: 'Register',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: ColorAssets.textPrimary,
-                              fontSize: 14.0),
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
               ],
             ),

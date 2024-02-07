@@ -15,9 +15,6 @@ class Team extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
-      appBar: AppBar(
-        backgroundColor: Colors.blueAccent,
-      ),
       body: DefaultTabController(
         length: 6,
         child: Column(

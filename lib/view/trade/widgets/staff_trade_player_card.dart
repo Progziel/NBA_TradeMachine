@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 
 class StaffTradePlayerCard extends StatelessWidget {
@@ -35,23 +37,24 @@ class StaffTradePlayerCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CustomTextWidget(
-                      text: 'James Anderson ',
+                      text: 'Kevin Johnson',
                       fontSize: 18.0,
                       fontWeight: FontWeight.w600,
                     ),
                     CustomTextWidget(
-                      text: 'SG, 6’ 8” 3.3...',
+                      text: 'Executive',
                       textColor: Colors.grey,
                     ),
-                    CustomTextWidget(text: '\$19.6M | 7 years'),
                   ],
                 ),
               ),
             ),
-            VerticalDivider(color: Colors.pink, thickness: 6.0),
-            Image.asset('assets/images/trade-rank-1.png', height: 60),
             VerticalDivider(color: Colors.black54, thickness: 2.0),
-            Icon(Icons.more_vert)
+            SvgPicture.asset(
+              'assets/svgs/76logo.svg',
+              height: 60,
+              color: ColorAssets.primary,
+            ),
 
             // Icons and Button
           ],

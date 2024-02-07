@@ -20,6 +20,14 @@ class PostController extends GetxController with GetSingleTickerProviderStateMix
 
 
 
+  TextEditingController postNameController = TextEditingController();
+  TextEditingController postDescriptionController = TextEditingController();
+
+
+
+
+
+
   void myFeedTogglePostExpansion(PostModel post) {
       post.expended = !post.expended!;
     }
@@ -62,13 +70,30 @@ class PostController extends GetxController with GetSingleTickerProviderStateMix
         shareCount: 5,
         flamCount: 2,
         comments: [
-          // Comments(
-          //   imgUrl: "https://example.com/user3.png",
-          //   username: "Jane Smith",
-          //   comment: "Great idea!",
-          //   time: "10 minutes ago",
-          // ),
-          // ... more comments
+          Comments(
+            imgUrl: "https://example.com/user3.png",
+            username: "Jane Smith",
+            comment: "Nice post! First post. Lorem ipsum dolor sit amet.First post. Lorem ipsum dolor sit amet. Keep up the good work!",
+            time: "6 minutes ago",
+          ),
+          Comments(
+            imgUrl: "https://example.com/user3.png",
+            username: "Jane Smith",
+            comment: "Great idea!",
+            time: "15 minutes ago",
+          ),
+          Comments(
+            imgUrl: "https://example.com/user3.png",
+            username: "Jane Smith",
+            comment: "Nice post! First post. Lorem ipsum dolor sit amet.First post. Lorem ipsum dolor sit amet  Keep up the good work!",
+            time: "20 minutes ago",
+          ),
+          Comments(
+            imgUrl: "https://example.com/user3.png",
+            username: "Jane Smith",
+            comment: "Great idea!",
+            time: "17 minutes ago",
+          ),
         ],
       ),
       PostModel(
@@ -92,13 +117,30 @@ class PostController extends GetxController with GetSingleTickerProviderStateMix
         shareCount: 5,
         flamCount: 2,
         comments: [
-          // Comments(
-          //   imgUrl: "https://example.com/user3.png",
-          //   username: "Jane Smith",
-          //   comment: "Great idea!",
-          //   time: "10 minutes ago",
-          // ),
-          // ... more comments
+          Comments(
+            imgUrl: "https://example.com/user3.png",
+            username: "Jane Smith",
+            comment: "Nice post! First post. Lorem ipsum dolor sit amet.First post. Lorem ipsum dolor sit amet. Keep up the good work!",
+            time: "6 minutes ago",
+          ),
+          Comments(
+            imgUrl: "https://example.com/user3.png",
+            username: "Jane Smith",
+            comment: "Great idea!",
+            time: "15 minutes ago",
+          ),
+          Comments(
+            imgUrl: "https://example.com/user3.png",
+            username: "Jane Smith",
+            comment: "Nice post! First post. Lorem ipsum dolor sit amet.First post. Lorem ipsum dolor sit amet  Keep up the good work!",
+            time: "20 minutes ago",
+          ),
+          Comments(
+            imgUrl: "https://example.com/user3.png",
+            username: "Jane Smith",
+            comment: "Great idea!",
+            time: "17 minutes ago",
+          ),
         ],
       ),
     ].obs;
@@ -133,12 +175,30 @@ class PostController extends GetxController with GetSingleTickerProviderStateMix
         shareCount: 5,
         flamCount: 2,
         comments: [
-          // Comments(
-          //   imgUrl: "https://example.com/user3.png",
-          //   username: "Jane Smith",
-          //   comment: "Great idea!",
-          //   time: "10 minutes ago",
-          // ),
+          Comments(
+            imgUrl: "https://example.com/user3.png",
+            username: "Jane Smith",
+            comment: "Nice post! First post. Lorem ipsum dolor sit amet.First post. Lorem ipsum dolor sit amet. Keep up the good work!",
+            time: "6 minutes ago",
+          ),
+          Comments(
+            imgUrl: "https://example.com/user3.png",
+            username: "Jane Smith",
+            comment: "Great idea!",
+            time: "15 minutes ago",
+          ),
+          Comments(
+            imgUrl: "https://example.com/user3.png",
+            username: "Jane Smith",
+            comment: "Nice post! First post. Lorem ipsum dolor sit amet.First post. Lorem ipsum dolor sit amet  Keep up the good work!",
+            time: "20 minutes ago",
+          ),
+          Comments(
+            imgUrl: "https://example.com/user3.png",
+            username: "Jane Smith",
+            comment: "Great idea!",
+            time: "17 minutes ago",
+          ),
         ],
       ),
       PostModel(
@@ -162,14 +222,62 @@ class PostController extends GetxController with GetSingleTickerProviderStateMix
         shareCount: 5,
         flamCount: 2,
         comments: [
-          // Comments(
-          //   imgUrl: "https://example.com/user3.png",
-          //   username: "Jane Smith",
-          //   comment: "Great idea!",
-          //   time: "10 minutes ago",
-          // ),
-          // ... more comments
+          Comments(
+            imgUrl: "https://example.com/user3.png",
+            username: "Jane Smith",
+            comment: "Nice post! First post. Lorem ipsum dolor sit amet.First post. Lorem ipsum dolor sit amet. Keep up the good work!",
+            time: "6 minutes ago",
+          ),
+          Comments(
+            imgUrl: "https://example.com/user3.png",
+            username: "Jane Smith",
+            comment: "Great idea!",
+            time: "15 minutes ago",
+          ),
+          Comments(
+            imgUrl: "https://example.com/user3.png",
+            username: "Jane Smith",
+            comment: "Nice post! First post. Lorem ipsum dolor sit amet.First post. Lorem ipsum dolor sit amet  Keep up the good work!",
+            time: "20 minutes ago",
+          ),
+          Comments(
+            imgUrl: "https://example.com/user3.png",
+            username: "Jane Smith",
+            comment: "Great idea!",
+            time: "17 minutes ago",
+          ),
         ],
       ),
     ].obs;
+
+
+
+
+  List<RxBool> fireEffects = List.generate(
+             20,
+          (index) => true.obs
+  );
+
+
+  // RxBool fireEffect=true.obs;
+  void changeFire(int index){
+    fireEffects[index].value=!fireEffects[index].value;
+
+  }
+
+  List<RxBool> heartEffects = List.generate(
+      20,
+          (index) => true.obs
+  );
+
+
+  // RxBool fireEffect=true.obs;
+  void changeHeart(int index){
+    heartEffects[index].value=!heartEffects[index].value;
+
+  }
+
+
+
+
 }

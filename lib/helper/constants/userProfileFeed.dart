@@ -97,6 +97,7 @@ class _UserProfileFeedState extends State<UserProfileFeed> {
                             // if (post.playerModel![index].profileImage !=
                             //     null)
                             PostImagesRow(
+                              post: post,
                               profilePictures: post.playerModel,
                               // profilePictures: [
                               //   post.playerModel![index].profileImage!,
@@ -127,6 +128,7 @@ class _UserProfileFeedState extends State<UserProfileFeed> {
                             Expanded(
                               flex:2,
                               child: PostImagesRow(
+                                post: post,
                                   profilePictures: post.playerModel
                                 //   post.playerModelList[index].profileImage
                   // [

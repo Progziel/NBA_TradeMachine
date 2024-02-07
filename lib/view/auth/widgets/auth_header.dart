@@ -20,9 +20,10 @@ class AuthHeader extends StatelessWidget {
           child: const Center(
             child: CustomTextWidget(
               text: 'NBA\nTrade Machine',
-              fontSize: 20.0,
+              fontSize: 24.0,
               fontWeight: FontWeight.w700,
               textColor: ColorAssets.light,
+              textAlign: TextAlign.center,
               maxLines: 2,
             ),
           ),

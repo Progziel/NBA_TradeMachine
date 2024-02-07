@@ -1,6 +1,8 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nbatrade/helper/constants/asset_helper.dart';
+import 'package:nbatrade/helper/constants/circular_profile_avatar.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/view/trade/widgets/TE_trade_player_card.dart';
@@ -22,12 +24,59 @@ class _TradeScreenState extends State<TradeScreen> {
       child: Scaffold(
         body: DefaultTabController(
           length: 3,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 12.0, left: 6.0, right: 6.0),
-            child: Column(
-              children: [
-                SizedBox(height: context.height * 0.02),
-                Row(
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  Container(
+                    padding:
+                        const EdgeInsets.only(left: 8.0, right: 8.0, top: 12.0),
+                    height: Get.height * 0.18,
+                    decoration: const BoxDecoration(
+                      color: ColorAssets.primary,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20.0),
+                        bottomRight: Radius.circular(20.0),
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 12.0, right: 12.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Get.back();
+                                },
+                                child: const Icon(
+                                  Icons.arrow_back_ios_outlined,
+                                  color: ColorAssets.grey,
+                                ),
+                              ),
+                              const CircularProfilePictureAvatar()
+                            ],
+                          ),
+                        ),
+                        const CustomTextWidget(
+                          text: 'Trade Machine',
+                          textColor: ColorAssets.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                        const SizedBox(height: 16.0),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
@@ -50,49 +99,47 @@ class _TradeScreenState extends State<TradeScreen> {
                     )
                   ],
                 ),
-                SizedBox(height: context.height * 0.02),
-                SizedBox(
-                  width: double.infinity,
-                  child: Center(
-                    child: ButtonsTabBar(
-                      height: 70,
-                      backgroundColor: ColorAssets.primary,
-                      unselectedBackgroundColor: Colors.grey[600],
-                      unselectedLabelStyle:
-                          const TextStyle(color: Colors.white),
-                      labelStyle: const TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                      tabs: [
-                        buildTabbar(
-                            title: 'Cavliers',
-                            rank: '#1',
-                            team: 'Team 1',
-                            image: 'assets/images/trade-rank-1.png'),
-                        buildTabbar(
-                            title: 'Pacers',
-                            rank: '#2',
-                            team: 'Team 2',
-                            image: 'assets/images/trade-rank-2.png'),
-                        buildTabbar(
-                            title: 'Heat',
-                            rank: '#3',
-                            team: 'Team 3',
-                            image: 'assets/images/trade-rank-3.png'),
-                      ],
-                    ),
-                  ),
-                ),
-                const Expanded(
-                  child: TabBarView(
-                    children: [
-                      FirstTabbarView(),
-                      FirstTabbarView(),
-                      FirstTabbarView(),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: Center(
+                  child: ButtonsTabBar(
+                    height: 70,
+                    backgroundColor: ColorAssets.primary,
+                    unselectedBackgroundColor: Colors.grey[600],
+                    unselectedLabelStyle: const TextStyle(color: Colors.white),
+                    labelStyle: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                    tabs: [
+                      buildTabbar(
+                          title: 'Cavliers',
+                          rank: '#1',
+                          team: 'Team 1',
+                          image: 'assets/images/trade-rank-1.png'),
+                      buildTabbar(
+                          title: 'Pacers',
+                          rank: '#2',
+                          team: 'Team 2',
+                          image: 'assets/images/trade-rank-2.png'),
+                      buildTabbar(
+                          title: 'Heat',
+                          rank: '#3',
+                          team: 'Team 3',
+                          image: 'assets/images/trade-rank-3.png'),
                     ],
                   ),
                 ),
-              ],
-            ),
+              ),
+              const Expanded(
+                child: TabBarView(
+                  children: [
+                    FirstTabbarView(),
+                    FirstTabbarView(),
+                    FirstTabbarView(),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -148,99 +195,97 @@ class FirstTabbarView extends StatelessWidget {
     return Scaffold(
       body: DefaultTabController(
         length: 4,
-        child: ListView(
-          children: [
-            Container(
-                padding: const EdgeInsets.all(12.0),
-                color: Colors.grey.shade300,
-                child: Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(12.0),
-                      decoration: const BoxDecoration(
-                          color: ColorAssets.primary,
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(12.0))),
-                      child: Column(
-                        children: [
-                          Image.asset('assets/images/trade-rank-1.png'),
-                          const Divider(
-                            color: Colors.grey,
-                            indent: 40.0,
-                            endIndent: 40.0,
-                          ),
-                          const CustomTextWidget(
-                            text: '\$119.6M Roster \$121.1M Total',
-                            textColor: Colors.white,
-                          ),
-                          const CustomTextWidget(
-                            text: '\$119.6M Roster \$121.1M Total',
-                            textColor: Colors.white,
-                          )
+        child: Container(
+            padding: const EdgeInsets.all(12.0),
+            color: Colors.grey.shade300,
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(12.0),
+                  decoration: const BoxDecoration(
+                      color: ColorAssets.primary,
+                      borderRadius: BorderRadius.all(Radius.circular(12.0))),
+                  child: Column(
+                    children: [
+                      Image.asset('assets/images/trade-rank-1.png'),
+                      const Divider(
+                        color: Colors.grey,
+                        indent: 40.0,
+                        endIndent: 40.0,
+                      ),
+                      const CustomTextWidget(
+                        text: '\$119.6M Roster \$121.1M Total',
+                        textColor: Colors.white,
+                      ),
+                      const CustomTextWidget(
+                        text: '\$119.6M Roster \$121.1M Total',
+                        textColor: Colors.white,
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(height: context.height * 0.01),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    elevation: 5.0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        border: Border.all(color: Colors.black12),
+                      ),
+                      child: const TabBar(
+                        padding: EdgeInsets.zero,
+                        isScrollable: false,
+                        dividerColor: Colors.transparent,
+                        tabAlignment: TabAlignment.fill,
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        tabs: [
+                          Tab(text: 'Roster (8)'),
+                          Tab(text: 'Picks'),
+                          Tab(text: 'TE'),
+                          Tab(text: 'Staff'),
                         ],
+                        labelColor: Colors.black,
+                        unselectedLabelColor: Colors.grey,
+                        indicatorColor: ColorAssets.primary,
                       ),
                     ),
-                    SizedBox(height: context.height * 0.01),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Card(
-                        elevation: 5.0,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade400,
-                            border: Border.all(color: Colors.black12),
-                          ),
-                          child: const TabBar(
-                            padding: EdgeInsets.zero,
-                            isScrollable: false,
-                            dividerColor: Colors.transparent,
-                            tabAlignment: TabAlignment.fill,
-                            indicatorSize: TabBarIndicatorSize.tab,
-                            tabs: [
-                              Tab(text: 'Roster (8)'),
-                              Tab(text: 'Picks'),
-                              Tab(text: 'TE'),
-                              Tab(text: 'Staff'),
-                            ],
-                            labelColor: Colors.black,
-                            unselectedLabelColor: Colors.grey,
-                            indicatorColor: ColorAssets.primary,
-                          ),
-                        ),
+                  ),
+                ),
+                SizedBox(height: context.height * 0.01),
+                Expanded(
+                  child: TabBarView(
+                    children: [
+                      ListView.builder(
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          return const RosterTradePlayerCard();
+                        },
                       ),
-                    ),
-                    SizedBox(height: context.height * 0.01),
-                    SizedBox(
-                      height: 500,
-                      child: TabBarView(
-                        children: [
-                          ListView.builder(
-                            itemBuilder: (context, index) {
-                              return const RosterTradePlayerCard();
-                            },
-                          ),
-                          ListView.builder(
-                            itemBuilder: (context, index) {
-                              return const PickTradePlayerCard();
-                            },
-                          ),
-                          ListView.builder(
-                            itemBuilder: (context, index) {
-                              return const TETradePlayerCard();
-                            },
-                          ),
-                          ListView.builder(
-                            itemBuilder: (context, index) {
-                              return const StaffTradePlayerCard();
-                            },
-                          ),
-                        ],
+                      ListView.builder(
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          return const PickTradePlayerCard();
+                        },
                       ),
-                    ),
-                  ],
-                )),
-          ],
-        ),
+                      ListView.builder(
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          return const TETradePlayerCard();
+                        },
+                      ),
+                      ListView.builder(
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          return const StaffTradePlayerCard();
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            )),
       ),
     );
   }

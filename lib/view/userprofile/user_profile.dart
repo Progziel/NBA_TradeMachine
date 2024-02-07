@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nbatrade/helper/constants/asset_helper.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/view/userprofile/widgets/reusable_profile_tabs.dart';
@@ -121,6 +122,7 @@ class DividerContainer extends StatelessWidget {
         text: text,
         fontSize: 18.0,
         fontWeight: FontWeight.w500,
+        textAlign: TextAlign.center,
       ),
     );
   }
@@ -158,7 +160,9 @@ class ProfileHeader extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Get.back();
+                        },
                         child: Icon(
                           Icons.arrow_back_ios_outlined,
                           color: ColorAssets.textLightGrey,
@@ -188,14 +192,22 @@ class ProfileHeader extends StatelessWidget {
             right: 0,
             left: 0,
             bottom: 0,
-            child: FractionallySizedBox(
-              widthFactor: 0.5,
-              child: CircleAvatar(
-                backgroundColor: Colors.grey.shade200,
-                backgroundImage: const NetworkImage(
-                    'https://designimages.appypie.com/profilepicture/profilepicture-2-portrait-head.jpg'),
-                radius: 60.0,
+            child: Container(
+              height: context.height*0.15,
+
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: AssetImage(
+                      "assets/images/user2.jpg"
+
+                  )
+                )
               ),
+
+
+
+
             ),
           ),
         ],

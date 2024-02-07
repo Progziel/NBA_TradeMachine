@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:nbatrade/helper/constants/asset_helper.dart';
+import 'package:nbatrade/helper/constants/circular_profile_avatar.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/models/player_model.dart';
@@ -12,63 +14,65 @@ class NbaContractScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            automaticallyImplyLeading: false,
-            expandedHeight: Get.height * 0.19,
-            flexibleSpace: FlexibleSpaceBar(
-              background: PreferredSize(
-                preferredSize: Size.fromHeight(Get.height * 0.28),
-                child: CustomAppBar2(
-                  title: 'NBA Contracts',
-                  prefixIcon: Icons.arrow_back_ios,
-                  prefixIconOnTap: () {
-                    Get.back();
-                    // Handle back button tap
-                  },
-                  sufixWidget: const CircleAvatar(),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              automaticallyImplyLeading: false,
+              expandedHeight: Get.height * 0.19,
+              flexibleSpace: FlexibleSpaceBar(
+                background: PreferredSize(
+                  preferredSize: Size.fromHeight(Get.height * 0.28),
+                  child: CustomAppBar2(
+                    title: 'NBA Contracts',
+                    prefixIcon: Icons.arrow_back_ios,
+                    prefixIconOnTap: () {
+                      Get.back();
+                      // Handle back button tap
+                    },
+                    sufixWidget: CircularProfilePictureAvatar()
+                  ),
                 ),
               ),
             ),
-          ),
-          const SliverToBoxAdapter(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: 30),
-                  Row(
-                    children: [
-                      Spacer(),
-                      CustomTextWidget(
-                        text: 'SORT',
-                        fontWeight: FontWeight.bold,
-                      ),
-                      Icon(
-                        Symbols.swap_vert,
-                        weight: 400,
-                      ),
-                      SizedBox(width: 5),
-                      CustomTextWidget(
-                        text: 'FILTER',
-                        fontWeight: FontWeight.bold,
-                      ),
-                      Icon(
-                        Symbols.filter_list,
-                        weight: 400,
-                      ),
-                      SizedBox(width: 5),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  PlayerTable(),
-                ],
+            const SliverToBoxAdapter(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(height: 30),
+                    Row(
+                      children: [
+                        Spacer(),
+                        CustomTextWidget(
+                          text: 'SORT',
+                          fontWeight: FontWeight.bold,
+                        ),
+                        Icon(
+                          Symbols.swap_vert,
+                          weight: 400,
+                        ),
+                        SizedBox(width: 5),
+                        CustomTextWidget(
+                          text: 'FILTER',
+                          fontWeight: FontWeight.bold,
+                        ),
+                        Icon(
+                          Symbols.filter_list,
+                          weight: 400,
+                        ),
+                        SizedBox(width: 5),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    PlayerTable(),
+                  ],
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -280,9 +284,9 @@ class PlayerTable extends StatelessWidget {
               height: 50,
               child: Row(
                 children: [
-                  const CircleAvatar(
+                   CircleAvatar(
                     radius: 25.0,
-                    backgroundImage: AssetImage('assets/images/a.jpg'),
+                    backgroundImage: AssetImage(MyAssetHelper.profileScreenImage),
                   ),
                   const SizedBox(width: 5),
                   Text(player.name ?? "")

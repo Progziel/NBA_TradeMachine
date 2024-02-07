@@ -7,9 +7,11 @@ import 'package:nbatrade/models/player_model.dart';
 
 class NBAPlayerCard extends StatelessWidget {
   final PlayerChatModel playerModel;
+  final bool showAddIcon;
   const NBAPlayerCard({
     super.key,
     required this.playerModel,
+    this.showAddIcon = true,
   });
 
   @override
@@ -44,7 +46,7 @@ class NBAPlayerCard extends StatelessWidget {
                       fontSize: 18.0,
                       fontWeight: FontWeight.w600,
                     ),
-                    CustomTextWidget(
+                    const CustomTextWidget(
                       text: 'SG, 6’ 8” 3.3...',
                       textColor: Colors.grey,
                     ),
@@ -54,32 +56,62 @@ class NBAPlayerCard extends StatelessWidget {
               ),
             ),
             // Icons and Button
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    CupertinoIcons.person_circle,
-                    color: ColorAssets.primary,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: 80,
-                    padding: const EdgeInsets.all(8.0),
-                    color: ColorAssets.primary,
-                    child: const CustomTextWidget(
-                      text: ' + Add',
-                      textColor: Colors.white,
-                      fontSize: 14.0,
+            showAddIcon
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          CupertinoIcons.person_circle,
+                          color: ColorAssets.primary,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 4.0),
+                          color: ColorAssets.primary,
+                          child: const CustomTextWidget(
+                            text: ' + Add',
+                            textColor: Colors.white,
+                            textAlign: TextAlign.center,
+                            fontSize: 12.0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(Icons.edit, color: ColorAssets.primary),
+                            Icon(
+                              Icons.cancel_outlined,
+                              color: ColorAssets.black,
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.keyboard_arrow_up,
+                                color: ColorAssets.primary),
+                            Icon(
+                              Icons.keyboard_arrow_down,
+                              color: ColorAssets.black,
+                            )
+                          ],
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-              ],
-            ),
+                  )
           ],
         ),
       ),

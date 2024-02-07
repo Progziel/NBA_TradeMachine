@@ -3,6 +3,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nbatrade/helper/constants/circular_profile_avatar.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/models/TwitterpostModel.dart';
 import 'package:nbatrade/view/approval/approval.dart';
@@ -65,7 +66,7 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: ColorAssets.lightGreyBG,
+        backgroundColor: Colors.grey.shade300,
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
@@ -81,7 +82,7 @@ class _NewsScreenState extends State<NewsScreen> {
                       Get.back();
                       // Handle back button tap
                     },
-                    sufixWidget: const CircleAvatar(),
+                    sufixWidget: const CircularProfilePictureAvatar(),
                   ),
                 ),
               ),
@@ -129,7 +130,7 @@ class _NewsScreenState extends State<NewsScreen> {
                                   children: [
                                     SocialEmbed(
                                       socialMediaObj: TwitterEmbedData(
-                                          embedHtml: post.embedHtml),
+                                          embedHtml: post!.embedHtml),
                                     ),
                                     const SizedBox(height: 20),
                                   ],

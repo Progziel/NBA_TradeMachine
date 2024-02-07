@@ -24,8 +24,7 @@ class ComparePlayerScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-            preferredSize: Size.fromHeight(
-                Get.height * 0.54), // Adjust the preferred height
+            preferredSize: Size.fromHeight(Get.height * 0.5),
             child: CustomReusableAppBar(
               text: "Compare NBA Players",
               topSection: Obx(
@@ -725,25 +724,6 @@ class TopSection extends StatelessWidget {
                   )
                 ],
               ),
-              // child:Stack(
-              //   children: [
-              //     Image.asset(imagePath,height: 100,width: 70,fit: BoxFit.fitHeight,),
-              //     Positioned.fill(
-              //
-              //       bottom: 0,
-              //       left: 0,
-              //       right: 0,
-              //       child: Row(
-              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //         crossAxisAlignment: CrossAxisAlignment.end,
-              //         children: [
-              //           CustomTextWidget(text: type, textColor: ColorAssets.white,fontSize: 15,align: TextAlign.center,fontWeight: FontWeight.bold,),
-              //           CustomTextWidget(text: rank,textColor: ColorAssets.white,fontSize: 15,align: TextAlign.center,fontWeight: FontWeight.bold,)
-              //         ],
-              //       ),
-              //     ),
-              //   ],
-              // )
             ),
           ),
           Padding(

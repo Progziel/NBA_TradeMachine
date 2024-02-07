@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nbatrade/controllers/post_controller.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/view/approval/tabs/approved.dart';
@@ -24,53 +25,58 @@ class _TradeApprovalScreenState extends State<TradeApprovalScreen>
     super.initState();
   }
 
+  PostController postController = Get.find<PostController>();
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              automaticallyImplyLeading: false,
-              expandedHeight: Get.height * 0.19,
-              flexibleSpace: const FlexibleSpaceBar(
-                background: AppbarApproval(),
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: Colors.white,
+          body: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                automaticallyImplyLeading: false,
+                expandedHeight: Get.height * 0.19,
+                flexibleSpace: const FlexibleSpaceBar(
+                  background: AppbarApproval(),
+                ),
               ),
-            ),
-            SliverToBoxAdapter(
-              child: SingleChildScrollView(
-                child: Container(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          customTabbar(),
-                          const SizedBox(height: 5),
-                          SizedBox(
-                            height: Get.height,
-                            // width: Get.width,
-                            child: TabBarView(
-                              physics: const NeverScrollableScrollPhysics(),
-                              controller: _tabController,
-                              children: const [
-                                // Content for each tab
-                                TabPanding(),
-                                TabApproved(),
-                                TabRejected(),
-                              ],
+              SliverToBoxAdapter(
+                child: SingleChildScrollView(
+                  child: Container(
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(0.0),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            customTabbar(),
+                            const SizedBox(height: 5),
+                            SizedBox(
+                              height: Get.height,
+                              // width: Get.width,
+                              child: TabBarView(
+                                physics: const NeverScrollableScrollPhysics(),
+                                controller: _tabController,
+                                children: const [
+                                  // Content for each tab
+                                  TabPanding(),
+                                  TabApproved(),
+                                  TabRejected(),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ));
+            ],
+          )),
+    );
   }
 
   Widget customTabbar() {
@@ -163,7 +169,7 @@ class CustomAppBar2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Get.height * 0.2, 
+      height: Get.height * 0.2,
       decoration: const BoxDecoration(
         color: ColorAssets.primary,
         borderRadius: BorderRadius.only(

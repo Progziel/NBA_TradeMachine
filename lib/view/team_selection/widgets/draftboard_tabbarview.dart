@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nbatrade/helper/constants/asset_helper.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/helper/constants/custom_textfield.dart';
@@ -14,9 +15,6 @@ class Draftboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        backgroundColor: Colors.blueAccent,
-      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
@@ -39,7 +37,10 @@ class Draftboard extends StatelessWidget {
                     return ReorderableDelayedDragStartListener(
                       key: ValueKey(index),
                       index: index,
-                      child: NBAPlayerCard(playerModel: playerChatModel[index]),
+                      child: NBAPlayerCard(
+                        playerModel: playerChatModel[index],
+                        showAddIcon: false,
+                      ),
                     );
                   },
                 ),
@@ -51,32 +52,37 @@ class Draftboard extends StatelessWidget {
                 textAlign: TextAlign.start,
               ),
               SizedBox(height: context.height * 0.01),
-              Row(
-                children: [
-                  const CircleAvatar(backgroundColor: Colors.grey, radius: 30),
-                  const SizedBox(width: 6.0),
-                  const Flexible(
-                      child: CustomTextFormField(
-                    hint: 'Write Something...',
-                    maxLines: 15,
-                    fillColor: Colors.white,
-                  //  borderRadius: 0,
-                  )),
-                  const SizedBox(width: 6.0),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      width: 80,
+              Container(
+                padding: EdgeInsets.all(8.0),
+                color: Colors.white,
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                        backgroundImage:
+                            AssetImage(MyAssetHelper.profileScreenImage),
+                        radius: 25),
+                    const SizedBox(width: 6.0),
+                    const Expanded(
+                        child: CustomTextFormField(
+                      hint: 'Write Something...',
+
+                      maxLines: 2,
+                      fillColor: Colors.white,
+                      //  borderRadius: 0,
+                    )),
+                    const SizedBox(width: 6.0),
+                    Container(
                       padding: const EdgeInsets.all(8.0),
                       color: ColorAssets.primary,
                       child: const CustomTextWidget(
                         text: 'Create Post',
                         textColor: Colors.white,
-                        fontSize: 10.0,
+                        fontSize: 12.0,
+                        textAlign: TextAlign.center,
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               )
             ],
           ),
