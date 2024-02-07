@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nbatrade/helper/constants/asset_helper.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
-import 'package:nbatrade/helper/constants/custom_textfield.dart';
 import 'colors.dart';
 
 class CustomProfileAppBar extends StatelessWidget {

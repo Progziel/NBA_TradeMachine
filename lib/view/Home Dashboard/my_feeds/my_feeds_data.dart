@@ -21,19 +21,6 @@ class _MyFeedsState extends State<MyFeeds> with SingleTickerProviderStateMixin {
   PostController postController = Get.put(PostController());
   bool filterPostByType = true;
 
-  // @override
-  // void initState() {
-  //   postController.tabController = TabController(length: 4, vsync: this);
-  //   // TODO: implement initState
-  //   super.initState();
-  // }
-
-  // @override
-  // void dispose() {
-  //   postController.tabController.dispose();
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -112,6 +99,7 @@ class _MyFeedsState extends State<MyFeeds> with SingleTickerProviderStateMixin {
                       ),
                     ),
                     post.expended == false
+                        // red post
                         ? Container(
                             height: 100,
                             color: Colors.red,
@@ -132,6 +120,7 @@ class _MyFeedsState extends State<MyFeeds> with SingleTickerProviderStateMixin {
                               ],
                             ),
                           )
+                        // green post
                         : Container(
                             height: Get.height / 3,
                             // width: Get.width,
@@ -151,34 +140,49 @@ class _MyFeedsState extends State<MyFeeds> with SingleTickerProviderStateMixin {
                               ],
                             ),
                           ),
+                    // Start---like comment share buttons bar
                     Container(
                       padding: const EdgeInsets.all(6),
                       color: ColorAssets.grey,
-                      child: const Row(
+                      child: Row(
                         children: [
-                          Icon(Icons.favorite_border),
-                          CustomTextWidget(text: "10"),
-                          SizedBox(
-                            width: 20,
+                          //like
+                          const Icon(Icons.favorite_border),
+                          const CustomTextWidget(text: "10"),
+                          const SizedBox(width: 20),
+
+                          GestureDetector(
+                            onTap: () {
+            Get.snackbar(
+              'Snackbar Title',
+              'This is a GetX snackbar',
+              snackPosition: SnackPosition.BOTTOM,
+              duration: Duration(seconds: 3),
+              backgroundColor: Colors.grey[800],
+              colorText: Colors.white,
+            );
+          },
+                            child: const Row(
+                              children: [
+                                Icon(Icons.comment_bank_outlined),
+                                CustomTextWidget(text: "10"),
+                              ],
+                            ),
                           ),
-                          Icon(Icons.comment_bank_outlined),
-                          CustomTextWidget(text: "10"),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Icon(Icons.local_fire_department_outlined),
-                          CustomTextWidget(text: "10"),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Icon(Icons.share),
-                          CustomTextWidget(text: "10"),
+
+                          const SizedBox(width: 20),
+                          // Fire
+                          const Icon(Icons.local_fire_department_outlined),
+                          const CustomTextWidget(text: "10"),
+                          const SizedBox(width: 20),
+                          //share
+                          const Icon(Icons.share),
+                          const CustomTextWidget(text: "10"),
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    )
+                    // END--- like comment share buttons bar
+                    const SizedBox(height: 10),
                   ],
                 );
               },
@@ -187,6 +191,7 @@ class _MyFeedsState extends State<MyFeeds> with SingleTickerProviderStateMixin {
       ],
     );
   }
+
 
   Widget createPostRow() {
     return Container(
@@ -334,9 +339,7 @@ class CreatePostView extends StatefulWidget {
 }
 
 class _CreatePostViewState extends State<CreatePostView> {
-
   final _selectedIndex = 0.obs;
-
 
   @override
   Widget build(BuildContext context) {
@@ -344,26 +347,29 @@ class _CreatePostViewState extends State<CreatePostView> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Obx(() => Row(
-                children: [
-                  createPostButton(
-                      index: 0, icons: Icons.document_scanner_outlined, text: "Text"),
-                  createPostButton(
-                      index: 1, icons: Icons.settings, text: "Tool"),
-                  createPostButton(
-                      index: 2, icons: Icons.link, text: "Link"),
-                  createPostButton(
-                      index: 3, icons: Icons.perm_media_outlined, text: "Media"),
-                  createPostButton(
-                      index: 4, icons: Icons.poll_outlined, text: "Poll"),
-                ],
-              ),),
-
+              child: Obx(
+                () => Row(
+                  children: [
+                    createPostButton(
+                        index: 0,
+                        icons: Icons.document_scanner_outlined,
+                        text: "Text"),
+                    createPostButton(
+                        index: 1, icons: Icons.settings, text: "Tool"),
+                    createPostButton(index: 2, icons: Icons.link, text: "Link"),
+                    createPostButton(
+                        index: 3,
+                        icons: Icons.perm_media_outlined,
+                        text: "Media"),
+                    createPostButton(
+                        index: 4, icons: Icons.poll_outlined, text: "Poll"),
+                  ],
+                ),
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -372,9 +378,10 @@ class _CreatePostViewState extends State<CreatePostView> {
             const SizedBox(
               height: 20,
             ),
-            const Expanded(child: CustomTextFormField(hint: "Description",maxLines: 10)),
+            const Expanded(
+                child: CustomTextFormField(hint: "Description", maxLines: 10)),
             CustomButton(
-              onTap: (){
+              onTap: () {
                 _selectedIndex.value++;
               },
               buttonText: "Next",
@@ -383,14 +390,14 @@ class _CreatePostViewState extends State<CreatePostView> {
           ],
         ),
       ),
-
     );
   }
 
-  Widget createPostButton(
-      {required int index,
-        required IconData icons,
-      required String text,}) {
+  Widget createPostButton({
+    required int index,
+    required IconData icons,
+    required String text,
+  }) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
@@ -398,7 +405,9 @@ class _CreatePostViewState extends State<CreatePostView> {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color:_selectedIndex.value == index ? ColorAssets.primary : ColorAssets.greyContainer,
+            color: _selectedIndex.value == index
+                ? ColorAssets.primary
+                : ColorAssets.greyContainer,
           ),
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: Row(
