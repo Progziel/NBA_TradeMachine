@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nbatrade/helper/constants/colors.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
@@ -9,18 +10,20 @@ class CustomTextFormField extends StatelessWidget {
   final Color? fillColor;
   final Color? hintTextColor;
   final Widget? sufixIcon;
+  final Widget? prefixIcon;
   final void Function(String)? onChanged;
   const CustomTextFormField(
       {Key? key,
-      this.controller,
-      this.sufixIcon,
-      this.fillColor,
-      this.hintTextColor,
-      this.validator,
-      required this.hint,
-      this.obscureText,
-      this.onChanged,
-      this.maxLines})
+        this.controller,
+        this.prefixIcon,
+        this.sufixIcon,
+        this.fillColor,
+        this.hintTextColor,
+        this.validator,
+        required this.hint,
+        this.obscureText,
+        this.onChanged,
+        this.maxLines})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -38,28 +41,32 @@ class CustomTextFormField extends StatelessWidget {
             contentPadding:
                 EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
 
-            // label: Text(label ?? "",),
-            //   border: OutlineInputBorder(
-            //     borderRadius: BorderRadius.circular(15.0), // Adjust the radius as needed
-            //   ),
             hintText: hint,
             hintStyle: TextStyle(color: hintTextColor),
             filled: true,
             fillColor: fillColor,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30.0),
-              borderSide: BorderSide(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: const BorderSide(
                 color: Colors.grey,
                 width: 2.0,
               ),
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30.0),
-              borderSide: BorderSide(
-                color: Colors.blue,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: const BorderSide(
+                color: ColorAssets.greyContainer,
                 width: 2.0,
               ),
             ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: const BorderSide(
+                color: ColorAssets.primary,
+                width: 2.0,
+              ),
+            ),
+            prefixIcon: prefixIcon,
             //focusedBorder: InputBorder.none,
             floatingLabelBehavior: FloatingLabelBehavior.always,
             suffixIcon: sufixIcon),

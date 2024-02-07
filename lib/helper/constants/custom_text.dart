@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:nbatrade/helper/constants/colors.dart';
 
 class CustomTextWidget extends StatelessWidget {
   final String text;
   final Color? textColor;
   final FontWeight? fontWeight;
+  final TextAlign? textAlign;
   final double? fontSize;
-  const CustomTextWidget(
-      {Key? key,
-      required this.text,
-      this.fontWeight,
-      this.textColor,
-      this.fontSize})
-      : super(key: key);
+  final  int? maxLines;
+  const   CustomTextWidget({Key? key,required this.text,this.fontWeight,this.textColor,this.fontSize,
+
+    this.textAlign,  this.maxLines }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +18,18 @@ class CustomTextWidget extends StatelessWidget {
       textAlign: TextAlign.center,
 
       text,
+      textAlign: textAlign??TextAlign.start,
+
       style: TextStyle(
         color: textColor ?? Colors.black,
         fontWeight: fontWeight ?? FontWeight.normal,
         fontSize: fontSize ?? 12.0,
         fontFamily: 'Nunito',
-        // overflow: TextOverflow.ellipsis,
+
+       // overflow: TextOverflow.ellipsis,
       ),
       softWrap: true,
-      maxLines: 3,
+      maxLines: maxLines ?? 1,
       overflow: TextOverflow.ellipsis,
       //textWidthBasis: TextWidthBasis.parent,
     );

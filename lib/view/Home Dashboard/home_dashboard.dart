@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/view/Home%20Dashboard/trending/trending_screen.dart';
-import 'package:nbatrade/view/news/news.dart';
+import 'package:nbatrade/view/compare_players/compare_player.dart';
+import 'package:nbatrade/view/team_selection/team_selection.dart';
+import 'package:nbatrade/view/trade/trade.dart';
 import '../../../helper/constants/colors.dart';
 import '../../../helper/constants/custom_appbar.dart';
 import '../approval/approval.dart';
@@ -24,8 +26,8 @@ class _HomeDashboardState extends State<HomeDashboard>
 
   bool expanded = false;
   List<Map<String, dynamic>> gridItemsData = [
-    {"text": "Team Selection", "icon": Icons.diversity_2},
-    {"text": "Trade", "icon": Icons.send_time_extension},
+    {"text": "Team Selection", "icon": Icons.diversity_2, "ontap": () => Get.to(const NBATeamSelection())},
+    {"text": "Trade", "icon": Icons.send_time_extension, "ontap": () => Get.to(const TradeScreen())},
     {
       "text": "NBA Contacts",
       "icon": Icons.diversity_3,
@@ -36,13 +38,9 @@ class _HomeDashboardState extends State<HomeDashboard>
       "icon": Icons.approval_outlined,
       "ontap": () => Get.to(TradeApprovalScreen())
     },
-    {"text": "Compare Players", "icon": Icons.compare_arrows},
-    {
-      "text": "News",
-      "icon": Icons.auto_awesome_mosaic_sharp,
-      "ontap": () => Get.to(const NewsScreen())
-    },
-    {"text": "Spaces", "icon": Icons.public},
+    {"text": "Compare Players", "icon": Icons.compare_arrows, "ontap": () => Get.to(ComparePlayerScreen())},
+    {"text": "News", "icon": Icons.auto_awesome_mosaic_sharp},
+    {"text": "Spaces", "icon": Icons.public,},
     {"text": "Chatrooms", "icon": Icons.inbox},
   ];
 
@@ -86,7 +84,7 @@ class _HomeDashboardState extends State<HomeDashboard>
                         height: Get.height,
                         child: TabBarView(
                           controller: _tabController,
-                          children: const [
+                          children:  [
                             MyFeeds(),
                             Trending(),
                             Trending(),
