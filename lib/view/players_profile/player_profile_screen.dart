@@ -5,10 +5,8 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:nbatrade/controllers/profile_screen_controller.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
-
-import '../../../helper/constants/custom_appbar.dart';
-import '../../../helper/constants/custom_profile_appbar.dart';
-import '../../../helper/constants/profile_detail_widget.dart';
+import '../../helper/constants/custom_profile_appbar.dart';
+import '../../helper/constants/profile_detail_widget.dart';
 
 class PlayerProfileScreen extends StatelessWidget {
   const PlayerProfileScreen({Key? key}) : super(key: key);

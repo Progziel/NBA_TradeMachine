@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nbatrade/controllers/post_controller.dart';
-import 'package:nbatrade/helper/constants/asset_helper.dart';
-import 'package:nbatrade/helper/constants/comment.dart';
 import 'package:nbatrade/helper/custom_Post_widget.dart';
 
-import '../../../helper/constants/colors.dart';
-import '../../../helper/constants/custom_text.dart';
 import '../../../helper/custom_text_dropdown.dart';
-import '../../../helper/post_image_row.dart';
 
 class Trending extends StatefulWidget {
   const Trending({Key? key}) : super(key: key);
@@ -18,7 +13,7 @@ class Trending extends StatefulWidget {
 }
 
 class _TrendingState extends State<Trending> {
-   bool trendingPostByType = true;
+  bool trendingPostByType = true;
   PostController postController = Get.find<PostController>();
 
   @override
@@ -34,20 +29,21 @@ class _TrendingState extends State<Trending> {
           },
         ),
         if (trendingPostByType == true)
-          Obx(()
-          => Expanded(
-            child: ListView.builder(
-              // reverse: true,
-              shrinkWrap: true,
-              itemCount: postController.trendingPosts.length,
-              // physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (BuildContext context, index) {
-                final post = postController.trendingPosts[index];
+          Obx(
+            () => Expanded(
+              child: ListView.builder(
+                // reverse: true,
+                shrinkWrap: true,
+                itemCount: postController.trendingPosts.length,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (BuildContext context, index) {
+                  final post = postController.trendingPosts[index];
 
-                return CustomPostWidget(postController: postController, post: post, index: index);
-              },
+                  return CustomPostWidget(
+                      postController: postController, post: post, index: index);
+                },
+              ),
             ),
-          ),
           ),
 //           Expanded(
 //             child: ListView.builder(

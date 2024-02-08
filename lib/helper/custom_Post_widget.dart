@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-import 'package:flutter_quill/quill_delta.dart';
 import 'package:nbatrade/controllers/post_controller.dart';
 import 'package:nbatrade/helper/constants/asset_helper.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
@@ -12,7 +11,6 @@ import 'package:nbatrade/helper/post_image_row.dart';
 
 import 'package:get/get.dart';
 import 'package:nbatrade/models/post_model.dart';
-import 'package:nbatrade/view/chatrooms/community_screen.dart';
 import 'package:nbatrade/view/user%20profile/user_profile.dart';
 
 class CustomPostWidget extends StatefulWidget {
@@ -21,6 +19,7 @@ class CustomPostWidget extends StatefulWidget {
   final PostController postController;
 
   const CustomPostWidget({
+    super.key,
     required this.postController,
     required this.post,
     required this.index,
@@ -60,7 +59,7 @@ class _CustomPostWidgetState extends State<CustomPostWidget> {
                 const SizedBox(width: 5),
                 InkWell(
                   onTap: () {
-                    Get.to(UserProfileScreen());
+                    Get.to(const UserProfileScreen());
                   },
                   child: CustomTextWidget(
                     text: "Posted by " + widget.post.postedBy,
@@ -93,6 +92,7 @@ class _CustomPostWidgetState extends State<CustomPostWidget> {
           ),
         ),
         widget.post.expended == false
+            // Short View Post
             ? Container(
                 height: context.height * 0.22,
                 color: ColorAssets.white,
@@ -100,7 +100,7 @@ class _CustomPostWidgetState extends State<CustomPostWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: PostImagesRow(
                         profilePictures: widget.post.playerModel,
                         post: widget.post,
@@ -129,6 +129,7 @@ class _CustomPostWidgetState extends State<CustomPostWidget> {
                   ],
                 ),
               )
+            // Full View Post
             : Container(
                 child: Column(
                   children: [
@@ -162,7 +163,7 @@ class _CustomPostWidgetState extends State<CustomPostWidget> {
                                             .post.mediaPosted
                                             .toString()))),
                                   ))
-                              : SizedBox(),
+                              : const SizedBox(),
                           SizedBox(
                             height: context.height * 0.03,
                           ),
@@ -178,7 +179,7 @@ class _CustomPostWidgetState extends State<CustomPostWidget> {
               ),
         Obx(() => Container(
               padding: const EdgeInsets.all(6),
-              color: Color(0xFFF6F6F6),
+              color: const Color(0xFFF6F6F6),
               child: Row(
                 children: [
                   GestureDetector(
@@ -198,8 +199,8 @@ class _CustomPostWidgetState extends State<CustomPostWidget> {
                     ),
                   ),
                   CustomTextWidget(text: widget.post.likeCount.toString()),
-                  SizedBox(width: 20),
-                  Icon(Icons.comment_bank_outlined),
+                  const SizedBox(width: 20),
+                  const Icon(Icons.comment_bank_outlined),
                   InkWell(
                     onTap: () {
                       Get.to(CommentScreen(comments: widget.post.comments!));
@@ -207,7 +208,7 @@ class _CustomPostWidgetState extends State<CustomPostWidget> {
                     child: CustomTextWidget(
                         text: widget.post.commentCount.toString()),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   GestureDetector(
                     onTap: () {
                       widget.postController.changeFire(widget.index);
@@ -220,8 +221,8 @@ class _CustomPostWidgetState extends State<CustomPostWidget> {
                             : Colors.black),
                   ),
                   CustomTextWidget(text: widget.post.flamCount.toString()),
-                  SizedBox(width: 20),
-                  Icon(Icons.share),
+                  const SizedBox(width: 20),
+                  const Icon(Icons.share),
                   CustomTextWidget(text: widget.post.shareCount.toString()),
                 ],
               ),

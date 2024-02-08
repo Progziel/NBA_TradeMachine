@@ -129,7 +129,7 @@ class _NewsScreenState extends State<NewsScreen> {
                                     children: [
                                       SocialEmbed(
                                         socialMediaObj: TwitterEmbedData(
-                                            embedHtml: post!.embedHtml),
+                                            embedHtml: post.embedHtml),
                                       ),
                                       const SizedBox(height: 20),
                                     ],

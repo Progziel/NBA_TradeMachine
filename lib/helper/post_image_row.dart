@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nbatrade/models/player_model.dart';
 import 'package:nbatrade/models/post_model.dart';
-import 'package:nbatrade/view/Home%20Dashboard/my_feeds/player_profile_screen.dart';
+import 'package:nbatrade/view/players_profile/player_profile_screen.dart';
 
 List<Color>? list = [Colors.white,Colors.purple,Colors.green,Colors.yellow];
 

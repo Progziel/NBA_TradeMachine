@@ -116,7 +116,7 @@ class _HomeDashboardState extends State<HomeDashboard>
                         SizedBox(
                           height: Get.height,
                           child: TabBarView(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             controller: _tabController,
                             children: const [
                               MyFeeds(),
