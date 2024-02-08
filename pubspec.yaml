@@ -46,6 +46,7 @@ dependencies:
  # material_symbols_icons: ^4.2718.0
   flutter_svg: ^2.0.9
   social_embed_webview: ^0.3.2
+  flutter_quill: ^9.2.12
   carousel_slider: ^4.2.1
 
 

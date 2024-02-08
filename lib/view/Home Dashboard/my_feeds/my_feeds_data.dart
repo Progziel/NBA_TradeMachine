@@ -1,8 +1,14 @@
 import 'dart:io';
 import 'dart:math';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:nbatrade/helper/constants/asset_helper.dart';
 import 'package:nbatrade/helper/constants/comment.dart';
+import 'package:nbatrade/helper/custom_Post_widget.dart';
+import 'package:nbatrade/helper/flutter_quil.dart';
 import 'package:nbatrade/models/player_model.dart';
+import 'package:nbatrade/view/team_selection/team_selection.dart';
+import 'package:nbatrade/view/team_selection/widgets/team_tabbarview.dart';
+import 'package:nbatrade/view/trade/trade.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'package:animations/animations.dart';
@@ -82,164 +88,9 @@ class _MyFeedsState extends State<MyFeeds> with SingleTickerProviderStateMixin {
                   itemBuilder: (BuildContext context, index) {
                     final post = postController.myFeedPosts[index];
 
-                    return Column(
-                      children: [
-                        Container(
-                          color: ColorAssets.white,
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Row(
-                              children: [
-                                 CircleAvatar(
-                                  radius: 10,
-                                  backgroundImage: AssetImage(MyAssetHelper.profileScreenImage),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const CustomTextWidget(
-                                  text: "S/Channel",
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                 CustomTextWidget(
-                                  text: "Posted by "+post.postedBy,
-                                  textColor: ColorAssets.black,
-                                   fontSize: 8,
-                                ),
-                                const SizedBox(
-                                  width: 2,
-                                ),
-                                 CustomTextWidget(
-                                  text: post.time,
-                                  textColor: ColorAssets.black,
-                                   fontSize: 8,
+                    return CustomPostWidget(postController: postController, post: post,
+                      index: index,
 
-                                 ),
-                                const Spacer(),
-                                InkWell(
-                                  onTap: () {
-                                    postController.togglePostExpansion(post);
-                                    setState(() {});
-                                  },
-                                  child: const CustomTextWidget(text: "Expanded"),
-                                ),
-                                const Icon(Icons.arrow_drop_down),
-                              ],
-                            ),
-                          ),
-                        ),
-                        post.expended == false
-                            ? Container(
-                                height: context.height*0.22,
-                                color: ColorAssets.white,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    PostImagesRow(
-                                      profilePictures: post.playerModel, post: post,
-                                    ),
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: CustomTextWidget(
-                                          maxLines: 10,
-
-                                          text: post.description,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            : Container(
-                                // width: Get.width,
-                                // color: const Color(0xff08591b),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      height: Get.height/3,
-
-                                      child: Expanded(
-                                        child: PostImagesRow(
-                                          post: post,
-                                            profilePictures: post.playerModel,
-
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        children: [
-
-                                          CustomTextWidget(
-                                            maxLines: 10,
-                                            text:post.description
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                        Obx(()
-                          => Container(
-                            padding: const EdgeInsets.all(6),
-                            color: Color(0xFFF6F6F6),
-                            child:  Row(
-                              children: [
-                                GestureDetector(
-                                    onTap: (){
-                                      postController.changeHeart(index);
-                                    },
-                                    child: Icon(postController.heartEffects[index].value==true?Icons.favorite_border:Icons.favorite,color:postController.heartEffects[index].value==false?Colors.red:Colors.black ,)),
-
-                                CustomTextWidget(text: post.likeCount.toString()),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Icon(Icons.comment_bank_outlined),
-                                InkWell(
-                                  onTap:(){
-                                    Get.to(CommentScreen(comments: post.comments!,));
-                                    // showModalBottomSheet(
-                                    //   backgroundColor: Colors.transparent,
-                                    //   context: context,
-                                    //   builder: (BuildContext context) {
-                                    //     return CommentScreen(
-                                    //       post: post,
-                                    //     );
-                                    //   },
-                                    // );
-                    },
-                                    child: CustomTextWidget(text: post.commentCount.toString() )),
-                                SizedBox(
-                                  width: 20,
-                                ),
-
-                                     GestureDetector(
-                                      onTap: (){
-                                        postController.changeFire(index);
-                                      },
-                                        child: Icon(Icons.local_fire_department_outlined,color:postController.fireEffects[index].value==false?Colors.orange:Colors.black ,)),
-
-                                CustomTextWidget(text: post.flamCount.toString()),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Icon(Icons.share),
-                                CustomTextWidget(text: post.shareCount.toString()),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        )
-                      ],
                     );
                   },
                 ),
@@ -250,59 +101,73 @@ class _MyFeedsState extends State<MyFeeds> with SingleTickerProviderStateMixin {
 
   }
 
+
+
+
   Widget createPostRow() {
-    return Container(
-      padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-          color: ColorAssets.white,
-          border: Border.all(
-            color: ColorAssets.grey,
-          ),
-          borderRadius: BorderRadius.circular(8)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            height: context.height*0.05,
-width: 50,
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                    image: AssetImage(
-                        "assets/images/user2.jpg"
+    return GestureDetector(
+      onTap: (){
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return CreatePostDialog(postController: postController);
+          },
+        );
 
-                    )
-                )
+      },
+      child: Container(
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+            color: ColorAssets.white,
+            border: Border.all(
+              color: ColorAssets.grey,
             ),
+            borderRadius: BorderRadius.circular(8)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              height: context.height*0.05,
+        width: 50,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                      image: AssetImage(
+                          "assets/images/user2.jpg"
+
+                      )
+                  )
+              ),
 
 
 
 
-          ),
-          Container(
-            width: Get.width / 1.8,
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-                border: Border.all(
-                  color: ColorAssets.grey,
-                ),
-                borderRadius: BorderRadius.circular(8)),
-            child: const CustomTextWidget(
-              text: "Create post here",
-              textColor: ColorAssets.grey,
             ),
-          ),
-          Container(
-            width: Get.width / 5,
-            height: 35,
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-                color: ColorAssets.primary,
-                borderRadius: BorderRadius.circular(8)),
-            child: const CustomTextWidget(
-                text: "Create Post", textColor: ColorAssets.white),
-          ),
-        ],
+            Container(
+              width: Get.width / 1.8,
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    color: ColorAssets.grey,
+                  ),
+                  borderRadius: BorderRadius.circular(8)),
+              child: const CustomTextWidget(
+                text: "Create post here",
+                textColor: ColorAssets.grey,
+              ),
+            ),
+            Container(
+              width: Get.width / 5,
+              height: 35,
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  color: ColorAssets.primary,
+                  borderRadius: BorderRadius.circular(8)),
+              child: const CustomTextWidget(
+                  text: "Create Post", textColor: ColorAssets.white),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -397,6 +262,34 @@ width: 50,
   // }
 }
 
+
+class CreatePostDialog extends StatelessWidget {
+  final PostController postController;
+
+  const CreatePostDialog({Key? key, required this.postController}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      insetPadding: EdgeInsets.all(10),
+      child: Container(
+        padding: EdgeInsets.all(16), // Add padding to the content
+        decoration: ShapeDecoration(
+          color:Color(0xFFEDEDFF),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16), // Adjust the border radius as needed
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: CreatePostView(postController: postController),
+        ),
+      ),
+    );
+  }
+}
+
+
+
 class CreatePostView extends StatefulWidget {
   final PostController postController;
   // final void Function()? onTap;
@@ -429,39 +322,40 @@ class _CreatePostViewState extends State<CreatePostView> {
     print("Image List Length:" + imageFileList!.length.toString());
     setState((){});
   }
+  QuillController descriptionController = QuillController.basic();
 
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: context.height*.73,
         child: SingleChildScrollView(
           child: Column(
-           mainAxisAlignment: MainAxisAlignment.start,
-          
-          
+           mainAxisAlignment: MainAxisAlignment.center,
+
+
             children: [
-          
+
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Obx(() => Row(
                   children: [
                     createPostButton(
-                        index: 0, icons: Icons.document_scanner_outlined, text: "Text"),
+                        index: 0, icons: Symbols.post_add, text: "Text"),
                     createPostButton(
-                        index: 1, icons: Icons.settings, text: "Tool"),
+                        index: 1, icons: Symbols.build, text: "Tool"),
                     createPostButton(
-                        index: 2, icons: Icons.link, text: "Link"),
+                        index: 2, icons: Symbols.attach_file, text: "Link"),
                     createPostButton(
                         index: 3, icons: Icons.perm_media_outlined, text: "Media"),
                     createPostButton(
                         index: 4, icons: Icons.poll_outlined, text: "Poll"),
                   ],
                 ),),
-          
+
               ),
-          
+
               const SizedBox(
                 height: 20,
               ),
@@ -470,11 +364,19 @@ class _CreatePostViewState extends State<CreatePostView> {
                   visible: _selectedIndex.value == 0,
                   child: Column(
                     children: [
-                       CustomTextFormField(hint: "Title ",fillColor: ColorAssets.greyContainer,controller: widget.postController.postNameController,),
+
+                      CustomTextFormField(hint: "Title ",
+                         fillColor:Color(0xFFEDEDFF),
+
+                         controller: widget.postController.postNameController,),
                       SizedBox(height: context.height*0.04,),
-                      CustomTextFormField(hint: "Description",maxLines: 10,fillColor: ColorAssets.greyContainer,controller: widget.postController.postDescriptionController,),
-          
-          
+                      MyRichTextField(controller: descriptionController,
+                        height: context.height*0.4,),
+                      // CustomTextFormField(hint: "Description",maxLines: 10,
+                      //   fillColor:Color(0xFFEDEDFF),
+                      //   controller: widget.postController.postDescriptionController,),
+
+
                     ],
                   ),
                 ),
@@ -483,7 +385,7 @@ class _CreatePostViewState extends State<CreatePostView> {
                 => Visibility(
                   visible: _selectedIndex.value == 1,
                   child: Column(
-          
+
                     children: [
                       Container(
                         padding: EdgeInsets.all(10),
@@ -493,21 +395,31 @@ class _CreatePostViewState extends State<CreatePostView> {
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(
                             color: ColorAssets.primary,
-                            
-          
+
+
                           ),
-                      color:    ColorAssets.greyContainer,
+                      color:   Color(0xFFEDEDFF),
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            CustomBlueButton(text: "TRADE MACHINE",icon: Symbols.arrow_circle_left_rounded),
-          
-                            CustomBlueButton(text: "DRAFT BIG BOARDER CREATOR",icon:Symbols.draft),
-          
-          
-          
+                            CustomBlueButton(text: "TRADE MACHINE",icon: Symbols.arrow_circle_left_rounded,height: context.height*0.07,
+                              width: context.width,
+                              onTap: (){
+                              Get.to(TradeScreen());
+                              },
+                            ),
+
+                            CustomBlueButton(text: "DRAFT BIG BOARDER CREATOR",icon:Symbols.draft,
+                              onTap: (){
+                                Get.to(NBATeamSelection());
+
+                              },
+                              height: context.height*0.07,width: context.width,font: 12,),
+
+
+
                           ],
                         ),
                       )
@@ -520,10 +432,10 @@ class _CreatePostViewState extends State<CreatePostView> {
                   visible: _selectedIndex.value == 2,
                   child: Column(
                     children: [
-                      const CustomTextFormField(hint: "Title of Link",maxLines: 2,fillColor: ColorAssets.greyContainer),
+                      const CustomTextFormField(hint: "Title of Link",maxLines: 2,fillColor: Color(0xFFEDEDFF)),
                       SizedBox(height: context.height*0.03,),
-                      const CustomTextFormField(hint: "Paste your Link here..",maxLines: 3,fillColor: ColorAssets.greyContainer),
-          
+                      const CustomTextFormField(hint: "Paste your Link here..",maxLines: 3,fillColor:Color(0xFFEDEDFF)),
+
                     ],
                   ),
                 ),
@@ -533,36 +445,50 @@ class _CreatePostViewState extends State<CreatePostView> {
                   visible: _selectedIndex.value == 3,
                   child: Column(
                     children: [
-                      const CustomTextFormField(hint: "Title",fillColor: ColorAssets.greyContainer,),
+                      const CustomTextFormField(hint: "Title",fillColor: Color(0xFFEDEDFF),),
                       SizedBox(height: context.height*0.03,),
-          
-                      Container(
-                        height:imageFileList!.length==0? context.height*0.3:context.height*0.4,
-                        width: context.width,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(
-                            color: ColorAssets.primary,
-          
-          
+
+
+                      Obx(()
+                        => Container(
+                          padding: EdgeInsets.all(10),
+                          height: context.height*0.3,
+                          width: context.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              color:   Color(0xFF545454),width: 2
+
+
+                            ),
+                            color:    Color(0xFFEDEDFF),
                           ),
-                          color:    ColorAssets.greyContainer,
-                        ),
-                        child: Expanded(
-                          child: GestureDetector(
-                            onTap: (){
-                              selectImages();
-          
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child:imageFileList!.length!=0? GridView.builder(
-                                  itemCount: imageFileList!.length,
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 3),
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return Image.file(File(imageFileList![index].path), fit: BoxFit.cover,);
-                                  }):Column(
+                          child: Expanded(
+                            child: GestureDetector(
+                              onTap: (){
+                                widget.postController.pickFile();
+
+                              },
+                              child:
+                             widget.postController.imagePath.value!=""? Container(
+                           
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      fit: BoxFit.fitHeight
+                                      ,
+
+                                      image: FileImage(File(widget.postController.imagePath.value.toString())
+                                  )
+                                ),
+                              ))
+                              // imageFileList!.length!=0? GridView.builder(
+                              //     itemCount: imageFileList!.length,
+                              //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              //         crossAxisCount: 3),
+                              //     itemBuilder: (BuildContext context, int index) {
+                              //       return Image.file(File(imageFileList![index].path), fit: BoxFit.cover,);
+                              //     })
+                                  :Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       CustomTextWidget(text: "Select Media to Post ",fontSize: 15,fontWeight: FontWeight.bold,),
@@ -577,7 +503,7 @@ class _CreatePostViewState extends State<CreatePostView> {
                           ),
                         ),
                       ),
-          
+
                     ],
                   ),
                 ),
@@ -587,11 +513,11 @@ class _CreatePostViewState extends State<CreatePostView> {
                   visible: _selectedIndex.value == 4,
                   child: Column(
                     children: [
-                      const CustomTextFormField(hint: "Title ",fillColor: ColorAssets.greyContainer),
+                      const CustomTextFormField(hint: "Title ",fillColor: Color(0xFFEDEDFF),),
                       SizedBox(height: context.height*0.04,),
-                      CustomTextFormField(hint: "Description",maxLines: 5,fillColor: ColorAssets.greyContainer),
+                      CustomTextFormField(hint: "Description",maxLines: 5,fillColor: Color(0xFFEDEDFF),),
                       SizedBox(height: context.height*0.04,),
-          
+
                       ListView.builder(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
@@ -605,7 +531,7 @@ class _CreatePostViewState extends State<CreatePostView> {
                                 SizedBox(width: 5,),
                                 Expanded(
                                   child: CustomTextFormField(
-                                    fillColor: ColorAssets.greyContainer,
+                                    fillColor: Color(0xFFEDEDFF),
                                     controller: _optionControllers[index],
                                      hint: 'Option ${index + 1}',
                                   ),
@@ -622,12 +548,14 @@ class _CreatePostViewState extends State<CreatePostView> {
                         },
                       ),
                       SizedBox(height: 16.0),
-          
+
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Row(
                           children: [
                             Icon(Icons.add,size: 18,color:ColorAssets.primary ,),
+                            // MyRichTextField(controller: controller,
+                            //   height: context.height*0.4,),
                             TextButton(
                               style: TextButton.styleFrom(
 
@@ -643,7 +571,7 @@ class _CreatePostViewState extends State<CreatePostView> {
                           ],
                         ),
                       ),
-          
+
                     ],
                   ),
                 ),
@@ -651,10 +579,12 @@ class _CreatePostViewState extends State<CreatePostView> {
               const SizedBox(
                 height: 20,
               ),
-          
+
               CustomButton(
 
                 onTap: (){
+
+
 
                   if(_selectedIndex.value<4){
                     _selectedIndex.value++;
@@ -670,28 +600,50 @@ class _CreatePostViewState extends State<CreatePostView> {
                       commentCount: Random().nextInt(50),
                       likeCount: Random().nextInt(70),
                       shareCount:  Random().nextInt(60),
-                      playerModel:          [
-                      PlayerModel(
-                      name: "Player 1",
-                      profileImage: "https://media.wired.com/photos/5f75cdbbb5fbbbb0ed6d44b3/master/pass/Culture_NBAFinals_1228816794.jpg",
-                    ),
-                        PlayerModel(
-                    name: "Player 2",
-                    profileImage: "https://storage.googleapis.com/nbarankings-theringer-com-cms/public/media/ringerbasketballhub/players/DonovanMitchellM-small.png",
-                    ),
-                  PlayerModel(
-                  name: "Player 3",
-                  profileImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHIbHtVscP83DXbGIPDyt4bkO_w0rNN_b3gA&usqp=CAU",
-                  ),
-                  PlayerModel(
-                  name: "Player 4",
-                  profileImage: "https://images.wsj.net/im-261194/square",
-                  ),
-                  // Add more players as needed
-                  ],
+                        postTitle: widget.postController.postNameController.text,
+                        mediaPosted: widget.postController.imagePath.toString(),
+                        // playerModel: [
+                        //   PlayerModel(
+                        //     name: "Player 1",
+                        //     profileImage: MyAssetHelper.nba1,
+                        //
+                        //     // profileImage: "https://media.wired.com/photos/5f75cdbbb5fbbbb0ed6d44b3/master/pass/Culture_NBAFinals_1228816794.jpg",
+                        //   ),
+                        //   PlayerModel(
+                        //     name: "Player 2",
+                        //     profileImage: MyAssetHelper.nba2,
+                        //
+                        //     // profileImage: "https://storage.googleapis.com/nbarankings-theringer-com-cms/public/media/ringerbasketballhub/players/DonovanMitchellM-small.png",
+                        //   ),
+                        //   PlayerModel(
+                        //     name: "Player 3",
+                        //     profileImage: MyAssetHelper.nba3,
+                        //
+                        //     // profileImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHIbHtVscP83DXbGIPDyt4bkO_w0rNN_b3gA&usqp=CAU",
+                        //   ),
+                        //   PlayerModel(
+                        //     name: "Player 4",
+                        //     profileImage: MyAssetHelper.nba4,
+                        //
+                        //     // profileImage: "https://images.wsj.net/im-261194/square",
+                        //   ),
+                        //   // Add more players as needed
+                        // ],
 
 
-                        description:widget.postController.postNameController.text+"\n"+widget.postController.postDescriptionController.text ,
+                        description:"""
+Trade Breakdown
+TOR: Kyle Lowry, Pat
+
+Trade Breakdown
+TOR: Kyle Lowry, Pat Connaughton, Nikola Jovic, AJ Green, 2024 POR SRP, 2027 MIL SRP,
+MIL: This move is pretty risky...Connaughton, Nikola Jovic, AJ Green, 2024 POR SRP, 2027 TOR: Kyle Lowry, Pat Connaughton, Nikola Jovic, AJ Green, 2024 POR SRP, 2027 MIL SRP,
+MIL: This move is pretty risky...Connaughton, Nikola Jovic, AJ Green, 2024 POR SRP, 2027 TOR: Kyle Lowry, Pat Connaughton, Nikola Jovic, AJ Green, 2024 POR SRP, 2027 MIL SRP,
+MIL: This move is pretty risky...Connaughton, Nikola Jovic, AJ Green, 2024 POR SRP, 2027 MIL SRP, 2027 MIA FRP
+MIA: Bruce Brown
+MIL: Dennis Schroeder
+MIL: This move is pretty risky...
+""",
                         postedBy: "James_r",
 
                         time: timeago.format(timeCurrent).toString(),
@@ -702,7 +654,6 @@ class _CreatePostViewState extends State<CreatePostView> {
                     setState(() {
                         Get.back();
                     });
-                    print("myFeeds List Count--------------------->"+widget.postController.myFeedPosts.length.toString());
 
                   }
                 },
@@ -710,21 +661,7 @@ class _CreatePostViewState extends State<CreatePostView> {
                 showBackgroundColor: true,
 
               ),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              // const CustomTextFormField(hint: "Text"),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              // const Expanded(child: CustomTextFormField(hint: "Description",maxLines: 10)),
-              // CustomButton(
-              //   onTap: (){
-              //     _selectedIndex.value++;
-              //   },
-              //   buttonText: "Next",
-              //   showBackgroundColor: true,
-              // ),
+
             ],
           ),
         ),
@@ -738,13 +675,13 @@ class _CreatePostViewState extends State<CreatePostView> {
         required IconData icons,
       required String text,}) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(4.0),
       child: InkWell(
         onTap: () => _selectedIndex.value = index,
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color:_selectedIndex.value == index ? ColorAssets.primary : ColorAssets.greyContainer,
+            color:_selectedIndex.value == index ? ColorAssets.primary : Color(0xFF747474),
           ),
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: Row(
