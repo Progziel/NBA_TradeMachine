@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nbatrade/models/player_model.dart';
 import 'package:nbatrade/models/post_model.dart';
+import 'package:nbatrade/view/Home%20Dashboard/my_feeds/player_profile_screen.dart';
 
 List<Color>? list = [Colors.white,Colors.purple,Colors.green,Colors.yellow];
 
@@ -15,25 +16,30 @@ class PostImagesRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("print $profilePictures");
-    print("----------->print $length");
 
     return profilePictures != null
         ? Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: profilePictures!.map((profilePictures) => InkWell(
         onTap: (){
         //  Get.to(()=> PlayerProfile());
         },
-        child: Container(
-          // width: 30, // Set the width as needed
-           width: post.expended==true? context.width*0.23:context.width*0.1!,// Set the height as needed
-          //color: color,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(profilePictures.profileImage!,),fit: BoxFit.fitHeight,
-              )
-            ),
-          // margin: EdgeInsets.symmetric(horizontal: 2),
-          // Set margin as needed
+        child: GestureDetector(
+          onTap: (){
+            Get.to(PlayerProfileScreen());
+          },
+          child: Container(
+            // width: 30, // Set the width as needed
+             width: post.expended==true? context.width*0.22:context.width*0.1,// Set the height as needed
+            //color: color,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(profilePictures.profileImage!,),fit: BoxFit.fitHeight,
+                )
+              ),
+            // margin: EdgeInsets.symmetric(horizontal: 2),
+            // Set margin as needed
+          ),
         ),
       )).toList(),
     )
