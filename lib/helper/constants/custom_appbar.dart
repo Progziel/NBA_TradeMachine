@@ -24,13 +24,20 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Get.height * 0.3,
+      height: Get.height / 4,
       decoration: const BoxDecoration(
         color: ColorAssets.primary,
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(30.0),
           bottomRight: Radius.circular(30.0),
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(85, 0, 0, 0),
+            blurRadius: 5.0, // Adjust blur radius as needed
+            offset: Offset(0, 6), // Offset shadow only on the bottom
+          ),
+        ],
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -64,7 +71,11 @@ class CustomAppBar extends StatelessWidget {
             padding: const EdgeInsets.only(left: 40.0, right: 40),
             child: CustomTextFormField(
               hint: "Search",
-              sufixIcon: const Icon(Icons.search),
+              hintTextColor: ColorAssets.textLightGrey,
+              sufixIcon: const Icon(
+                Icons.search,
+                size: 20,
+              ),
               validator: (value) => value, // Add a simple validator here
             ),
           ),

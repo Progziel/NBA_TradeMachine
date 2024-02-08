@@ -70,25 +70,25 @@ class PostController extends GetxController with GetSingleTickerProviderStateMix
         shareCount: 5,
         flamCount: 2,
         comments: [
-          Comments(
+          const Comments(
             imgUrl: "https://example.com/user3.png",
             username: "Jane Smith",
             comment: "Nice post! First post. Lorem ipsum dolor sit amet.First post. Lorem ipsum dolor sit amet. Keep up the good work!",
             time: "6 minutes ago",
           ),
-          Comments(
+          const Comments(
             imgUrl: "https://example.com/user3.png",
             username: "Jane Smith",
             comment: "Great idea!",
             time: "15 minutes ago",
           ),
-          Comments(
+          const Comments(
             imgUrl: "https://example.com/user3.png",
             username: "Jane Smith",
             comment: "Nice post! First post. Lorem ipsum dolor sit amet.First post. Lorem ipsum dolor sit amet  Keep up the good work!",
             time: "20 minutes ago",
           ),
-          Comments(
+          const Comments(
             imgUrl: "https://example.com/user3.png",
             username: "Jane Smith",
             comment: "Great idea!",
@@ -117,25 +117,25 @@ class PostController extends GetxController with GetSingleTickerProviderStateMix
         shareCount: 5,
         flamCount: 2,
         comments: [
-          Comments(
+          const Comments(
             imgUrl: "https://example.com/user3.png",
             username: "Jane Smith",
             comment: "Nice post! First post. Lorem ipsum dolor sit amet.First post. Lorem ipsum dolor sit amet. Keep up the good work!",
             time: "6 minutes ago",
           ),
-          Comments(
+          const Comments(
             imgUrl: "https://example.com/user3.png",
             username: "Jane Smith",
             comment: "Great idea!",
             time: "15 minutes ago",
           ),
-          Comments(
+          const Comments(
             imgUrl: "https://example.com/user3.png",
             username: "Jane Smith",
             comment: "Nice post! First post. Lorem ipsum dolor sit amet.First post. Lorem ipsum dolor sit amet  Keep up the good work!",
             time: "20 minutes ago",
           ),
-          Comments(
+          const Comments(
             imgUrl: "https://example.com/user3.png",
             username: "Jane Smith",
             comment: "Great idea!",
@@ -175,25 +175,25 @@ class PostController extends GetxController with GetSingleTickerProviderStateMix
         shareCount: 5,
         flamCount: 2,
         comments: [
-          Comments(
+          const Comments(
             imgUrl: "https://example.com/user3.png",
             username: "Jane Smith",
             comment: "Nice post! First post. Lorem ipsum dolor sit amet.First post. Lorem ipsum dolor sit amet. Keep up the good work!",
             time: "6 minutes ago",
           ),
-          Comments(
+          const Comments(
             imgUrl: "https://example.com/user3.png",
             username: "Jane Smith",
             comment: "Great idea!",
             time: "15 minutes ago",
           ),
-          Comments(
+          const Comments(
             imgUrl: "https://example.com/user3.png",
             username: "Jane Smith",
             comment: "Nice post! First post. Lorem ipsum dolor sit amet.First post. Lorem ipsum dolor sit amet  Keep up the good work!",
             time: "20 minutes ago",
           ),
-          Comments(
+          const Comments(
             imgUrl: "https://example.com/user3.png",
             username: "Jane Smith",
             comment: "Great idea!",
@@ -222,25 +222,25 @@ class PostController extends GetxController with GetSingleTickerProviderStateMix
         shareCount: 5,
         flamCount: 2,
         comments: [
-          Comments(
+          const Comments(
             imgUrl: "https://example.com/user3.png",
             username: "Jane Smith",
             comment: "Nice post! First post. Lorem ipsum dolor sit amet.First post. Lorem ipsum dolor sit amet. Keep up the good work!",
             time: "6 minutes ago",
           ),
-          Comments(
+          const Comments(
             imgUrl: "https://example.com/user3.png",
             username: "Jane Smith",
             comment: "Great idea!",
             time: "15 minutes ago",
           ),
-          Comments(
+          const Comments(
             imgUrl: "https://example.com/user3.png",
             username: "Jane Smith",
             comment: "Nice post! First post. Lorem ipsum dolor sit amet.First post. Lorem ipsum dolor sit amet  Keep up the good work!",
             time: "20 minutes ago",
           ),
-          Comments(
+          const Comments(
             imgUrl: "https://example.com/user3.png",
             username: "Jane Smith",
             comment: "Great idea!",

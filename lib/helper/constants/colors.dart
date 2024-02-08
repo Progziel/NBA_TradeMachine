@@ -5,7 +5,7 @@ class ColorAssets {
   static const Color primary = Color(0xFF00008B);
 
   // Text colors
-  static const Color textPrimary = Color(0xFF1C1B1F);
+  static const Color textPrimary = Color(0xFF1C1B1F); 
   static const Color textSecondary = Color(0xFF545454);
   static const Color textWhite = Colors.white;
   static Color textLightGrey = Colors.grey.shade600;
