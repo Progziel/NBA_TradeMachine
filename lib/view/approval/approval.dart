@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nbatrade/controllers/post_controller.dart';
+import 'package:nbatrade/helper/constants/circular_profile_avatar.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/view/approval/tabs/approved.dart';
@@ -26,7 +27,6 @@ class _TradeApprovalScreenState extends State<TradeApprovalScreen>
   }
 
   PostController postController = Get.find<PostController>();
-
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +145,7 @@ class AppbarApproval extends StatelessWidget {
         prefixIconOnTap: () {
           Get.back();
         },
-        sufixWidget: const CircleAvatar());
+        sufixWidget: const CircularProfilePictureAvatar());
   }
 }
 

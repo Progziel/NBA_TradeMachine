@@ -13,7 +13,10 @@ class TETradePlayerCard extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: 80,
-        color: Colors.white,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12.0),
+            border: Border.all(color: Colors.black54)),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

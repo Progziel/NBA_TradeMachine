@@ -10,8 +10,6 @@ import 'package:nbatrade/view/approval/approval.dart';
 import 'package:social_embed_webview/platforms/twitter.dart';
 import 'package:social_embed_webview/social_embed_webview.dart';
 
-
-
 List<NewsPostModel> newsPosts = [
   NewsPostModel(
     imageUrl: 'assets/images/newsplayers.png',
@@ -65,85 +63,87 @@ class _NewsScreenState extends State<NewsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.grey.shade300,
-        body: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              automaticallyImplyLeading: false,
-              expandedHeight: Get.height * 0.19,
-              flexibleSpace: FlexibleSpaceBar(
-                background: PreferredSize(
-                  preferredSize: Size.fromHeight(Get.height * 0.50),
-                  child: CustomAppBar2(
-                    title: 'News',
-                    prefixIcon: Icons.arrow_back_ios,
-                    prefixIconOnTap: () {
-                      Get.back();
-                      // Handle back button tap
-                    },
-                    sufixWidget: const CircularProfilePictureAvatar(),
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: ColorAssets.primaryBackground,
+          body: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                automaticallyImplyLeading: false,
+                expandedHeight: Get.height * 0.19,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: PreferredSize(
+                    preferredSize: Size.fromHeight(Get.height * 0.50),
+                    child: CustomAppBar2(
+                      title: 'News',
+                      prefixIcon: Icons.arrow_back_ios,
+                      prefixIconOnTap: () {
+                        Get.back();
+                        // Handle back button tap
+                      },
+                      sufixWidget: const CircularProfilePictureAvatar(),
+                    ),
                   ),
                 ),
               ),
-            ),
-            SliverToBoxAdapter(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 20),
-                      child: Container(
+              SliverToBoxAdapter(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Padding(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 6, horizontal: 4),
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(96, 0, 0, 0),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: CarouselSlider(
-                          items: newsPosts.map((post) {
-                            return CustomImageContainer(
-                              ImageUrl: post.imageUrl,
-                            );
-                          }).toList(),
-                          options: CarouselOptions(
-                            viewportFraction: 1,
+                            vertical: 10.0, horizontal: 20),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 6, horizontal: 4),
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(96, 0, 0, 0),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: CarouselSlider(
+                            items: newsPosts.map((post) {
+                              return CustomImageContainer(
+                                ImageUrl: post.imageUrl,
+                              );
+                            }).toList(),
+                            options: CarouselOptions(
+                              viewportFraction: 1,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const Text("Post/News From X",
-                        style: TextStyle(color: Colors.grey)),
-                    const SizedBox(height: 5),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
+                      const Text("Post/News From X",
+                          style: TextStyle(color: Colors.grey)),
+                      const SizedBox(height: 5),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        padding: const EdgeInsets.all(20),
+                        child: _isLoading
+                            ? const CircularProgressIndicator()
+                            : Column(
+                                children: newsPosts.map((post) {
+                                  return Column(
+                                    children: [
+                                      SocialEmbed(
+                                        socialMediaObj: TwitterEmbedData(
+                                            embedHtml: post!.embedHtml),
+                                      ),
+                                      const SizedBox(height: 20),
+                                    ],
+                                  );
+                                }).toList(),
+                              ),
                       ),
-                      padding: const EdgeInsets.all(20),
-                      child: _isLoading
-                          ? const CircularProgressIndicator()
-                          : Column(
-                              children: newsPosts.map((post) {
-                                return Column(
-                                  children: [
-                                    SocialEmbed(
-                                      socialMediaObj: TwitterEmbedData(
-                                          embedHtml: post!.embedHtml),
-                                    ),
-                                    const SizedBox(height: 20),
-                                  ],
-                                );
-                              }).toList(),
-                            ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            )
-          ],
-        ));
+              )
+            ],
+          )),
+    );
   }
 }
 

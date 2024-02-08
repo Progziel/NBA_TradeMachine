@@ -12,6 +12,7 @@ class SpaceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: ColorAssets.primaryBackground,
         body: ListView(
           children: [
             Stack(
@@ -19,7 +20,7 @@ class SpaceScreen extends StatelessWidget {
                 Container(
                   padding:
                       const EdgeInsets.only(left: 8.0, right: 8.0, top: 12.0),
-                  height: Get.height * 0.18,
+                  height: Get.height * 0.15,
                   decoration: const BoxDecoration(
                     color: ColorAssets.primary,
                     borderRadius: BorderRadius.only(
@@ -87,86 +88,98 @@ class CustomSpaceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        height: context.height * 0.3,
-        decoration: BoxDecoration(
-          image: const DecorationImage(
-              image: NetworkImage(
-                "https://img.freepik.com/free-photo/football-background-with-frame_23-2147832085.jpg?size=626&ext=jpg&uid=R133237588&ga=GA1.1.290330012.1706909482&semt=ais",
-              ),
-              fit: BoxFit.cover),
-          border: Border.all(color: Colors.black45),
-        ),
-        child: Column(
-          children: [
-            Expanded(
-                child: Container(
-              color: Colors.transparent,
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Card(
+        color: Colors.grey.shade200,
+        elevation: 2.0,
+        child: Container(
+          height: context.height * 0.3,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20.0),
+            image: const DecorationImage(
+                image: AssetImage(
+                  "assets/images/newsplayers2.png",
+                ),
+                fit: BoxFit.cover),
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                  child: Container(
+                color: Colors.transparent,
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(CupertinoIcons.share, color: Colors.transparent),
+                      CircleAvatar(
+                        backgroundImage:
+                            AssetImage('assets/images/newsplayers.png'),
+                        radius: 50,
+                      ),
+                      Icon(CupertinoIcons.share, color: Colors.white),
+                    ],
+                  ),
+                ),
+              )),
+              Expanded(
+                  child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Icon(CupertinoIcons.share, color: Colors.transparent),
-                    CircleAvatar(radius: 40),
-                    Icon(CupertinoIcons.share, color: Colors.white),
+                    const CustomTextWidget(
+                      text: 'Trade Community',
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    const CustomTextWidget(
+                      text: 's/trade_community',
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.w600,
+                      textColor: Colors.black54,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        TextButton(
+                          onPressed: () {},
+                          child: const CustomTextWidget(
+                            text: 's/general',
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w600,
+                            textColor: Colors.black54,
+                          ),
+                        ),
+                        OutlinedButton(
+                          onPressed: () {},
+                          child: const CustomTextWidget(
+                            text: 'Joined',
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w600,
+                            textColor: ColorAssets.primary,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const CustomTextWidget(
+                            text: '167k Members',
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w600,
+                            textColor: Colors.black54,
+                          ),
+                        )
+                      ],
+                    )
                   ],
                 ),
-              ),
-            )),
-            Expanded(
-                child: Container(
-              color: Colors.white,
-              child: Column(
-                children: [
-                  const CustomTextWidget(
-                    text: 'Trade Community',
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  const CustomTextWidget(
-                    text: 's/general',
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w600,
-                    textColor: Colors.black54,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: const CustomTextWidget(
-                          text: 's/general',
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.w600,
-                          textColor: Colors.black54,
-                        ),
-                      ),
-                      OutlinedButton(
-                        onPressed: () {},
-                        child: const CustomTextWidget(
-                          text: 'Joined',
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w600,
-                          textColor: Colors.green,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: const CustomTextWidget(
-                          text: '167k Members',
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.w600,
-                          textColor: Colors.black54,
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            )),
-          ],
+              )),
+            ],
+          ),
         ),
       ),
     );

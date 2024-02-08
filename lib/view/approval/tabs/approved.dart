@@ -40,30 +40,29 @@ class _TabApprovedState extends State<TabApproved> {
                 decoration: BoxDecoration(
                     color: Color.fromARGB(41, 155, 209, 110),
                     borderRadius: BorderRadius.circular(20)),
-                child:  Container(
+                child: Container(
                   width: Get.width,
-                  padding: EdgeInsets.symmetric(horizontal: 12,vertical: 29),
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 29),
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(169, 237, 237, 255),
                       borderRadius: BorderRadius.circular(20)),
-                  child:             Obx(()
-                  => Expanded(
-                    child: ListView.builder(
+                  child: Obx(
+                    () => ListView.builder(
                       // reverse: true,
                       shrinkWrap: true,
                       itemCount: postController.trendingPosts.length,
-                      // physics: const NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (BuildContext context, index) {
                         final post = postController.trendingPosts[index];
-          
-                        return CustomPostWidget(postController: postController, post: post, index: index);
+
+                        return CustomPostWidget(
+                            postController: postController,
+                            post: post,
+                            index: index);
                       },
                     ),
                   ),
-                  ),
-          
                 ),
-          
               )
             ],
           ),

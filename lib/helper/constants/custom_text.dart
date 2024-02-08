@@ -8,14 +8,16 @@ class CustomTextWidget extends StatelessWidget {
   final TextAlign? textAlign;
   final double? fontSize;
   final int? maxLines;
+  final FontStyle? fontStyle;
   const CustomTextWidget(
       {Key? key,
-      required this.text,
-      this.fontWeight,
-      this.textColor,
-      this.fontSize,
-      this.textAlign,
-      this.maxLines})
+        required this.text,
+        this.fontWeight,
+        this.textColor,
+        this.fontSize,
+        this.textAlign,
+        this.fontStyle,
+        this.maxLines})
       : super(key: key);
 
   @override
@@ -25,10 +27,11 @@ class CustomTextWidget extends StatelessWidget {
       textAlign: textAlign ?? TextAlign.start,
 
       style: TextStyle(
-        color: textColor ?? Colors.black,
-        fontWeight: fontWeight ?? FontWeight.bold,
-        fontSize: fontSize ?? 10.0,
-        fontFamily: 'Nunito',
+          color: textColor ?? Colors.black,
+          fontWeight: fontWeight ?? FontWeight.normal,
+          fontSize: fontSize ?? 12.0,
+          fontFamily: 'Nunito',
+          fontStyle: fontStyle ?? FontStyle.normal
 
         // overflow: TextOverflow.ellipsis,
       ),

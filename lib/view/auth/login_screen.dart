@@ -4,6 +4,7 @@ import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_button.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/helper/constants/custom_textfield.dart';
+import 'package:nbatrade/helper/constants/custom_textfield2.dart';
 import 'package:nbatrade/view/Home%20Dashboard/home_dashboard.dart';
 import 'package:nbatrade/view/auth/forget_password.dart';
 import 'package:nbatrade/view/auth/register_screen.dart';
@@ -27,39 +28,39 @@ class LoginScreen extends StatelessWidget {
                 const AuthHeader(),
                 const Padding(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 22.0, vertical: 8.0),
+                      EdgeInsets.symmetric(horizontal: 22.0, vertical: 4.0),
                   child: CustomTextWidget(
                     text: 'Log in to your account.',
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w600,
+                    maxLines: 2,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 14.0,
                     textColor: ColorAssets.textSecondary,
                   ),
                 ),
-                SizedBox(height: context.height * 0.03),
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 12.0, horizontal: context.width * 0.1),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      const CustomTextFormField(
+                      CustomTextFormField2(
                         hint: 'Email',
-                        prefixIcon: Icon(
+                        prefixIcon: const Icon(
                           Icons.email_outlined,
                           color: ColorAssets.primary,
                         ),
+                        hintTextColor: ColorAssets.primary.withOpacity(0.3),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      const CustomTextFormField(
+                      CustomTextFormField2(
                         hint: 'Password',
-                        prefixIcon: Icon(
+                        hintTextColor: ColorAssets.primary.withOpacity(0.3),
+                        prefixIcon: const Icon(
                           Icons.key,
                           color: ColorAssets.primary,
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
                       ),
                       TextButton(
                         onPressed: () {
@@ -70,6 +71,7 @@ class LoginScreen extends StatelessWidget {
                           text: 'Forget Password?',
                           maxLines: 1,
                           fontSize: 12.0,
+                          fontWeight: FontWeight.w600,
                           textColor: ColorAssets.primary,
                         ),
                       )
@@ -80,9 +82,7 @@ class LoginScreen extends StatelessWidget {
                   showBackgroundColor: true,
                   buttonText: 'Login',
                   onTap: () {
-                    Get.offAll(() {
-                      return const HomeDashboard();
-                    });
+                    Get.offAll(() => const HomeDashboard());
                   },
                 ),
                 SizedBox(height: context.height * 0.02),

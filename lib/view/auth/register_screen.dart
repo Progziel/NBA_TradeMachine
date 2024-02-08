@@ -4,6 +4,7 @@ import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_button.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/helper/constants/custom_textfield.dart';
+import 'package:nbatrade/helper/constants/custom_textfield2.dart';
 import 'package:nbatrade/view/auth/login_screen.dart';
 import 'package:nbatrade/view/auth/widgets/auth_header.dart';
 import 'package:nbatrade/view/auth/widgets/custom_social_icon.dart';
@@ -24,45 +25,47 @@ class RegisterScreen extends StatelessWidget {
               children: [
                 const AuthHeader(),
                 const Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 22.0, vertical: 8.0),
+                  padding: EdgeInsets.symmetric(horizontal: 22.0),
                   child: CustomTextWidget(
                     text: 'Create your Account',
                     maxLines: 2,
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 14.0,
+                    fontStyle: FontStyle.italic,
                     textColor: ColorAssets.textSecondary,
                   ),
                 ),
-                SizedBox(height: context.height * 0.03),
-                const Padding(
-                  padding: EdgeInsets.all(12.0),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: context.width * 0.1),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      CustomTextFormField(
+                      CustomTextFormField2(
                         hint: 'Name',
-                        prefixIcon: Icon(
+                        hintTextColor: ColorAssets.primary.withOpacity(0.3),
+                        prefixIcon: const Icon(
                           Icons.person,
                           color: ColorAssets.primary,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      CustomTextFormField(
+                      CustomTextFormField2(
                         hint: 'Email',
-                        prefixIcon: Icon(
+                        hintTextColor: ColorAssets.primary.withOpacity(0.3),
+                        prefixIcon: const Icon(
                           Icons.email_outlined,
                           color: ColorAssets.primary,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      CustomTextFormField(
+                      CustomTextFormField2(
                         hint: 'Password',
-                        prefixIcon: Icon(
+                        hintTextColor: ColorAssets.primary.withOpacity(0.3),
+                        prefixIcon: const Icon(
                           Icons.key,
                           color: ColorAssets.primary,
                         ),
@@ -70,7 +73,7 @@ class RegisterScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: context.height * 0.01),
+                SizedBox(height: context.height * 0.02),
                 CustomButton(
                   showBackgroundColor: true,
                   buttonText: 'Register',

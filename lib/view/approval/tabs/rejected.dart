@@ -36,11 +36,16 @@ class _TabRejectedState extends State<TabRejected> {
                       textColor: ColorAssets.error,
                       text: "Please Note"),
                   Center(
-                    child: CustomTextWidget(
-                        fontSize: 12,
-                        textColor: ColorAssets.error,
-                        text:
-                            "Your Trade Post was against our terms and conditions.Please review our terms & Conditions before make Trade"),
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: CustomTextWidget(
+                          fontSize: 12,
+                          maxLines: 2,
+                          textAlign: TextAlign.center,
+                          textColor: ColorAssets.error,
+                          text:
+                              "Your Trade Post was against our terms and conditions.Please review our terms & Conditions before make Trade"),
+                    ),
                   ),
                   SizedBox(
                     height: 10,
@@ -49,26 +54,26 @@ class _TabRejectedState extends State<TabRejected> {
               ),
               Container(
                 width: Get.width,
-                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 29),
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 29),
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(169, 237, 237, 255),
                     borderRadius: BorderRadius.circular(20)),
-                child:             Obx(()
-                => Expanded(
-                  child: ListView.builder(
+                child: Obx(
+                  () => ListView.builder(
                     // reverse: true,
                     shrinkWrap: true,
                     itemCount: postController.trendingPosts.length,
-                    // physics: const NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (BuildContext context, index) {
                       final post = postController.trendingPosts[index];
-          
-                      return CustomPostWidget(postController: postController, post: post, index: index);
+
+                      return CustomPostWidget(
+                          postController: postController,
+                          post: post,
+                          index: index);
                     },
                   ),
                 ),
-                ),
-          
               ),
             ],
           ),

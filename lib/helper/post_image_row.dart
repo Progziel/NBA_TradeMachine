@@ -20,26 +20,21 @@ class PostImagesRow extends StatelessWidget {
     return profilePictures != null
         ? Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: profilePictures!.map((profilePictures) => InkWell(
+      children: profilePictures!.map((profilePictures) => GestureDetector(
         onTap: (){
-        //  Get.to(()=> PlayerProfile());
+          Get.to(PlayerProfileScreen());
         },
-        child: GestureDetector(
-          onTap: (){
-            Get.to(PlayerProfileScreen());
-          },
-          child: Container(
-            // width: 30, // Set the width as needed
-             width: post.expended==true? context.width*0.22:context.width*0.1,// Set the height as needed
-            //color: color,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(profilePictures.profileImage!,),fit: BoxFit.fitHeight,
-                )
-              ),
-            // margin: EdgeInsets.symmetric(horizontal: 2),
-            // Set margin as needed
-          ),
+        child: Container(
+          // width: 30, // Set the width as needed
+           width: post.expended==true? context.width*0.22:context.width*0.1,// Set the height as needed
+          //color: color,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(profilePictures.profileImage!,),fit: BoxFit.fitHeight,
+              )
+            ),
+          // margin: EdgeInsets.symmetric(horizontal: 2),
+          // Set margin as needed
         ),
       )).toList(),
     )

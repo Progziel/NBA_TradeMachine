@@ -515,8 +515,10 @@ class CopyWidget extends StatelessWidget {
           },
           child: Container(
             height: Get.height * 0.05,
+            padding: EdgeInsets.all(8.0),
             decoration: BoxDecoration(
-              color: ColorAssets.grey,
+              color: Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(12.0),
               border: Border.all(
                 color: Colors.grey, // Border color
                 width: 1, // Border width
@@ -527,8 +529,8 @@ class CopyWidget extends StatelessWidget {
                 CustomTextWidget(
                   text: "HTTPS://NBa-trade-machine.com",
                   textColor: ColorAssets.black,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
+                  fontWeight: FontWeight.w300,
+                  fontSize: 12,
                 ),
                 Icon(
                   Symbols.copy_all,
@@ -568,10 +570,11 @@ class PlayerDetailSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        padding: EdgeInsets.all(8.0),
         width: Get.width,
         decoration: BoxDecoration(
-          color: ColorAssets.primaryBackground,
-        ),
+            color: ColorAssets.primaryBackground,
+            borderRadius: BorderRadius.circular(12.0)),
         child: Stack(
           children: [
             Column(

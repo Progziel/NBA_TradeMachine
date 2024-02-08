@@ -211,7 +211,7 @@ class _HomeDashboardState extends State<HomeDashboard>
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisExtent: 83,
+                mainAxisExtent: 89,
                 crossAxisCount: 4,
                 crossAxisSpacing: 1.0,
                 mainAxisSpacing: 10.0,

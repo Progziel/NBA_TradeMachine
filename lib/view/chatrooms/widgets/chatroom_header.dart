@@ -15,9 +15,10 @@ class ChatRoomHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomCurvedWidget(
       child: Container(
-        height: context.height * 0.2,
+        height: context.height * 0.15,
         color: ColorAssets.primary,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 8, left: 12.0, right: 12.0),
@@ -39,7 +40,7 @@ class ChatRoomHeader extends StatelessWidget {
             const CustomTextWidget(
               text: 'Chat Rooms',
               textColor: ColorAssets.textWhite,
-              fontSize: 24.0,
+              fontSize: 20.0,
               fontWeight: FontWeight.w700,
             )
           ],

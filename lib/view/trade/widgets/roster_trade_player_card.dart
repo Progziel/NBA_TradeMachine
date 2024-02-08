@@ -13,13 +13,16 @@ class RosterTradePlayerCard extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: 80,
-        color: Colors.white,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12.0),
+            border: Border.all(color: Colors.black54)),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Profile Image
             ClipRRect(
-              // borderRadius: BorderRadius.circular(50.0),
+              borderRadius: BorderRadius.circular(12.0),
               child: Image.network(
                 'https://designimages.appypie.com/profilepicture/profilepicture-2-portrait-head.jpg',
                 height: 80,
@@ -48,7 +51,7 @@ class RosterTradePlayerCard extends StatelessWidget {
                 ),
               ),
             ),
-            VerticalDivider(color: Colors.pink, thickness: 6.0),
+            VerticalDivider(color: Color(0xff860038), thickness: 6.0),
             Image.asset('assets/images/trade-rank-1.png', height: 60),
             VerticalDivider(color: Colors.black54, thickness: 2.0),
             Icon(Icons.more_vert)

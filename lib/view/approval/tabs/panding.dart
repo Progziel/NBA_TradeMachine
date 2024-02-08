@@ -42,18 +42,16 @@ class _TabPandingState extends State<TabPanding> {
                     color: const Color.fromARGB(169, 237, 237, 255),
                     borderRadius: BorderRadius.circular(20)),
                 child:             Obx(()
-                => Expanded(
-                  child: ListView.builder(
-                    // reverse: true,
-                    shrinkWrap: true,
-                    itemCount: postController.trendingPosts.length,
-                    // physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (BuildContext context, index) {
-                      final post = postController.trendingPosts[index];
-          
-                      return CustomPostWidget(postController: postController, post: post, index: index);
-                    },
-                  ),
+                => ListView.builder(
+                  // reverse: true,
+                  shrinkWrap: true,
+                  itemCount: postController.trendingPosts.length,
+                   physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (BuildContext context, index) {
+                    final post = postController.trendingPosts[index];
+                          
+                    return CustomPostWidget(postController: postController, post: post, index: index);
+                  },
                 ),
                 ),
           

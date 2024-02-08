@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -14,6 +13,7 @@ import 'package:nbatrade/helper/post_image_row.dart';
 import 'package:get/get.dart';
 import 'package:nbatrade/models/post_model.dart';
 import 'package:nbatrade/view/chatrooms/community_screen.dart';
+import 'package:nbatrade/view/user%20profile/user_profile.dart';
 
 class CustomPostWidget extends StatefulWidget {
   final PostModel post;
@@ -31,7 +31,6 @@ class CustomPostWidget extends StatefulWidget {
 }
 
 class _CustomPostWidgetState extends State<CustomPostWidget> {
-
   QuillController descriptionController = QuillController.basic();
 
   @override
@@ -50,9 +49,8 @@ class _CustomPostWidgetState extends State<CustomPostWidget> {
                 ),
                 const SizedBox(width: 10),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     // Get.to(CommunityScreen(publicChatroomModel: publicChatroomModel))
-
                   },
                   child: const CustomTextWidget(
                     text: "S/Channel",
@@ -61,14 +59,13 @@ class _CustomPostWidgetState extends State<CustomPostWidget> {
                 ),
                 const SizedBox(width: 5),
                 InkWell(
-                  onTap: (){
-                    // Get.to(U)
-
+                  onTap: () {
+                    Get.to(UserProfileScreen());
                   },
                   child: CustomTextWidget(
                     text: "Posted by " + widget.post.postedBy,
                     textColor: ColorAssets.black,
-                    fontSize: 8,
+                    fontSize: 9,
                   ),
                 ),
                 const SizedBox(width: 2),
@@ -81,150 +78,154 @@ class _CustomPostWidgetState extends State<CustomPostWidget> {
                 InkWell(
                   onTap: () {
                     widget.postController.togglePostExpansion(widget.post);
-                    setState(() {
-
-                    });
+                    setState(() {});
                   },
                   child: const CustomTextWidget(text: "Expanded"),
                 ),
-                const Icon(Icons.arrow_drop_down),
+                InkWell(
+                    onTap: () {
+                      widget.postController.togglePostExpansion(widget.post);
+                      setState(() {});
+                    },
+                    child: const Icon(Icons.arrow_drop_down)),
               ],
             ),
           ),
         ),
         widget.post.expended == false
             ? Container(
-          height: context.height * 0.22,
-          color: ColorAssets.white,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 8),
-                child: PostImagesRow(
-                  profilePictures: widget.post.playerModel,
-                  post: widget.post,
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomTextWidget(
-                        maxLines: 2,
-                        textAlign: TextAlign.left,
-
-                        text: widget.post.postTitle.toString(),
+                height: context.height * 0.22,
+                color: ColorAssets.white,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: PostImagesRow(
+                        profilePictures: widget.post.playerModel,
+                        post: widget.post,
                       ),
-                      SizedBox(height: context.height*0.01,),
-
-                      CustomTextWidget(
-                        maxLines: 5,
-                        text:widget.post.description
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomTextWidget(
+                              maxLines: 2,
+                              textAlign: TextAlign.left,
+                              text: widget.post.postTitle.toString(),
+                            ),
+                            SizedBox(
+                              height: context.height * 0.01,
+                            ),
+                            CustomTextWidget(
+                                maxLines: 5, text: widget.post.description),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-        )
+              )
             : Container(
-          child: Column(
-            children: [
-              //
-              // Container(
-              //   height: Get.height / 3,
-              //   child: Expanded(
-              //     child: PostImagesRow(
-              //       post: widget.post,
-              //       profilePictures: widget.post.playerModel,
-              //     ),
-              //   ),
-              // ),
-
-              Padding(
-                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    CustomTextWidget(
-                      maxLines: 3,
-                      text: widget.post.postTitle.toString(),
-                      fontWeight: FontWeight.bold,
-                      textAlign: TextAlign.left,
-                    ),
-                    SizedBox(height: context.height*0.01,),
                     Container(
-                      height: context.height*0.3,
-                      width: context.width*0.7,
-
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fitHeight
-                              ,
-
-                              image: FileImage(File(widget.post.mediaPosted.toString())
-                              )
+                      height: Get.height / 3,
+                      child: PostImagesRow(
+                        post: widget.post,
+                        profilePictures: widget.post.playerModel,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          CustomTextWidget(
+                            maxLines: 3,
+                            text: widget.post.postTitle.toString(),
+                            fontWeight: FontWeight.bold,
+                            textAlign: TextAlign.left,
                           ),
-                        )),
-                    SizedBox(height: context.height*0.03,),
-
-                    CustomTextWidget(
-                      maxLines: 10,
-                      text: widget.post.description,
+                          SizedBox(
+                            height: context.height * 0.01,
+                          ),
+                          widget.post.mediaPosted.toString() == ""
+                              ? Container(
+                                  width: context.width * 0.7,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        fit: BoxFit.fitHeight,
+                                        image: FileImage(File(widget
+                                            .post.mediaPosted
+                                            .toString()))),
+                                  ))
+                              : SizedBox(),
+                          SizedBox(
+                            height: context.height * 0.03,
+                          ),
+                          CustomTextWidget(
+                            maxLines: 10,
+                            text: widget.post.description,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
         Obx(() => Container(
-          padding: const EdgeInsets.all(6),
-          color: Color(0xFFF6F6F6),
-          child: Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  widget.postController.changeHeart(widget.index);
-                },
-                child: Icon(
-                  widget.postController.heartEffects[widget.index].value == true
-                      ? Icons.favorite_border
-                      : Icons.favorite,
-                  color: widget.postController.heartEffects[widget.index].value == false
-                      ? Colors.red
-                      : Colors.black,
-                ),
+              padding: const EdgeInsets.all(6),
+              color: Color(0xFFF6F6F6),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      widget.postController.changeHeart(widget.index);
+                    },
+                    child: Icon(
+                      widget.postController.heartEffects[widget.index].value ==
+                              true
+                          ? Icons.favorite_border
+                          : Icons.favorite,
+                      color: widget.postController.heartEffects[widget.index]
+                                  .value ==
+                              false
+                          ? Colors.red
+                          : Colors.black,
+                    ),
+                  ),
+                  CustomTextWidget(text: widget.post.likeCount.toString()),
+                  SizedBox(width: 20),
+                  Icon(Icons.comment_bank_outlined),
+                  InkWell(
+                    onTap: () {
+                      Get.to(CommentScreen(comments: widget.post.comments!));
+                    },
+                    child: CustomTextWidget(
+                        text: widget.post.commentCount.toString()),
+                  ),
+                  SizedBox(width: 20),
+                  GestureDetector(
+                    onTap: () {
+                      widget.postController.changeFire(widget.index);
+                    },
+                    child: Icon(Icons.local_fire_department_outlined,
+                        color: widget.postController.fireEffects[widget.index]
+                                    .value ==
+                                false
+                            ? Colors.orange
+                            : Colors.black),
+                  ),
+                  CustomTextWidget(text: widget.post.flamCount.toString()),
+                  SizedBox(width: 20),
+                  Icon(Icons.share),
+                  CustomTextWidget(text: widget.post.shareCount.toString()),
+                ],
               ),
-              CustomTextWidget(text: widget.post.likeCount.toString()),
-              SizedBox(width: 20),
-              Icon(Icons.comment_bank_outlined),
-              InkWell(
-                onTap: () {
-                  Get.to(CommentScreen(comments: widget.post.comments!));
-                },
-                child: CustomTextWidget(text: widget.post.commentCount.toString()),
-              ),
-              SizedBox(width: 20),
-              GestureDetector(
-                onTap: () {
-                  widget.postController.changeFire(widget.index);
-                },
-                child: Icon(Icons.local_fire_department_outlined,
-                    color: widget.postController.fireEffects[widget.index].value == false
-                        ? Colors.orange
-                        : Colors.black),
-              ),
-              CustomTextWidget(text: widget.post.flamCount.toString()),
-              SizedBox(width: 20),
-              Icon(Icons.share),
-              CustomTextWidget(text: widget.post.shareCount.toString()),
-            ],
-          ),
-        )),
+            )),
         const SizedBox(height: 10),
       ],
     );
