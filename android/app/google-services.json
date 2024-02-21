@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "971843975076",
+    "project_id": "nba-trade-machine-c3583",
+    "storage_bucket": "nba-trade-machine-c3583.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:971843975076:android:9e4d6b839b3221b2133331",
+        "android_client_info": {
+          "package_name": "com.nba.nbatrade"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_qamsVR9998sA7-TKsWxyvjFzcrmkVyM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

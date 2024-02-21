@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nbatrade/Repository/AuthRepository/auth_repository.dart';
 import 'package:nbatrade/helper/constants/asset_helper.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
@@ -27,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(height: context.height * 0.01),
               const CustomTextWidget(
                 text: 'James Anderson',
-                fontSize: 18.0,
+                  fontSize: 18.0,
                 fontWeight: FontWeight.w600,
               ),
               SizedBox(height: context.height * 0.01),
@@ -70,7 +71,9 @@ class ProfileScreen extends StatelessWidget {
               ReUsableProfileTabs(
                 icon: Icons.key,
                 text: 'Change Password',
-                onTap: () {},
+                onTap: () {
+
+                },
               ),
               SizedBox(height: context.height * 0.01),
               const DividerContainer(text: 'Information'),
@@ -94,6 +97,14 @@ class ProfileScreen extends StatelessWidget {
                 icon: CupertinoIcons.share,
                 text: 'Share This App',
                 onTap: () {},
+              ),
+              ReUsableProfileTabs(
+
+                icon: Icons.logout,
+                text: 'Logout',
+                onTap: () {
+                  AuthRepository.instance.logout();
+                },
               ),
             ],
           ),

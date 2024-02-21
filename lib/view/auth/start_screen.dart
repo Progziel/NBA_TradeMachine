@@ -1,16 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nbatrade/controllers/auth_controller.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_button.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/view/auth/login_screen.dart';
+import 'package:nbatrade/view/auth/register_screen.dart';
 import 'package:nbatrade/view/auth/widgets/custom_social_icon.dart';
 
 import 'widgets/auth_header.dart';
 
-class StartScreen extends StatelessWidget {
+class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
+
+  @override
+  State<StartScreen> createState() => _StartScreenState();
+}
+
+class _StartScreenState extends State<StartScreen> {
+  AuthController controller = AuthController();
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -59,14 +70,15 @@ class StartScreen extends StatelessWidget {
               CustomButton(
                 showBackgroundColor: true,
                 buttonText: 'Login',
-                onTap: () => Get.to(const LoginScreen(),
+                onTap: () => Get.to(LoginScreen(controller: controller),
                     transition: Transition.rightToLeft),
               ),
               SizedBox(height: context.height * 0.02),
               CustomButton(
                 showBackgroundColor: false,
                 buttonText: 'Register',
-                onTap: () {},
+                onTap: () => Get.to(RegisterScreen(controller: controller),
+                    transition: Transition.rightToLeft),
               ),
               SizedBox(height: context.height * 0.05),
               const Center(

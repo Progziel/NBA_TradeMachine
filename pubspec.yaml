@@ -42,12 +42,16 @@ dependencies:
   fluttertoast:
   timeago: ^3.6.1
   image_picker: ^1.0.7
+  google_sign_in: ^6.2.1
   get: ^4.6.6
  # material_symbols_icons: ^4.2718.0
   flutter_svg: ^2.0.9
   social_embed_webview: ^0.3.2
   flutter_quill: ^9.2.12
+  cloud_firestore: ^4.15.5
   carousel_slider: ^4.2.1
+  firebase_core: ^2.25.4
+  firebase_auth: ^4.17.4
 
 
 dev_dependencies:

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomSocialIcon extends StatelessWidget {
+  final VoidCallback? onTap;
   final String imagePath;
   const CustomSocialIcon({
+    this.onTap,
     super.key,
     required this.imagePath,
   });
@@ -12,7 +14,7 @@ class CustomSocialIcon extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(100)),
       child: IconButton(
-        onPressed: () {},
+        onPressed: onTap,
         icon: Image(height: 40.0, image: AssetImage(imagePath)),
       ),
     );

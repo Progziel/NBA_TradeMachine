@@ -510,7 +510,7 @@ class CopyWidget extends StatelessWidget {
             Clipboard.setData(
                     ClipboardData(text: "HTTPS://NBa-trade-machine.com"))
                 .then((_) {
-              ToastMessage().showToastMessage("Copied to clipboard");
+              ToastMessage.showToastMessage("Copied to clipboard");
             });
           },
           child: Container(
