@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
-
-import 'package:nbatrade/view/Home%20Dashboard/home_dashboard.dart';
 import 'package:nbatrade/view/auth/login_screen.dart';
 
 
