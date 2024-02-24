@@ -8,26 +8,54 @@ import 'package:nbatrade/helper/constants/custom_text.dart';
 
 class CustomBlueButton extends StatelessWidget {
   final String text;
-  const CustomBlueButton({
+  final IconData? icon;
+  final double? height;
+  final double? width;
+  final double? font;
+  final VoidCallback? onTap;
+  const CustomBlueButton( {
+
     super.key, required this.text,
+    this.onTap,
+
+    this.font,
+    this.height,
+    this.width,
+
+     this.icon
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 8),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: height,
+        width: width,
 
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        margin: EdgeInsets.symmetric(horizontal: 10),
 
-        color: ColorAssets.primary,
-      ),
-      child:Center(child:
-      CustomTextWidget(text: text,textColor: ColorAssets.white,
-        fontWeight: FontWeight.bold,fontSize: 20,
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
 
-      )
+          color: ColorAssets.primary,
+        ),
+        child:Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon,color: ColorAssets.white,size: 18,),
+            SizedBox(width: 5,),
+
+            CustomTextWidget(text: text,textColor: ColorAssets.white,
+
+
+              fontWeight: FontWeight.bold,fontSize: font,
+
+
+            ),
+          ],
+        ),
       ),
     );
   }

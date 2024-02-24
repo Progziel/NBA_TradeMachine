@@ -9,7 +9,7 @@ class CustomStoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100.0,
+      width: 80.0,
       margin: const EdgeInsets.all(4.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -17,7 +17,7 @@ class CustomStoryWidget extends StatelessWidget {
           Expanded(
             flex: 2,
             child: CircleAvatar(
-              backgroundImage: NetworkImage(imageUrl),
+              backgroundImage: AssetImage(imageUrl),
             ),
           ),
           Expanded(

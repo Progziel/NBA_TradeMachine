@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:nbatrade/controllers/post_controller.dart';
+import 'package:nbatrade/helper/constants/circular_profile_avatar.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
+import 'package:nbatrade/view/approval/tabs/approved.dart';
 import 'package:nbatrade/view/approval/tabs/panding.dart';
 import 'package:nbatrade/view/approval/tabs/rejected.dart';
 
-import '../Home Dashboard/my_feeds/home_tabs.dart';
-import 'tabs/approved.dart';
-
-class ApprovalScreen extends StatefulWidget {
-  ApprovalScreen({super.key});
+class TradeApprovalScreen extends StatefulWidget {
+  const TradeApprovalScreen({super.key});
 
   @override
-  State<ApprovalScreen> createState() => _ApprovalScreenState();
+  State<TradeApprovalScreen> createState() => _TradeApprovalScreenState();
 }
 
-class _ApprovalScreenState extends State<ApprovalScreen>
+class _TradeApprovalScreenState extends State<TradeApprovalScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -27,47 +26,56 @@ class _ApprovalScreenState extends State<ApprovalScreen>
     super.initState();
   }
 
+  PostController postController = Get.find<PostController>();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(Get.height * 0.28),
-        child: CustomAppBar2(
-            title: 'Trade Approval',
-            prefixIcon: Icons.arrow_back_ios,
-            prefixIconOnTap: () {
-              // Handle back button tap
-            },
-            sufixWidget: const CircleAvatar()),
-      ),
-      body: Container(
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(0.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                customTabbar(),
-                SizedBox(
-                  height: Get.height,
-                  // width: Get.width,
-                  child: TabBarView(
-                    physics: NeverScrollableScrollPhysics(),
-                    controller: _tabController,
-                    children: [
-                      // Content for each tab
-                      TabPanding(),
-                      TabApproved(),
-                      TabRejected(),
-                    ],
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: Colors.white,
+          body: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                automaticallyImplyLeading: false,
+                expandedHeight: Get.height * 0.19,
+                flexibleSpace: const FlexibleSpaceBar(
+                  background: AppbarApproval(),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: SingleChildScrollView(
+                  child: Container(
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(0.0),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            customTabbar(),
+                            const SizedBox(height: 5),
+                            SizedBox(
+                              height: Get.height,
+                              // width: Get.width,
+                              child: TabBarView(
+                                physics: const NeverScrollableScrollPhysics(),
+                                controller: _tabController,
+                                children: const [
+                                  // Content for each tab
+                                  TabPanding(),
+                                  TabApproved(),
+                                  TabRejected(),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ],
-            ),
-          ),
-        ),
-      ),
+              ),
+            ],
+          )),
     );
   }
 
@@ -86,41 +94,58 @@ class _ApprovalScreenState extends State<ApprovalScreen>
       tabAlignment: TabAlignment.center,
 // Remove default padding
       tabs: [
-        CustomTab(
+        CustomAplTab(
           text: "Pandings",
-       //   color: const Color(0xFFD9D9D9),
+          color: const Color(0xFFD9D9D9),
           index: 0,
           selected: _tabController.index == 0,
           onTap: () {
             _tabController.animateTo(0);
             setState(() {});
           },
-         // fontColr: const Color(0xFF1C1B1F),
+          fontColr: const Color(0xFF1C1B1F),
         ),
-        CustomTab(
-          text: "Approved",
-        //  color: const Color(0xFF9AD16E),
+        CustomAplTab(
+          text: "Acceped",
+          color: const Color(0xFF9AD16E),
           index: 1,
           selected: _tabController.index == 1,
           onTap: () {
             _tabController.animateTo(1);
             setState(() {});
           },
-         // fontColr: const Color(0xFFFFFFFF),
+          fontColr: const Color(0xFFFFFFFF),
         ),
-        CustomTab(
+        CustomAplTab(
           text: "Rejected",
           index: 2,
-         // color: const Color(0xFFDA7777),
+          color: const Color(0xFFDA7777),
           selected: _tabController.index == 2,
           onTap: () {
             _tabController.animateTo(2);
             setState(() {});
           },
-        //  fontColr: const Color(0xFFFFFFFF),
+          fontColr: const Color(0xFFFFFFFF),
         ),
       ],
     );
+  }
+}
+
+class AppbarApproval extends StatelessWidget {
+  const AppbarApproval({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomAppBar2(
+        title: 'Trade Approval',
+        prefixIcon: Icons.arrow_back_ios,
+        prefixIconOnTap: () {
+          Get.back();
+        },
+        sufixWidget: const CircularProfilePictureAvatar());
   }
 }
 
@@ -192,55 +217,58 @@ class CustomAppBar2 extends StatelessWidget {
   }
 }
 
-//   CustomTab
-// class CustomTab extends StatelessWidget {
-//   final String text;
-//   final int index;
-//   final Color color;
-//   final Color fontColr;
-//   final bool selected;
-//   final VoidCallback onTap;
-//   final IconData? icon;
-//
-//   const CustomTab(
-//       {super.key,
-//       required this.text,
-//       required this.color,
-//       required this.fontColr,
-//       required this.index,
-//       required this.selected,
-//       required this.onTap,
-//       this.icon});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return InkWell(
-//       onTap: onTap,
-//       child: Container(
-//         padding: const EdgeInsets.all(6),
-//         decoration: BoxDecoration(
-//           color: color,
-//           borderRadius: BorderRadius.circular(5.0),
-//           boxShadow: selected
-//               ? [
-//                   BoxShadow(
-//                     color: Colors.black.withOpacity(0.3),
-//                     blurRadius: 5.0,
-//                     spreadRadius: 1.0,
-//                     offset: const Offset(0, 5),
-//                   ),
-//                 ]
-//               : [],
-//         ),
-//         child: Row(
-//           mainAxisSize: MainAxisSize.min,
-//           children: [
-//             const SizedBox(width: 10),
-//             Text(text, style: TextStyle(color: fontColr)),
-//             const SizedBox(width: 10),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+//   CustomAplTab
+class CustomAplTab extends StatelessWidget {
+  final String text;
+  final int index;
+  final Color color;
+  final Color fontColr;
+  final bool selected;
+  final VoidCallback onTap;
+  final IconData? icon;
+
+  const CustomAplTab(
+      {super.key,
+      required this.text,
+      required this.color,
+      required this.fontColr,
+      required this.index,
+      required this.selected,
+      required this.onTap,
+      this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(6),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(5.0),
+          boxShadow: selected
+              ? [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.3),
+                    blurRadius: 5.0,
+                    spreadRadius: 1.0,
+                    offset: const Offset(0, 5),
+                  ),
+                ]
+              : [],
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(width: 10),
+            Text(
+                textAlign: TextAlign.center,
+                text,
+                style: TextStyle(color: fontColr)),
+            const SizedBox(width: 10),
+          ],
+        ),
+      ),
+    );
+  }
+}

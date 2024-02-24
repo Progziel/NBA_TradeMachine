@@ -1,33 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nbatrade/models/player_model.dart';
+import 'package:nbatrade/models/post_model.dart';
+import 'package:nbatrade/view/Home%20Dashboard/my_feeds/player_profile_screen.dart';
 
 List<Color>? list = [Colors.white,Colors.purple,Colors.green,Colors.yellow];
 
 class PostImagesRow extends StatelessWidget {
+  final double? length;
  // final List<String>? profilePictures;
   final List<PlayerModel>? profilePictures;
-  const PostImagesRow({Key? key,this.profilePictures}) : super(key: key);
+  final PostModel post;
+  const PostImagesRow({Key? key,this.profilePictures, required this.post,this.length}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     print("print $profilePictures");
+
     return profilePictures != null
         ? Row(
-      children: profilePictures!.map((profilePictures) => InkWell(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: profilePictures!.map((profilePictures) => GestureDetector(
         onTap: (){
-        //  Get.to(()=> PlayerProfile());
+          Get.to(PlayerProfileScreen());
         },
         child: Container(
           // width: 30, // Set the width as needed
-           width: 30, // Set the height as needed
+           width: post.expended==true? context.width*0.22:context.width*0.1,// Set the height as needed
           //color: color,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(profilePictures.profileImage!,),fit: BoxFit.fitHeight,
+                image: AssetImage(profilePictures.profileImage!,),fit: BoxFit.fitHeight,
               )
             ),
-          margin: EdgeInsets.all(4),
+          // margin: EdgeInsets.symmetric(horizontal: 2),
           // Set margin as needed
         ),
       )).toList(),
@@ -61,3 +67,39 @@ class PostImagesRow extends StatelessWidget {
     //     : const SizedBox();
   }
 }
+
+// import 'package:flutter/material.dart';
+// import 'package:nbatrade/models/player_model.dart';
+// import 'package:nbatrade/models/post_model.dart';
+//
+// class PostImagesRow extends StatelessWidget {
+//   final List<PlayerModel>? profilePictures;
+//   final PostModel post;
+//   const PostImagesRow({Key? key, this.profilePictures, required this.post})
+//       : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     print("print $profilePictures");
+//     return profilePictures != null
+//         ? Row(
+//       children: [
+//         for (final profilePicture in profilePictures!)
+//           Expanded(
+//             child: InkWell(
+//               onTap: () {},
+//               child: Container(
+//                 decoration: BoxDecoration(
+//                   image: DecorationImage(
+//                     image: NetworkImage(profilePicture.profileImage!),
+//                     fit: BoxFit.cover,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ),
+//       ],
+//     )
+//         : Container();
+//   }
+// }

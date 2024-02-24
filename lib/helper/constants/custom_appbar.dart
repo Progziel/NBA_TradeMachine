@@ -5,8 +5,6 @@ import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/helper/constants/custom_textfield.dart';
 import 'colors.dart';
 
-
-
 class CustomAppBar extends StatelessWidget {
   final void Function()? prefixIconOnTap;
   final void Function()? sufixWidgetOnTap;
@@ -14,7 +12,7 @@ class CustomAppBar extends StatelessWidget {
   final Widget? sufixWidget;
   final String title;
 
-   const CustomAppBar({
+  const CustomAppBar({
     Key? key,
     this.prefixIcon,
     required this.title,
@@ -26,40 +24,58 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Get.height * 0.3,
+      height: Get.height / 4,
       decoration: const BoxDecoration(
         color: ColorAssets.primary,
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(30.0),
           bottomRight: Radius.circular(30.0),
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(85, 0, 0, 0),
+            blurRadius: 5.0, // Adjust blur radius as needed
+            offset: Offset(0, 6), // Offset shadow only on the bottom
+          ),
+        ],
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
+          SizedBox(height: context.height * 0.02),
           Padding(
-            padding: const EdgeInsets.only(left: 12.0,right: 12.0),
+            padding: const EdgeInsets.only(left: 12.0, right: 12.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                InkWell(onTap: prefixIconOnTap, child: Icon(prefixIcon,color: ColorAssets.white,)),
-                CustomTextWidget(text: title, textColor: ColorAssets.white,fontWeight: FontWeight.w500,fontSize: 20),
+                InkWell(
+                    onTap: prefixIconOnTap,
+                    child: Icon(
+                      prefixIcon,
+                      color: ColorAssets.white,
+                    )),
+                CustomTextWidget(
+                    text: title,
+                    textColor: ColorAssets.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20),
                 if (sufixWidget != null)
                   InkWell(onTap: sufixWidgetOnTap, child: sufixWidget!),
-                if(sufixWidget == null)
-                  const SizedBox()
+                if (sufixWidget == null) const SizedBox()
               ],
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: context.height * 0.02),
           Padding(
-            padding: const EdgeInsets.only(left: 40.0,right: 40),
+            padding: const EdgeInsets.only(left: 40.0, right: 40),
             child: CustomTextFormField(
               hint: "Search",
-              sufixIcon: const Icon(Icons.search),
+              hintTextColor: ColorAssets.textLightGrey,
+              sufixIcon: const Icon(
+                Icons.search,
+                size: 20,
+              ),
               validator: (value) => value, // Add a simple validator here
             ),
           ),
@@ -68,5 +84,3 @@ class CustomAppBar extends StatelessWidget {
     );
   }
 }
-
-

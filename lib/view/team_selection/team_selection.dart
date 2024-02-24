@@ -1,5 +1,7 @@
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nbatrade/helper/constants/circular_profile_avatar.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/view/team_selection/widgets/draftboard_tabbarview.dart';
@@ -32,51 +34,102 @@ class _NBATeamSelectionState extends State<NBATeamSelection>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 60,
-              width: Get.width,
-              decoration: const BoxDecoration(
-                color: Colors.grey,
-              ),
-              child: TabBar(
-                padding: const EdgeInsets.all(7),
-                controller: _tabController,
-                indicator: const BoxDecoration(
-                  color: ColorAssets.primary,
-                ),
-                dividerColor: Colors.transparent,
-                labelStyle:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                labelColor: ColorAssets.white,
-                unselectedLabelColor: Colors.white,
-                indicatorSize: TabBarIndicatorSize.tab,
-                unselectedLabelStyle:
-                    const TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
-                tabs: const [
-                  Tab(
-                    text: 'Teams',
-                    height: 40,
-                  ),
-                  Tab(
-                    text: 'Your Draft Board',
-                    height: 40,
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
+        backgroundColor: Colors.grey.shade300,
+        body: DefaultTabController(
+          length: 2,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Stack(
                 children: [
-                  const Team(),
-                  const Draftboard(),
+                  Container(
+                    padding:
+                        const EdgeInsets.only(left: 8.0, right: 8.0, top: 12.0),
+                    height: Get.height * 0.15,
+                    decoration: const BoxDecoration(
+                      color: ColorAssets.primary,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20.0),
+                        bottomRight: Radius.circular(20.0),
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 12.0, right: 12.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Get.back();
+                                },
+                                child: const Icon(
+                                  Icons.arrow_back_ios_outlined,
+                                  color: ColorAssets.grey,
+                                ),
+                              ),
+                              const CircularProfilePictureAvatar()
+                            ],
+                          ),
+                        ),
+                        const CustomTextWidget(
+                          text: 'NBA Team Selection',
+                          textColor: ColorAssets.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                        const SizedBox(height: 16.0),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-            ),
-          ],
+              Container(
+                width: Get.width,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                ),
+                child: ButtonsTabBar(
+                  backgroundColor: ColorAssets.primary,
+                  unselectedBackgroundColor: Colors.grey[600],
+                  unselectedLabelStyle: const TextStyle(color: Colors.white),
+                  labelStyle: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                  tabs: [
+                    buildTab(title: 'Teams', context: context),
+                    buildTab(title: 'Your Draft Board', context: context),
+                  ],
+                ),
+              ),
+              const Expanded(
+                child: TabBarView(
+                  children: [
+                    Team(),
+                    Draftboard(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Tab buildTab({required BuildContext context, required String title}) {
+    return Tab(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: context.width * 0.1),
+        child: CustomTextWidget(
+          text: title,
+          fontSize: 14.0,
+          fontWeight: FontWeight.w500,
+          textColor: Colors.white,
         ),
       ),
     );

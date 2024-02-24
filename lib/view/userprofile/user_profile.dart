@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nbatrade/Repository/AuthRepository/auth_repository.dart';
+import 'package:nbatrade/helper/constants/asset_helper.dart';
 import 'package:nbatrade/helper/constants/colors.dart';
 import 'package:nbatrade/helper/constants/custom_text.dart';
 import 'package:nbatrade/view/userprofile/widgets/reusable_profile_tabs.dart';
-
 import '../../../helper/constants/custom_appbar.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,8 +28,8 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(height: context.height * 0.01),
               const CustomTextWidget(
                 text: 'James Anderson',
-                fontSize: 18.0,
-                fontWeight: FontWeight.w500,
+                  fontSize: 18.0,
+                fontWeight: FontWeight.w600,
               ),
               SizedBox(height: context.height * 0.01),
               CustomTextWidget(
@@ -69,32 +69,42 @@ class ProfileScreen extends StatelessWidget {
                 onTap: () {},
               ),
               ReUsableProfileTabs(
-                icon: CupertinoIcons.lock,
+                icon: Icons.key,
                 text: 'Change Password',
-                onTap: () {},
+                onTap: () {
+
+                },
               ),
               SizedBox(height: context.height * 0.01),
               const DividerContainer(text: 'Information'),
               SizedBox(height: context.height * 0.01),
               ReUsableProfileTabs(
-                icon: CupertinoIcons.lock,
+                icon: Icons.account_box_outlined,
                 text: 'About App',
                 onTap: () {},
               ),
               ReUsableProfileTabs(
-                icon: CupertinoIcons.lock,
+                icon: Icons.rule,
+                text: 'Terms & Conditions',
+                onTap: () {},
+              ),
+              ReUsableProfileTabs(
+                icon: Icons.policy,
                 text: 'Privacy Policy',
                 onTap: () {},
               ),
               ReUsableProfileTabs(
-                icon: CupertinoIcons.lock,
-                text: 'Privacy Policy',
-                onTap: () {},
-              ),
-              ReUsableProfileTabs(
-                icon: CupertinoIcons.lock,
+                icon: CupertinoIcons.share,
                 text: 'Share This App',
                 onTap: () {},
+              ),
+              ReUsableProfileTabs(
+
+                icon: Icons.logout,
+                text: 'Logout',
+                onTap: () {
+                  AuthRepository.instance.logout();
+                },
               ),
             ],
           ),
@@ -110,17 +120,17 @@ class DividerContainer extends StatelessWidget {
     super.key,
     required this.text,
   });
-
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
       width: double.infinity,
-      color: Colors.grey.shade300,
+      color: Color(0xffD9D9FF),
       child: CustomTextWidget(
         text: text,
-        fontSize: 18.0,
+        fontSize: 16.0,
         fontWeight: FontWeight.w500,
+        textAlign: TextAlign.center,
       ),
     );
   }
@@ -130,7 +140,6 @@ class ProfileHeader extends StatelessWidget {
   const ProfileHeader({
     super.key,
   });
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -158,10 +167,12 @@ class ProfileHeader extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Get.back();
+                        },
                         child: Icon(
                           Icons.arrow_back_ios_outlined,
-                          color: ColorAssets.textLightGrey,
+                          color: ColorAssets.white,
                         ),
                       ),
                       const CustomTextWidget(
@@ -174,7 +185,7 @@ class ProfileHeader extends StatelessWidget {
                         onTap: () {},
                         child: Icon(
                           Icons.edit,
-                          color: ColorAssets.textLightGrey,
+                          color: ColorAssets.white,
                         ),
                       ),
                     ],
@@ -188,14 +199,12 @@ class ProfileHeader extends StatelessWidget {
             right: 0,
             left: 0,
             bottom: 0,
-            child: FractionallySizedBox(
-              widthFactor: 0.5,
-              child: CircleAvatar(
-                backgroundColor: Colors.grey.shade200,
-                backgroundImage: const NetworkImage(
-                    'https://designimages.appypie.com/profilepicture/profilepicture-2-portrait-head.jpg'),
-                radius: 60.0,
-              ),
+            child: Container(
+              height: context.height * 0.15,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/user2.jpg"))),
             ),
           ),
         ],
@@ -203,7 +212,6 @@ class ProfileHeader extends StatelessWidget {
     );
   }
 }
-
 // class HalfClipper extends CustomClipper<Rect> {
 //   @override
 //   Rect getClip(Size size) {

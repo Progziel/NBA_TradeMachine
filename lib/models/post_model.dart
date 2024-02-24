@@ -6,6 +6,7 @@ class PostModel {
   final String channelName;
   final String postedBy;
   final String time;
+  final String? postTitle;
   final String description;
   final int? likeCount;
   final int? commentCount;
@@ -13,6 +14,7 @@ class PostModel {
   final int? flamCount;
   final List<Comments>? comments;
      bool? expended;
+  final String? mediaPosted;
    PostModel(
       {
        // required this.playerModel,
@@ -25,7 +27,11 @@ class PostModel {
       this.flamCount,
       this.likeCount,
         this.expended = false,
-      this.shareCount,this.playerModel,});
+      this.shareCount,this.playerModel,
+        this.mediaPosted,
+        this.postTitle,
+
+      });
 }
 
 class Comments {
